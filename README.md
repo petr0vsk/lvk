@@ -7,7 +7,7 @@ Lua library for vk.com REST API
 
 ## Description
 
-Wrapper-functions for [REST API methods](https://vk.com/dev/methods) of [vk.com](https://vk.com). Implementation for 5.37 version of API.
+Lua wrapper-functions for [REST API methods](https://vk.com/dev/methods) of [vk.com](https://vk.com). Implementation for 5.37 version of API.
 
 ## Usage
 

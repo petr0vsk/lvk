@@ -3,141 +3,269 @@ local https = require("ssl.https")
 local luaVkApi = {}
 
 local authUrl = "https://oauth.vk.com/authorize" .. "?client_id={APP_ID}"
-		.. "&scope={PERMISSIONS}" .. "&redirect_uri={REDIRECT_URI}" 
-		.. "&display={DISPLAY}" .. "&v={API_VERSION}" .. "&response_type=token"
+  .. "&scope={PERMISSIONS}" .. "&redirect_uri={REDIRECT_URI}"
+  .. "&display={DISPLAY}" .. "&v={API_VERSION}" .. "&response_type=token"
 local apiRequest = "https://api.vk.com/method/{METHOD_NAME}" .. "?{PARAMETERS}"
-		.. "&access_token={ACCESS_TOKEN}" .. "&v={API_VERSION}"
+  .. "&access_token={ACCESS_TOKEN}" .. "&v={API_VERSION}"
 
 function luaVkApi.invokeApi(method, params)
-	-- load properties
-	file = io.open("luaVkApi.properties")
-	local properties = {}
-	for line in file:lines() do
-		for key, value in string.gmatch(line, "(.-)=(.-)$") do 
-			properties[key] = value 
-		end
-	end	
-	
-	-- parse method parameters
-	local parameters = ""	
-	if params ~= nil then
-		for key, value in pairs(params) do
-			parameters = parameters .. key .. "=" .. value .. "&"
-		end
-	end
-	
-	local reqUrl = string.gsub(apiRequest, "{METHOD_NAME}", method)
-	reqUrl = string.gsub(reqUrl, "{ACCESS_TOKEN}", properties.accessToken)
-	reqUrl = string.gsub(reqUrl, "{API_VERSION}", properties.apiVersion)
-	reqUrl = string.gsub(reqUrl, "{PARAMETERS}&", parameters)		
-	return https.request(reqUrl)
+  -- load properties
+  file = io.open("luaVkApi.properties")
+  local properties = {}
+  for line in file:lines() do
+    for key, value in string.gmatch(line, "(.-)=(.-)$") do
+      properties[key] = value
+    end
+  end
+
+  -- parse method parameters
+  local parameters = ""
+  if params ~= nil then
+    for key, value in pairs(params) do
+      parameters = parameters .. key .. "=" .. value .. "&"
+    end
+  end
+
+  local reqUrl = string.gsub(apiRequest, "{METHOD_NAME}", method)
+  reqUrl = string.gsub(reqUrl, "{ACCESS_TOKEN}", properties.accessToken)
+  reqUrl = string.gsub(reqUrl, "{API_VERSION}", properties.apiVersion)
+  reqUrl = string.gsub(reqUrl, "{PARAMETERS}&", parameters)
+  return https.request(reqUrl)
 end
 
-function luaVkApi.getNewsFeed(countVal)
-	if countVal == nil then 
-		countVal = "100"
-	end
-	return luaVkApi.invokeApi("newsfeed.get", {count=countVal})
+-----------------------
+--      Users        --
+-----------------------
+function luaVkApi.getUsersInfo(userIds, returnedFields, nameCase)
+  return luaVkApi.invokeApi("users.get", {user_ids=userIds, fields=returnedFields, name_case=nameCase})
 end
+
+function luaVkApi.searchUsers(queryString, sortVal, offsetVal, countVal, returnedFields) --not all parameters are listed here
+  return luaVkApi.invokeApi("users.search", {q=queryString, sort=sortVal, offset=offsetVal, count=countVal, fields=returnedFields})
+end
+
+function luaVkApi.isAppUser(userId)
+  return luaVkApi.invokeApi("users.isAppUser", {user_id=userId})
+end
+
+function luaVkApi.getSubscriptions(userId, extendedVal, offsetVal, countVal, fieldsVal)
+  return luaVkApi.invokeApi("users.getSubscriptions", {user_id=userId, extended=extendedVal, offset=offsetVal, count=countVal, fields=fieldsVal})
+end
+
+function luaVkApi.getFollowers(userId, nameCase, offsetVal, countVal, fieldsVal)
+  return luaVkApi.invokeApi("users.getFollowers", {user_id=userId, name_case=nameCase, offset=offsetVal, count=countVal, fields=fieldsVal})
+end
+
+-----------------------
+--  Authorization    --
+-----------------------
+function luaVkApi.checkPhone(phoneNumber, userId, clientSecret)
+  return luaVkApi.invokeApi("auth.checkPhone", {phone=phoneNumber, client_id=userId, client_secret=clientSecret})
+end
+
+function luaVkApi.signup() --!!!not all parameters are listed here
+  return luaVkApi.invokeApi("auth.signup", {})
+end
+
+function luaVkApi.confirm(userId, clientSecret, phoneNumber, codeVal, passwordVal, testMode, introVal)
+  return luaVkApi.invokeApi("auth.confirm", {client_id=userId, client_secret=clientSecret, phone=phoneNumber,
+    code=codeVal, password=passwordVal, test_mode=testMode, intro=introVal})
+end
+
+function luaVkApi.restore(phoneNumber)
+  return luaVkApi.invokeApi("auth.restore", {phone=phoneNumber})
+end
+
+-----------------------
+--       Wall        --
+-----------------------
+function luaVkApi.getWallPosts(ownerId, domainVal, offsetVal, countVal, filterVal, isExtended, fieldsVal)
+  return luaVkApi.invokeApi("wall.get", {owner_id=ownerId, domain=domainVal, offset=offsetVal, count=countVal,
+    filter=filterVal, extended=isExtended, fields=fieldsVal})
+end
+
+function luaVkApi.searchWallPosts(ownerId, domainVal, queryStr, offsetVal, countVal, ownersOnly, filterVal, isExtended, fieldsVal)
+  return luaVkApi.invokeApi("wall.search", {owner_id=ownerId, domain=domainVal, query=queryStr, offset=offsetVal, count=countVal,
+    owners_only=ownersOnly, filter=filterVal, extended=isExtended, fields=fieldsVal})
+end
+
+function luaVkApi.getWallById(postIds, isExtended, copyHistoryDepth, fieldsVal)
+  return luaVkApi.invokeApi("wall.getById", {posts=postIds, extended=isExtended, copy_history_depth=copyHistoryDepth, fields=fieldsVal})
+end
+
+function luaVkApi.post(ownerId, friendsOnly, fromGroup, messageVal, postAttachments, servicesList, isSigned, publishDate, latitude, longitude, placeId, postId)
+  return luaVkApi.invokeApi("wall.post", {owner_id=ownerId, friends_only=friendsOnly, from_group=fromGroup, message=messageVal, attachments=postAttachments,
+    services=servicesList, signed=isSigned, publish_date=publishDate, lat=latitude, long=longitude, place_id=placeId, post_id=postId})
+end
+
+
+
+
+
+
+
+
+
+
+function luaVkApi.getNewsFeed(countVal) --not all parameters are listed here
+  if countVal == nil then
+    countVal = "100"
+end
+return luaVkApi.invokeApi("newsfeed.get", {count=countVal})
+end
+
 
 function luaVkApi.getAlbums(userId)
-	--Params.create().add("owner_id", userId).add("photo_sizes", "1").add("thumb_src", "1"));
-	return luaVkApi.invokeApi("photos.getAlbums", {count=countVal})
+  --Params.create().add("owner_id", userId).add("photo_sizes", "1").add("thumb_src", "1"));
+  return luaVkApi.invokeApi("photos.getAlbums", {count=countVal})
 end
 
 function luaVkApi.getStatus(userId)
-	return luaVkApi.invokeApi("status.get", {user_id=userId})
+  return luaVkApi.invokeApi("status.get", {user_id=userId})
 end
 
 function luaVkApi.getFriendIds(userId)
-	return luaVkApi.invokeApi("friends.get", {user_id=userId})
+  return luaVkApi.invokeApi("friends.get", {user_id=userId})
 end
 
 function luaVkApi.addToFriends(userId)
-	return luaVkApi.invokeApi("friends.add", {user_id=userId})
-end
-
-function luaVkApi.getWallPosts(ownerId, countVal)
-	if countVal == nil then 
-		countVal = "100"
-	end
-	return luaVkApi.invokeApi("wall.get", {owner_id=ownerId, count=countVal})
+  return luaVkApi.invokeApi("friends.add", {user_id=userId})
 end
 
 function luaVkApi.searchNews(keyWord, countVal)
-	if countVal == nil then 
-		countVal = "200"
-	end
-	return luaVkApi.invokeApi("newsfeed.search", {q=keyWord, count=countVal})
+  if countVal == nil then
+    countVal = "200"
+  end
+  return luaVkApi.invokeApi("newsfeed.search", {q=keyWord, count=countVal})
 end
 
 function luaVkApi.getFriendsOfFriendsIds()
-	return ""
+  return ""
 end
 --[[
+
+
 public String getFriendsOfFriendsIds() {
+
+
 		JSONArray userIds = new JSONArray();
+
+
 		try {
+
+
 			String myFriendIdResponse = invokeApi("friends.get",
+
+
 					Params.create().add("user_id", propertyManager.getProp(Properties.CURRENT_USER_ID)));
+
+
 			JSONArray friendIds = new JSONObject(myFriendIdResponse).getJSONObject("response").getJSONArray("items");
+
+
 			for (int i = 0; i < friendIds.length(); i++) {
+
+
 				Thread.sleep(Integer.parseInt(
+
+
 						propertyManager.getProp(Properties.REQUESTS_DELAY, propertyManager.DEFAULT_REQUESTS_DELAY)));
+
+
 				String friendIdResponse = invokeApi("friends.get",
+
+
 						Params.create().add("user_id", friendIds.get(i).toString()));
+
+
 				if (friendIdResponse.contains("response") && friendIdResponse.contains("items")) {
+
+
 					JSONArray friendOfFriendIds = new JSONObject(friendIdResponse).getJSONObject("response")
+
+
 							.getJSONArray("items");
+
+
 					userIds = JSONUtils.concatArray(userIds, friendOfFriendIds);
+
+
 				}
+
+
 			}
+
+
 		} catch (IOException e) {
+
+
 			Logger.error(e);
+
+
 		} catch (JSONException e) {
+
+
 			Logger.error(e);
+
+
 		} catch (InterruptedException e) {
+
+
 			Logger.error(e);
+
+
 		}
+
+
 		if (userIds.length() > 0)
+
+
 			userIds = JSONUtils.removeDuplicateIds(userIds);
 
+
+
+
+
 		return userIds.toString();
+
+
 	}
+
+
 ]]
 
 function luaVkApi.doRepost(objectId)
-	return luaVkApi.invokeApi("wall.repost", {object=objectId})
+  return luaVkApi.invokeApi("wall.repost", {object=objectId})
 end
 
 function luaVkApi.putLike(itemId, entityType)
-	return luaVkApi.invokeApi("likes.add", {item_id=itemId, type=entityType})
+  return luaVkApi.invokeApi("likes.add", {item_id=itemId, type=entityType})
 end
 
 function luaVkApi.joinCommunity(groupId)
-	return luaVkApi.invokeApi("groups.join", {group_id=groupId})
+  return luaVkApi.invokeApi("groups.join", {group_id=groupId})
 end
 
 function luaVkApi.searchCommunities(searchWord, countVal)
-	if countVal == nil then 
-		countVal = "1000"
-	end
-	return luaVkApi.invokeApi("groups.search", {q=searchWord, count=countVal})
+  if countVal == nil then
+    countVal = "1000"
+  end
+  return luaVkApi.invokeApi("groups.search", {q=searchWord, count=countVal})
 end
 
 function luaVkApi.getCommunityById(groupId)
-	return luaVkApi.invokeApi("groups.getById", {group_id=groupId})
+  return luaVkApi.invokeApi("groups.getById", {group_id=groupId})
 end
 
 function luaVkApi.getUserCommunities(userId, countVal)
-	if countVal == nil then 
-		countVal = "1000"
-	end
-	return luaVkApi.invokeApi("groups.get", {user_id=groupId, count=countVal})
+  if countVal == nil then
+    countVal = "1000"
+  end
+  return luaVkApi.invokeApi("groups.get", {user_id=groupId, count=countVal})
 end
 
 function luaVkApi.getPrivateMessages()
-	return luaVkApi.invokeApi("messages.get")
+  return luaVkApi.invokeApi("messages.get")
 end
 
 return luaVkApi

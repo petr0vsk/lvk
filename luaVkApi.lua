@@ -196,12 +196,14 @@ end
 -----------------------
 --     Friends       --
 -----------------------
-function luaVkApi.getFriendIds(userId)
-  return luaVkApi.invokeApi("friends.get", {user_id=userId})
+function luaVkApi.getFriendIds(userId, orderVal, listId, countVal, offsetVal, 
+    fieldsVal, nameCase)
+  return luaVkApi.invokeApi("friends.get", {user_id=userId, order=orderVal, list_id=listId, 
+      count=countVal, offset=offsetVal, fields=fieldsVal, name_case=nameCase})
 end
 
-function luaVkApi.addToFriends(userId)
-  return luaVkApi.invokeApi("friends.add", {user_id=userId})
+function luaVkApi.addToFriends(userId, textVal, followVal)
+  return luaVkApi.invokeApi("friends.add", {user_id=userId, text=textVal, follow=followVal})
 end
 
 function luaVkApi.getOnlineFriends(userId, listId, onlineMobile, sortOrder, countVal, offsetVal)
@@ -209,7 +211,8 @@ function luaVkApi.getOnlineFriends(userId, listId, onlineMobile, sortOrder, coun
       online_mobile=onlineMobile, order=sortOrder, count=countVal, offset=offsetVal})
 end
 
-function luaVkApi.getMutualFriends(sourceUid, targetUid, targetUids, sortOrder, countVal, offsetVal)
+function luaVkApi.getMutualFriends(sourceUid, targetUid, targetUids, sortOrder,
+    countVal, offsetVal)
   return luaVkApi.invokeApi("friends.getMutual", {source_uid=sourceUid, target_uid=targetUid,
       target_uids=targetUids, order=sortOrder, count=countVal, offset=offsetVal})
 end
@@ -218,36 +221,70 @@ function luaVkApi.getRecentFriends(countVal)
   return luaVkApi.invokeApi("friends.getRecent", {count=countVal})
 end
 
-
-
-
-
-
-function luaVkApi.getFriendsOfFriendsIds()
-  return ""
+function luaVkApi.getFriendsRequests(countVal, offsetVal, extended, needMutual, outVal, sortVal,
+    suggestedVal)
+  return luaVkApi.invokeApi("friends.getRequests", {count=countVal, offset=offsetVal, 
+      extended=extendedVal, need_mutual=needMutual, out=outVal, sort=sortVal, suggested=suggestedVal})
 end
---[[
-public String getFriendsOfFriendsIds() {
-		JSONArray userIds = new JSONArray();
-			String myFriendIdResponse = invokeApi("friends.get",
-					Params.create().add("user_id", propertyManager.getProp(Properties.CURRENT_USER_ID)));
-			JSONArray friendIds = new JSONObject(myFriendIdResponse).getJSONObject("response").getJSONArray("items");
-			for (int i = 0; i < friendIds.length(); i++) {
-				Thread.sleep(Integer.parseInt(
-						propertyManager.getProp(Properties.REQUESTS_DELAY, propertyManager.DEFAULT_REQUESTS_DELAY)));
-				String friendIdResponse = invokeApi("friends.get",
-						Params.create().add("user_id", friendIds.get(i).toString()));
-				if (friendIdResponse.contains("response") && friendIdResponse.contains("items")) {
-					JSONArray friendOfFriendIds = new JSONObject(friendIdResponse).getJSONObject("response")
-							.getJSONArray("items");
-					userIds = JSONUtils.concatArray(userIds, friendOfFriendIds);
-				}
-			}
-		if (userIds.length() > 0)
-			userIds = JSONUtils.removeDuplicateIds(userIds);
-		return userIds.toString();
-	}
-]]
+
+function luaVkApi.editFriendsList(userId, listIds)
+  return luaVkApi.invokeApi("friends.edit", {user_id=userId, list_ids=listIds})
+end
+
+function luaVkApi.deleteFriend(userId)
+  return luaVkApi.invokeApi("friends.delete", {user_id=userId})
+end
+
+function luaVkApi.getFriendsOfFriendsIds(userId, returnSystem)
+  return luaVkApi.invokeApi("friends.getLists", {user_id=userId, return_system=returnSystem})
+end
+
+function luaVkApi.addFriendList(nameVal, userIds)
+  return luaVkApi.invokeApi("friends.addList", {name=nameVal, user_ids=userIds})
+end
+
+function luaVkApi.editFriendList(nameVal, listId, userIds, addUserIds, deleteUserIds)
+  return luaVkApi.invokeApi("friends.editList", {name=nameVal, list_id=listId, user_ids=userIds,
+      add_user_ids=addUserIds, delete_user_ids=deleteUserIds})
+end
+
+function luaVkApi.deleteFriendList(listId)
+  return luaVkApi.invokeApi("friends.deleteList", {list_id=listId})
+end
+
+function luaVkApi.getAppUsers()
+  return luaVkApi.invokeApi("friends.getAppUsers")
+end
+
+function luaVkApi.getUsersByPhones(phonesVal, fieldsVal)
+  return luaVkApi.invokeApi("friends.getByPhones", {phones=phonesVal, fields=fieldsVal})
+end
+
+function luaVkApi.deleteAllFriendsRequests()
+  return luaVkApi.invokeApi("friends.deleteAllRequests")
+end
+
+function luaVkApi.getFriendsSuggestions(filterVal, countVal, offsetVal,fieldsVal, nameCase)
+  return luaVkApi.invokeApi("friends.getSuggestions", {filter=filterVal, count=countVal,
+      offset=offsetVal, fields=fieldsVal, name_case=nameCase})
+end
+
+function luaVkApi.areFriends(userIds, needSign)
+  return luaVkApi.invokeApi("friends.areFriends", {user_ids=userIds, need_sign=needSign})
+end
+
+function luaVkApi.getAvailableFriendsForCall(fieldsVal, nameCase)
+  return luaVkApi.invokeApi("friends.getAvailableForCall", {fields=fieldsVal, name_case=nameCase})
+end
+
+function luaVkApi.searchFriends(userId, query, fieldsVal, nameCase, offsetVal, countCal)
+  return luaVkApi.invokeApi("friends.search", {user_id=userId, q=query, fields=fieldsVal,
+      name_case=nameCase, offset=offsetVal, count=countVal})
+end
+
+
+
+
 
 -----------------------
 --     Widgets       --

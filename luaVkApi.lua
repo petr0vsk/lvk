@@ -424,14 +424,38 @@ end
 -----------------------
 --   Notifications   --
 -----------------------
+function luaVkApi.getNotifications(countVal, startFrom, filtersVal, startTime, endTime)
+  return luaVkApi.invokeApi("notifications.get", {count=countVal, start_from=startFrom,
+      filters=filtersVal, start_time=startTime, end_time=endTime})
+end
+
+function luaVkApi.markNotificationsAsViewed()
+  return luaVkApi.invokeApi("notifications.markAsViewed")
+end
 
 -----------------------
 --       Stats       --
 -----------------------
+function luaVkApi.getStatistics(groupId, appId, dateFrom, dateTo)
+  return luaVkApi.invokeApi("stats.get", {group_id=groupId, app_id=appId, date_from=dateFrom,
+      date_to=dateTo})
+end
+
+function luaVkApi.trackVisitor()
+  return luaVkApi.invokeApi("stats.trackVisitor")
+end
+
+function luaVkApi.trackVisitor(ownerId, postId)
+  return luaVkApi.invokeApi("stats.getPostReach", {owner_id=ownerId, post_id=postId})
+end
 
 -----------------------
 --      Search       --
 -----------------------
+function luaVkApi.getHint(query, limitVal, filtersVal, searchGlobal)
+  return luaVkApi.invokeApi("search.getHints", {q=query, limit=limitVal, filters=filtersVal,
+      search_global=searchGlobal})
+end
 
 -----------------------
 --       Apps        --
@@ -448,6 +472,9 @@ end
 -----------------------
 --      Gifts        --
 -----------------------
+function luaVkApi.getGifts(userId, countVal, offsetVal)
+  return luaVkApi.invokeApi("gifts.get", {user_id=userId, count=countVal, offset=offsetVal})
+end
 
 -----------------------
 --      Other        --

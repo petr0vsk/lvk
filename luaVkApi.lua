@@ -204,6 +204,25 @@ function luaVkApi.addToFriends(userId)
   return luaVkApi.invokeApi("friends.add", {user_id=userId})
 end
 
+function luaVkApi.getOnlineFriends(userId, listId, onlineMobile, sortOrder, countVal, offsetVal)
+  return luaVkApi.invokeApi("friends.getOnline", {user_id=userId, list_id=listId,
+      online_mobile=onlineMobile, order=sortOrder, count=countVal, offset=offsetVal})
+end
+
+function luaVkApi.getMutualFriends(sourceUid, targetUid, targetUids, sortOrder, countVal, offsetVal)
+  return luaVkApi.invokeApi("friends.getMutual", {source_uid=sourceUid, target_uid=targetUid,
+      target_uids=targetUids, order=sortOrder, count=countVal, offset=offsetVal})
+end
+
+function luaVkApi.getRecentFriends(countVal)
+  return luaVkApi.invokeApi("friends.getRecent", {count=countVal})
+end
+
+
+
+
+
+
 function luaVkApi.getFriendsOfFriendsIds()
   return ""
 end

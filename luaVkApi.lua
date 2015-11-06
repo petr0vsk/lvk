@@ -282,23 +282,47 @@ function luaVkApi.searchFriends(userId, query, fieldsVal, nameCase, offsetVal, c
       name_case=nameCase, offset=offsetVal, count=countVal})
 end
 
-
-
-
-
 -----------------------
 --     Widgets       --
 -----------------------
+function luaVkApi.getCommentsFromWidget(widgetApiId, urlStr, pageId, orderVal,
+    fieldsVal, offsetVal, countCal)
+  return luaVkApi.invokeApi("widgets.getComments", {widget_api_id=widgetApiId, url=urlStr,
+      page_id=pageId, order=orderVal, fields=fieldsVal, offset=offsetVal, count=countVal})
+end
+
+function luaVkApi.getPagesWithWidget(widgetApiId, orderVal, periodVal, offsetVal, countCal)
+  return luaVkApi.invokeApi("widgets.getPages", {widget_api_id=widgetApiId, order=orderVal,
+      page_id=pageId, order=orderVal, period=periodVal, offset=offsetVal, count=countVal})
+end
 
 -----------------------
 --    Data storage   --
 -----------------------
+function luaVkApi.getStorageVariable(keyStr, keysStr, userId, globalVal)
+  return luaVkApi.invokeApi("storage.get", {key=keyStr, keys=keysStr, user_id=userId,
+      global=globalVal})
+end
+
+function luaVkApi.setStorageVariable(keyStr, valueStr, userId, globalVal)
+  return luaVkApi.invokeApi("storage.set", {key=keyStr, value=valueStr, user_id=userId,
+      global=globalVal})
+end
+
+function luaVkApi.getVariableKeys(userId, globalVal, offsetVal, countVal)
+  return luaVkApi.invokeApi("storage.getKeys", {user_id=userId, global=globalVal,
+      offset=offsetVal, count=countVal})
+end
 
 -----------------------
 --      Status       --
 -----------------------
-function luaVkApi.getStatus(userId)
-  return luaVkApi.invokeApi("status.get", {user_id=userId})
+function luaVkApi.getStatus(userId, groupId)
+  return luaVkApi.invokeApi("status.get", {user_id=userId, group_id=groupId})
+end
+
+function luaVkApi.setStatus(textVal, groupId)
+  return luaVkApi.invokeApi("status.set", {text=textVal, group_id=groupId})
 end
 
 -----------------------

@@ -412,10 +412,73 @@ end
 -----------------------
 --      Polls        --
 -----------------------
+function luaVkApi.getPollById(ownerId, isBoard, pollId)
+  return luaVkApi.invokeApi("polls.getById", {owner_id=ownerId, is_board=isBoard, 
+      poll_id=pollId})
+end
+
+function luaVkApi.addVote(ownerId, pollId, answerId, isBoard)
+  return luaVkApi.invokeApi("polls.addVote", {owner_id=ownerId, poll_id=pollId, 
+      answer_id=answerId, is_board=isBoard})
+end
+
+function luaVkApi.deleteVote(ownerId, pollId, answerId, isBoard)
+  return luaVkApi.invokeApi("polls.deleteVote", {owner_id=ownerId, poll_id=pollId, 
+      answer_id=answerId, is_board=isBoard})
+end
+
+function luaVkApi.getVoters(ownerId, pollId, answerIds, isBoard, friendsOnly, offsetVal,
+    countVal, fieldsVal, nameCase)
+  return luaVkApi.invokeApi("polls.getVoters", {owner_id=ownerId, poll_id=pollId, 
+      answer_ids=answerIds, is_board=isBoard, friends_only=friendsOnly, offset=offsetVal,
+      count=countVal, fields=fieldsVal, name_case=nameCase})
+end
+
+function luaVkApi.createPoll(questionStr, isAnonymous, ownerId, addAnswers)
+  return luaVkApi.invokeApi("polls.create", {question=questionStr, is_anonymous=isAnonymous, 
+      owner_id=ownerId, add_answers=addAnswers})
+end
+
+function luaVkApi.editPoll(ownerId, pollId, questionStr, addAnswers, editAnswers, 
+    deleteAnswers)
+  return luaVkApi.invokeApi("polls.edit", {owner_id=ownerId, poll_id=pollId,
+      question=questionStr, question=questionStr, add_answers=addAnswers,
+      edit_answers=editAnswers, delete_answers=deleteAnswers})
+end
 
 -----------------------
 --    Documents      --
 -----------------------
+function luaVkApi.getDocuments(countVal, offsetVal, ownerId)
+  return luaVkApi.invokeApi("docs.get", {count=countVal, offset=offsetId, owner_id=ownerId})
+end
+
+function luaVkApi.getDocumentsById(docsVal)
+  return luaVkApi.invokeApi("docs.getById", {docs=docsVal})
+end
+
+function luaVkApi.getUploadServer(groupId)
+  return luaVkApi.invokeApi("docs.getUploadServer", {group_id=groupId})
+end
+
+function luaVkApi.getWallUploadServer(groupId)
+  return luaVkApi.invokeApi("docs.getWallUploadServer", {group_id=groupId})
+end
+
+function luaVkApi.saveDoc(docFile, titleVal, tagsVal)
+  return luaVkApi.invokeApi("docs.save", {file=docFile, title=titleVal, tags=tagsVal})
+end
+
+function luaVkApi.deleteDoc(ownerId, docId)
+  return luaVkApi.invokeApi("docs.delete", {owner_id=ownerId, doc_id=docId})
+end
+
+function luaVkApi.addDoc(ownerId, docId, accessKey)
+  return luaVkApi.invokeApi("docs.add", {owner_id=ownerId, doc_id=docId, access_key=accessKey})
+end
+
+
+
 
 -----------------------
 --    Favorites      --

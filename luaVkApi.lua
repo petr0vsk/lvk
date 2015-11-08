@@ -490,6 +490,10 @@ end
 -----------------------
 --      Other        --
 -----------------------
+function luaVkApi.executeCode(codeStr)
+  return luaVkApi.invokeApi("execute", {code=codeStr})
+end
+
 
 
 return luaVkApi

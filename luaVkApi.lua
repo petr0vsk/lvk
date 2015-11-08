@@ -477,9 +477,6 @@ function luaVkApi.addDoc(ownerId, docId, accessKey)
   return luaVkApi.invokeApi("docs.add", {owner_id=ownerId, doc_id=docId, access_key=accessKey})
 end
 
-
-
-
 -----------------------
 --    Favorites      --
 -----------------------
@@ -542,6 +539,56 @@ end
 -----------------------
 --     VK data       --
 -----------------------
+function luaVkApi.getCountries(needAll, codeStr, offsetVal, countVal)
+  return luaVkApi.invokeApi("database.getCountries", {need_all=needAll, code=codeStr,
+      offset=offsetVal, count=countVal})
+end
+
+function luaVkApi.getRegions(countryId, query, offsetVal, countVal)
+  return luaVkApi.invokeApi("database.getRegions", {country_id=countryId, q=query,
+      offset=offsetVal, count=countVal})
+end
+
+function luaVkApi.getStreetsById(streetIds)
+  return luaVkApi.invokeApi("database.getStreetsById", {street_ids=streetIds})
+end
+
+function luaVkApi.getCountriesById(countryIds)
+  return luaVkApi.invokeApi("database.getCountriesById", {country_ids=countryIds})
+end
+
+function luaVkApi.getCities(countryId, regionId, query, needAll, offsetVal, countVal)
+  return luaVkApi.invokeApi("database.getCities", {country_id=countryId, region_id=regionId,
+      q=query, need_all=needAll, offset=offsetVal, count=countVal})
+end
+
+function luaVkApi.getCitiesById(cityIds)
+  return luaVkApi.invokeApi("database.getCitiesById", {city_ids=cityIds})
+end
+
+function luaVkApi.getUniversities(query, countryId, cityId, offsetVal, countVal)
+  return luaVkApi.invokeApi("database.getUniversities", {q=query, country_id=countryId, 
+      city_id=cityId, offset=offsetVal, count=countVal})
+end
+
+function luaVkApi.getSchools(query, cityId, offsetVal, countVal)
+  return luaVkApi.invokeApi("database.getSchools", {q=query, city_id=cityId, offset=offsetVal,
+      count=countVal})
+end
+
+function luaVkApi.getSchoolClasses(countryId)
+  return luaVkApi.invokeApi("database.getSchoolClasses", {country_id=countryId})
+end
+
+function luaVkApi.getFaculties(universityId, offsetVal, countVal)
+  return luaVkApi.invokeApi("database.getFaculties", {university_id=universityId, offset=offsetVal,
+      count=countVal})
+end
+
+function luaVkApi.getChairs(facultyId, offsetVal, countVal)
+  return luaVkApi.invokeApi("database.getChairs", {faculty_id=facultyId, offset=offsetVal,
+      count=countVal})
+end
 
 -----------------------
 --      Gifts        --

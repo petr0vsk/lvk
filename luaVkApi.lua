@@ -464,6 +464,17 @@ end
 -----------------------
 --     Service       --
 -----------------------
+function luaVkApi.checkLink(urlStr)
+  return luaVkApi.invokeApi("utils.checkLink", {url=urlStr})
+end
+
+function luaVkApi.resolveScreenName(screenNsme)
+  return luaVkApi.invokeApi("utils.resolveScreenName", {screen_name=screenNsme})
+end
+
+function luaVkApi.getServerTime()
+  return luaVkApi.invokeApi("utils.getServerTime")
+end
 
 -----------------------
 --     VK data       --

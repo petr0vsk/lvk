@@ -520,6 +520,41 @@ end
 -----------------------
 --       Apps        --
 -----------------------
+function luaVkApi.getAppsCatalog(sortVal, offsetVal, countVal, platformVal, isExtended,
+    returnFriends, fieldsVal, nameCase, query, genreId, filterVal)
+  return luaVkApi.invokeApi("apps.getCatalog", {sort=sortVal, offset=offsetVal, count=countVal,
+      platform=platformVal, extended=isExtended, return_friends=returnFriends, fields=fieldsVal, 
+      name_case=nameCase, q=query, genre_id=genreId, filter=filterVal})
+end
+
+function luaVkApi.getApp(appId, appIds, platformVal, isExtended, returnFriends, fieldsVal,
+    nameCase)
+  return luaVkApi.invokeApi("apps.get", {app_id=appId, app_ids=appIds, platform=platformVal,
+      extended=isExtended, return_friends=returnFriends, fields=fieldsVal, name_case=nameCase})
+end
+
+function luaVkApi.sendAppRequest(userId, textVal, typeVal, nameVal, keyVal, separateVal)
+  return luaVkApi.invokeApi("apps.sendRequest", {user_id, text=textVal, type=typeVal, name=nameVal,
+      key=keyVal, separate=separateVal})
+end
+
+function luaVkApi.deleteAppRequests()
+  return luaVkApi.invokeApi("apps.deleteAppRequests")
+end
+
+function luaVkApi.getFriendsList(isExtended, countVal, offsetVal, typeVal, fieldsVal)
+  return luaVkApi.invokeApi("apps.getFriendsList", {extended=isExtended, count=countVal, 
+      offset=offsetVal, type=typeVal, fields=fieldsVal})
+end
+
+function luaVkApi.getLeaderboard(typeVal, globalVal, isExtended)
+  return luaVkApi.invokeApi("apps.getLeaderboard", {type=typeVal, global=globalVal, 
+      extended=isExtended})
+end
+
+function luaVkApi.getScore(userId)
+  return luaVkApi.invokeApi("apps.getScore", {user_id=userId})
+end
 
 -----------------------
 --     Service       --

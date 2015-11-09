@@ -373,6 +373,39 @@ end
 -----------------------
 --      Places       --
 -----------------------
+function luaVkApi.addLocation(typeVal, titleVal, latitudeVal, longitudeVal, countryVal,
+    cityVal, addressVal)
+  return luaVkApi.invokeApi("places.add", {type=typeVal, title=titleVal, latitude=latitudeVal,
+      longitude=longitudeVal, country=countryVal, city-cityVal, address=addressVal})
+end
+
+function luaVkApi.getLocationById(placesVal)
+  return luaVkApi.invokeApi("places.getById", {places=placesVal})
+end
+
+function luaVkApi.searchLocations(query, cityVal, latitudeVal, longitudeVal, radiusVal,
+    offsetVal, countVal)
+  return luaVkApi.invokeApi("places.search", {q=query, city=cityVal, latitude=latitudeVal,
+      longitude=longitudeVal, radius=radiusVal, offset=offsetVal, count=countVal})
+end
+
+function luaVkApi.checkinUser(placeId, textStr, latitudeVal, longitudeVal, friendsOnly,
+    servicesVal)
+  return luaVkApi.invokeApi("places.checkin", {place_id=placeId, text=textStr,
+      latitude=latitudeVal, longitude=longitudeVal, friends_only=friendsOnly,
+      services=servicesVal})
+end
+
+function luaVkApi.getCheckins(latitudeVal, longitudeVal, placeVal, userId, offsetVal,
+    countVal, timeStamp, friendsOnly, needPlaces)
+  return luaVkApi.invokeApi("places.getCheckins", {latitude=latitudeVal, longitude=longitudeVal,
+      place=placeVal, user_id=userId, offset=offsetVal, count=countVal, timestamp=timeStamp,
+      friends_only=friendsOnly, need_places=needPlaces})
+end
+
+function luaVkApi.getPlaceTypes()
+  return luaVkApi.invokeApi("places.getTypes")
+end
 
 -----------------------
 --      Account      --

@@ -405,8 +405,26 @@ end
 -----------------------
 --      Likes        --
 -----------------------
-function luaVkApi.putLike(itemId, entityType)
-  return luaVkApi.invokeApi("likes.add", {item_id=itemId, type=entityType})
+function luaVkApi.putLikerIds(typeVal, ownerId, itemId, pageUrl, filterVal,
+    friendsOnly, isExtended, offsetVal, countVal, skipOwn)
+  return luaVkApi.invokeApi("likes.getList", {type=typeVal, owner_id=ownerId,
+      item_id=itemId, page_url=pageUrl, filter=filterVal, friends_only=friendsOnly,
+      extended=isExtended, offset=offsetVal, count=countVal, skip_own=skipOwn})
+end
+
+function luaVkApi.putLike(entityType, ownerId, itemId, accessKey, refStr)
+  return luaVkApi.invokeApi("likes.add", {type=entityType, owner_id=ownerId,
+      item_id=itemId, access_key=accessKey, ref=refStr})
+end
+
+function luaVkApi.deleteLike(entityType, ownerId, itemId)
+  return luaVkApi.invokeApi("likes.delete", {type=entityType, owner_id=ownerId,
+      item_id=itemId})
+end
+
+function luaVkApi.isLiked(userId, entityType, ownerId, itemId)
+  return luaVkApi.invokeApi("likes.isLiked", {user_id=userId, type=entityType,
+      owner_id=ownerId, item_id=itemId})
 end
 
 -----------------------
@@ -480,6 +498,52 @@ end
 -----------------------
 --    Favorites      --
 -----------------------
+function luaVkApi.getBookmarkers(offsetVal, countVal)
+  return luaVkApi.invokeApi("fave.getUsers", {offset=offsetVal, count=countVal})
+end
+
+function luaVkApi.getLikedPhotos(offsetVal, countVal, photoSizes)
+  return luaVkApi.invokeApi("fave.getPhotos", {offset=offsetVal, count=countVal,
+      photo_sizes=photoSizes})
+end
+
+function luaVkApi.getLikedPosts(offsetVal, countVal, isExtended)
+  return luaVkApi.invokeApi("fave.getPosts", {offset=offsetVal, count=countVal,
+      extended=isExtended})
+end
+
+function luaVkApi.getLikedVideos(offsetVal, countVal, isExtended)
+  return luaVkApi.invokeApi("fave.getVideos", {offset=offsetVal, count=countVal,
+      extended=isExtended})
+end
+
+function luaVkApi.getLikedLinks(offsetVal, countVal)
+  return luaVkApi.invokeApi("fave.getLinks", {offset=offsetVal, count=countVal})
+end
+
+function luaVkApi.bookmarkUser(userId)
+  return luaVkApi.invokeApi("fave.addUser", {user_id=userId})
+end
+
+function luaVkApi.removeBookmarkedUser(userId)
+  return luaVkApi.invokeApi("fave.removeUser", {user_id=userId})
+end
+
+function luaVkApi.bookmarkGroup(groupId)
+  return luaVkApi.invokeApi("fave.addGroup", {group_id=groupId})
+end
+
+function luaVkApi.removeBookmarkedGroup(userId)
+  return luaVkApi.invokeApi("fave.removeGroup", {user_id=userId})
+end
+
+function luaVkApi.bookmarkLink(linkStr, textStr)
+  return luaVkApi.invokeApi("fave.addLink", {link=linkStr, text=textStr})
+end
+
+function luaVkApi.removeBookmarkedLink(linkId)
+  return luaVkApi.invokeApi("fave.removeLink", {link_id=linkId})
+end
 
 -----------------------
 --   Notifications   --

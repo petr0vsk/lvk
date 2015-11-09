@@ -285,11 +285,89 @@ function luaVkApi.savePhoto(albumId, groupId, serverVal, photosList, hashVal,
   longitude=longitudeVal, caption=captionVal})
 end
 
-
 function luaVkApi.copyPhoto(ownerId, photoId, accessKey)
   return luaVkApi.invokeApi("photos.copy", {owner_id=ownerId, photo_id=photoId, 
       access_key=accessKey})
 end
+
+function luaVkApi.editPhoto(ownerId, photoId, captionVal, latitudeVal, longitudeVal,
+    placeStr, foursquareId, deletePlace)
+  return luaVkApi.invokeApi("photos.edit", {owner_id=ownerId, photo_id=photoId,
+      caption=captionVal, latitude=latitudeVal, longitude=longitudeVal,
+      place_str=placeStr, foursquare_id=foursquareId, delete_place=deletePlace})
+end
+
+function luaVkApi.movePhoto(ownerId, targetAlbumId, photoId)
+  return luaVkApi.invokeApi("photos.move", {owner_id=ownerId, target_album_id=targetAlbumId,
+      photo_id=photoId})
+end
+
+function luaVkApi.makeCover(ownerId, photoId, albumId)
+  return luaVkApi.invokeApi("photos.makeCover", {owner_id=ownerId, photo_id=photoId,
+      album_id=albumId})
+end
+
+function luaVkApi.reorderPhotoAlbums(ownerId, albumId, beforeVal, afterVal)
+  return luaVkApi.invokeApi("photos.reorderAlbums", {owner_id=ownerId, album_id=albumId,
+      before=beforeVal, after=afterVal})
+end
+
+function luaVkApi.reorderPhotos(ownerId, photoId, beforeVal, afterVal)
+  return luaVkApi.invokeApi("photos.reorderPhotos", {owner_id=ownerId, photo_id=photoId,
+      before=beforeVal, after=afterVal})
+end
+
+function luaVkApi.getAllPhotos(ownerId, isExtended, offsetVal, countVal, photoSizes,
+    noServiceAlbums, needHidden, skipHidden)
+  return luaVkApi.invokeApi("photos.getAll", {owner_id=ownerId, extended=isExtended,
+      offset=offsetVal, count=countVal, photo_sizes=photoSizes, no_service_albums=noServiceAlbums,
+      need_hidden=needHidden, skip_hidden=skipHidden})
+end
+
+function luaVkApi.getUserPhotos(userId, offsetVal, countVal, isExtended, sortVal)
+  return luaVkApi.invokeApi("photos.getUserPhotos", {user_id=userId, offset=offsetVal,
+      count=countVal, extended=isExtended, sort=sortVal})
+end
+
+function luaVkApi.deletePhotoAlbum(albumId, groupId)
+  return luaVkApi.invokeApi("photos.deleteAlbum", {album_id=albumId, group_id=groupId})
+end
+
+function luaVkApi.deletePhoto(ownerId, photoId)
+  return luaVkApi.invokeApi("photos.delete", {owner_id=ownerId, photo_id=photoId})
+end
+
+function luaVkApi.restorePhoto(ownerId, photoId)
+  return luaVkApi.invokeApi("photos.restore", {owner_id=ownerId, photo_id=photoId})
+end
+
+function luaVkApi.confirmPhotoTag(ownerId, photoId, tagId)
+  return luaVkApi.invokeApi("photos.confirmTag", {owner_id=ownerId, photo_id=photoId,
+      tag_id=tagId})
+end
+
+function luaVkApi.getNewPhotoTags(offsetVal, countVal)
+  return luaVkApi.invokeApi("photos.getNewTags", {offset=offsetVal, count=countVal})
+end
+
+function luaVkApi.removePhotoTag(ownerId, photoId, tagId)
+  return luaVkApi.invokeApi("photos.removeTag", {owner_id=ownerId, photo_id=photoId,
+      tag_id=tagId})
+end
+
+function luaVkApi.putPhotoTag(ownerId, photoId, userId, x_, y_, x2_, y2_)
+  return luaVkApi.invokeApi("photos.putTag", {owner_id=ownerId, photo_id=photoId,
+      user_id=userId, x=x_, y=y_, x2=x2_, y2=y2_})
+end
+
+function luaVkApi.gePhotoTags(ownerId, photoId, accessKey)
+  return luaVkApi.invokeApi("photos.getTags", {owner_id=ownerId, photo_id=photoId,
+      access_key=accessKey})
+end
+
+
+
+
 
 -----------------------
 --     Friends       --

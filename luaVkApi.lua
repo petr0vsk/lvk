@@ -365,10 +365,39 @@ function luaVkApi.gePhotoTags(ownerId, photoId, accessKey)
       access_key=accessKey})
 end
 
+function luaVkApi.gePhotoComments(ownerId, photoId, needLikes, startCommentId, offsetVal,
+    countVal, sortVal, accessKey, isExtended, fieldsVal)
+  return luaVkApi.invokeApi("photos.getComments", {owner_id=ownerId, photo_id=photoId,
+      need_likes=needLikes, start_comment_id=startCommentId, offset=offsetVal,
+      count=countVal, sort=sortVal, access_key=accessKey, extended=isExtended,
+      fields=fieldsVal})
+end
 
+function luaVkApi.getAllPhotoComments(ownerId, albumId, needLikes, offsetVal, countVal)
+  return luaVkApi.invokeApi("photos.getAllComments", {owner_id=ownerId, album_id=albumId,
+      need_likes=needLikes, offset=offsetVal, count=countVal})
+end
 
+function luaVkApi.createPhotoComment(ownerId, photoId, messageStr, attachmentsVal, fromGroup,
+    replyToComment, stickerId, accessKey, guidVal)
+  return luaVkApi.invokeApi("photos.createComment", {owner_id=ownerId, photo_id=photoId,
+      message=messageStr, attachments=attachmentsVal, from_group=fromGroup,
+      reply_to_comment=replyToComment, sticker_id=stickerId, access_key=accessKey,
+      guid=guidVal})
+end
 
+function luaVkApi.deletePhotoComment(ownerId, commentId)
+  return luaVkApi.invokeApi("photos.deleteComment", {owner_id=ownerId, comment_id=commentId})
+end
 
+function luaVkApi.restorePhotoComment(ownerId, commentId)
+  return luaVkApi.invokeApi("photos.restoreComment", {owner_id=ownerId, comment_id=commentId})
+end
+
+function luaVkApi.editPhotoComment(ownerId, commentId, messageVal, attachmentsVal)
+  return luaVkApi.invokeApi("photos.editComment", {owner_id=ownerId, comment_id=commentId,
+      message=messageVal, attachments=attachmentsVal})
+end
 -----------------------
 --     Friends       --
 -----------------------

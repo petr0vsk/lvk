@@ -69,8 +69,11 @@ function luaVkApi.checkPhone(phoneNumber, userId, clientSecret)
       client_secret=clientSecret})
 end
 
-function luaVkApi.signup() --!!!not all parameters are listed here
-  return luaVkApi.invokeApi("auth.signup", {})
+function luaVkApi.signup(firstName, lastName, clientId, clientSecret, phoneVal,
+    passwordVal, testMode, voiceVal, sexVal, sidVal)
+  return luaVkApi.invokeApi("auth.signup", {first_name=firstName, last_name=lastName,
+      client_id=clientId, client_secret=clientSecret, phone=phoneVal, password=passwordVal,
+      test_mode=testMode, voice=voiceVal, sex=sexVal, sid=sidVal})
 end
 
 function luaVkApi.confirm(userId, clientSecret, phoneNumber, codeVal, passwordVal,

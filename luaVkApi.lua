@@ -188,9 +188,107 @@ end
 -----------------------
 --     Photos        --
 -----------------------
-function luaVkApi.getAlbums(userId)
-  --Params.create().add("owner_id", userId).add("photo_sizes", "1").add("thumb_src", "1"));
-  return luaVkApi.invokeApi("photos.getAlbums", {count=countVal})
+function luaVkApi.createPhotoAlbum(titleVal, groupId, descriptionVal, privacyView,
+    privacyComment, uploadByAdminsOnly, commentsDissabled)
+  return luaVkApi.invokeApi("photos.createAlbum", {title=titleVal, grop_id=groupId,
+      description=descriptionVal, privacy_view=privacyView, privacy_comment=privacyComment,
+      upload_by_admins_only=uploadByAdminsOnly, comments_dissabled=commentsDissabled})
+end
+
+function luaVkApi.editPhotoAlbum(albumId, titleVal, descriptionVal, ownerId, privacyView,
+    privacyComment, uploadByAdminsOnly, commentsDissabled)
+  return luaVkApi.invokeApi("photos.editAlbum", {album_id=albumId, title=titleVal,
+      description=descriptionVal, owner_id=ownerId, privacy_view=privacyView, 
+      privacy_comment=privacyComment, upload_by_admins_only=uploadByAdminsOnly, 
+      comments_dissabled=commentsDissabled})
+end
+
+function luaVkApi.getPhotoAlbums(ownerId, albumIds, offsetVal, countVal, needSystem,
+    needCovers, photoSizes)
+  return luaVkApi.invokeApi("photos.getAlbums", {owner_id=ownerId, album_ids=albumIds,
+      offset=offsetVal, count=countVal, need_system=needSystem, need_covers=needCovers,
+      photo_sizes=photoSizes})
+end
+
+function luaVkApi.getPhotos(ownerId, albumId, photoIds, revVal, isExtended, feedType,
+    feedVal, photoSizes, offsetVal, countVal)
+  return luaVkApi.invokeApi("photos.get", {owner_id=ownerId, album_id=albumId,
+      photo_ids=photoIds, rev=revVal, extended=isExtended, feed_type=feedType,
+      feed=feedVal, photo_sizes=photoSizes, offset=offsetVal, count=countVal})
+end
+
+function luaVkApi.getPhotoAlbumsCount(userId, groupId)
+  return luaVkApi.invokeApi("photos.getAlbumsCount", {user_id=userId, group_id=groupId})
+end
+
+function luaVkApi.getPhotosById(photosVal, isExtended, photoSizes)
+  return luaVkApi.invokeApi("photos.getById", {photos=photosVal, extended=isExtended,
+      photo_sizes=photoSizes})
+end
+
+function luaVkApi.getPhotoUploadServer(albumId, groupId)
+  return luaVkApi.invokeApi("photos.getUploadServer", {album_id=albumId, group_id=groupId})
+end
+
+function luaVkApi.getOwnerPhotoUploadServer(ownerId)
+  return luaVkApi.invokeApi("photos.getOwnerPhotoUploadServer", {owner_id=ownerId})
+end
+
+function luaVkApi.getChatCoverUploadServer(chatId, cropX, cropY, cropWidth)
+  return luaVkApi.invokeApi("photos.getChatUploadServer", {chat_id=chatId, crop_x=cropX,
+      crop_y=cropY, crop_width=cropWidth})
+end
+
+function luaVkApi.saveOwnerPhoto(serverVal, hashVal, photoVal)
+  return luaVkApi.invokeApi("photos.saveOwnerPhoto", {server=serverVal, hash=hashVal,
+      photo=photoVal})
+end 
+
+function luaVkApi.saveWallPhoto(userId, groupId, photoVal, serverVal, hashVal)
+  return luaVkApi.invokeApi("photos.saveWallPhoto", {user_id=userId, group_id=grouId,
+      photo=photoVal, server=serverVal, hash=hashVal})
+end
+
+function luaVkApi.getWallPhotoUploadServer(groupId)
+  return luaVkApi.invokeApi("photos.getWallUploadServer", {group_id=grouId})
+end
+
+function luaVkApi.getMessagesUploadServer()
+  return luaVkApi.invokeApi("photos.getMessagesUploadServer")
+end
+
+function luaVkApi.saveMessagesPhoto(photoVal)
+  return luaVkApi.invokeApi("photos.saveMessagesPhoto", {photo=photoVal})
+end
+
+function luaVkApi.reportPhoto(ownerId, photoId, reasonVal)
+  return luaVkApi.invokeApi("photos.report", {owner_id=ownerId, photo_id=photoId,
+      reason=reasonVal})
+end
+
+function luaVkApi.reportPhotoComment(ownerId, commentId, reasonVal)
+  return luaVkApi.invokeApi("photos.reportComment", {owner_id=ownerId, comment_id=commentId,
+      reason=reasonVal})
+end
+
+function luaVkApi.searchPhotos(query, latitude, longitude, startTime, endTime, sortVal,
+    offsetVal, countVal, radiusVal)
+  return luaVkApi.invokeApi("photos.search", {q=query, lat=latitude, long=longitude,
+      start_time=startTime, end_time=endTime, sort=sortVal, offset=offsetVal,
+      count=countVal, radius=radiusVal})
+end
+
+function luaVkApi.savePhoto(albumId, groupId, serverVal, photosList, hashVal,
+    latitudeVal, longitudeVal, captionVal)
+  return luaVkApi.invokeApi("photos.save", {album_id=albumId, group_id=groupId,
+  server=serverVal, photos_list=photosList, hash=hashVal, latitude=latitudeVal,
+  longitude=longitudeVal, caption=captionVal})
+end
+
+
+function luaVkApi.copyPhoto(ownerId, photoId, accessKey)
+  return luaVkApi.invokeApi("photos.copy", {owner_id=ownerId, photo_id=photoId, 
+      access_key=accessKey})
 end
 
 -----------------------
@@ -373,39 +471,6 @@ end
 -----------------------
 --      Places       --
 -----------------------
-function luaVkApi.addLocation(typeVal, titleVal, latitudeVal, longitudeVal, countryVal,
-    cityVal, addressVal)
-  return luaVkApi.invokeApi("places.add", {type=typeVal, title=titleVal, latitude=latitudeVal,
-      longitude=longitudeVal, country=countryVal, city-cityVal, address=addressVal})
-end
-
-function luaVkApi.getLocationById(placesVal)
-  return luaVkApi.invokeApi("places.getById", {places=placesVal})
-end
-
-function luaVkApi.searchLocations(query, cityVal, latitudeVal, longitudeVal, radiusVal,
-    offsetVal, countVal)
-  return luaVkApi.invokeApi("places.search", {q=query, city=cityVal, latitude=latitudeVal,
-      longitude=longitudeVal, radius=radiusVal, offset=offsetVal, count=countVal})
-end
-
-function luaVkApi.checkinUser(placeId, textStr, latitudeVal, longitudeVal, friendsOnly,
-    servicesVal)
-  return luaVkApi.invokeApi("places.checkin", {place_id=placeId, text=textStr,
-      latitude=latitudeVal, longitude=longitudeVal, friends_only=friendsOnly,
-      services=servicesVal})
-end
-
-function luaVkApi.getCheckins(latitudeVal, longitudeVal, placeVal, userId, offsetVal,
-    countVal, timeStamp, friendsOnly, needPlaces)
-  return luaVkApi.invokeApi("places.getCheckins", {latitude=latitudeVal, longitude=longitudeVal,
-      place=placeVal, user_id=userId, offset=offsetVal, count=countVal, timestamp=timeStamp,
-      friends_only=friendsOnly, need_places=needPlaces})
-end
-
-function luaVkApi.getPlaceTypes()
-  return luaVkApi.invokeApi("places.getTypes")
-end
 
 -----------------------
 --      Account      --
@@ -414,225 +479,32 @@ end
 -----------------------
 --     Messages      --
 -----------------------
-function luaVkApi.getPrivateMessages(outVal, offsetVal, countVal, timeOffset, filtersVal,
-    previewLength, lastMessageId)
-  return luaVkApi.invokeApi("messages.get", {out=outVal, offset=offsetVal, count=countVal,
-      time_offset=timeOffset, filters=filtersVal, preview_length=previewLength, 
-      last_message_id=lastMessageId})
-end
-
-function luaVkApi.getDialogs(offsetVal, countVal, startMessageId, previewLength, unreadVal)
-  return luaVkApi.invokeApi("messages.getDialogs", {offset=offsetVal, count=countVal,
-      start_message_id=startMessageId, preview_length=previewLength, unread=unreadVal})
-end
-
-function luaVkApi.getMessagesById(messageIds, previewLength)
-  return luaVkApi.invokeApi("messages.getById", {message_ids=messageIds, preview_length=previewLength})
-end
-
-function luaVkApi.searchMessages(query, previewLength, offsetVal, countVal)
-  return luaVkApi.invokeApi("messages.search", {q=query, preview_length=previewLength,
-      offset=offsetVal, count=countVal})
-end
-
-function luaVkApi.getMessageHistory(offsetVal, countVal, userId, chatId, peerId, startMessageId,
-    revVal)
-  return luaVkApi.invokeApi("messages.getHistory", {offset=offsetVal, count=countVal, user_id=userId,
-      chat_id=chatId, peer_id=peerId, start_message_id, rev=revVal})
-end
-
-function luaVkApi.sendMessage(userId, peerId, domainVal, chatId, userIds, messageStr, guidVal,
-    latVal, longVal, attachmentVal, forwardMessages, stickerId)
-  return luaVkApi.invokeApi("messages.send", {user_id=userId, peer_id=peerId, domain=domainVal,
-      chat_id=chatId, user_ids=userIds, message=messageStr, guid=guidVal, lat=latVal,
-      long=longVal, attachment=attachmentVal, forward_messages=forwardMessages, sticker_id=stickerId})
-end
-
-function luaVkApi.deleteMessages(messageIds)
-  return luaVkApi.invokeApi("messages.delete", {message_ids=messageIds})
-end
-
-function luaVkApi.deleteDialog(userId, peerId, offsetVal, countVal)
-  return luaVkApi.invokeApi("messages.deleteDialog", {user_id=userId, peer_id=peerId, offset=offsetVal,
-      count=countVal})
-end
-
-function luaVkApi.restoreMessage(messageId)
-  return luaVkApi.invokeApi("messages.restore", {message_id=messageId})
-end
-
-function luaVkApi.markAsRead(messageIds, peer_id, startMessageId)
-  return luaVkApi.invokeApi("messages.markAsRead", {message_ids=messageIds, peer_id=peerId,
-      start_message_id=startMessageId})
-end
-
-function luaVkApi.markAsImportant(messageIds, isImportant)
-  return luaVkApi.invokeApi("messages.markAsImportant", {message_ids=messageIds, important=isImportant})
-end
-
-function luaVkApi.getLongPollServer(useSSL, needPts)
-  return luaVkApi.invokeApi("messages.getLongPollServer", {use_ssl=useSSL, need_pts=needPts})
-end
-
-function luaVkApi.getLongPollHistory(tsVal, ptsVal, previewLength, isOnlines, fieldsVal, 
-    eventsLimit, msgsLimit, maxMsgId)
-  return luaVkApi.invokeApi("messages.getLongPollHistory", {ts=tsVal, pts=ptsVal, 
-      preview_length=previewLength, onlines=isOnlines, fields=fieldsVal, events_limit=eventsLimit,
-      msgs_limit=msgsLimit, max_msg_id=maxMsgId})
-end
-
-function luaVkApi.getChat(chatId, chatIds, fieldsVal, nameCase)
-  return luaVkApi.invokeApi("messages.getChat", {chat_id=chatId, chat_ids=chatIds, fields=fieldsVal,
-      name_case=nameCase})
-end
-
-function luaVkApi.createChat(userIds, titleVal)
-  return luaVkApi.invokeApi("messages.createChat", {user_ids=userIds, title=titleVal})
-end
-
-function luaVkApi.editChat(chatId, titleVal)
-  return luaVkApi.invokeApi("messages.editChat", {chat_id=chatId, title=titleVal})
-end
-
-function luaVkApi.getChatUsers(chatId, chatIds, fieldsVal, nameCase)
-  return luaVkApi.invokeApi("messages.getChatUsers", {chat_id=chatId, chat_ids=chatIds,
-      fields=fieldsVal, name_case=nameCase})
-end
-
-function luaVkApi.setActivity(userId, typeVal, peerId)
-  return luaVkApi.invokeApi("messages.setActivity", {user_id=userId, type=typeVal,
-      peer_id=peerId})
-end
-
-function luaVkApi.searchDialogs(query, limitVal, fieldsVal)
-  return luaVkApi.invokeApi("messages.searchDialogs", {q=query, limit=limitVal,
-      fields=fieldsVal})
-end
-
-function luaVkApi.addChatUser(chatId, userId)
-  return luaVkApi.invokeApi("messages.addChatUser", {chat_id=chatId, user_id=userId})
-end
-
-function luaVkApi.removeChatUser(chatId, userId)
-  return luaVkApi.invokeApi("messages.removeChatUser", {chat_id=chatId, user_id=userId})
-end
-
-function luaVkApi.getLastActivity(userId)
-  return luaVkApi.invokeApi("messages.getLastActivity", {user_id=userId})
-end
-
-function luaVkApi.setChatPhoto(fileVal)
-  return luaVkApi.invokeApi("messages.setChatPhoto", {file=fileVal})
-end
-
-function luaVkApi.deleteChatPhoto(chatId)
-  return luaVkApi.invokeApi("messages.deleteChatPhoto", {chat_id=chatId})
+function luaVkApi.getPrivateMessages()
+  return luaVkApi.invokeApi("messages.get")
 end
 
 -----------------------
 --      News         --
 -----------------------
-function luaVkApi.getNewsFeed(filtersVal, returnBanned, startTime, endTime, maxPhotos,
-    sourceIds, startFrom, countVal, fieldsVal)
-  return luaVkApi.invokeApi("newsfeed.get", {filters=filtersVal, return_banned=returnBanned, 
-      start_time=startTime, end_time=endTime, max_photos=maxPhotos, source_ids=sourceIds, 
-      start_from=startFrom, count=countVal, fields=fieldsVal})
+function luaVkApi.getNewsFeed(countVal) --not all parameters are listed here
+  if countVal == nil then
+    countVal = "100"
+  end
+  return luaVkApi.invokeApi("newsfeed.get", {count=countVal})
 end
 
-function luaVkApi.getRecommendedNews(startTime, endTime, maxPhotos, startFrom, countVal,
-    fieldsVal)
-  return luaVkApi.invokeApi("newsfeed.getRecommended", {start_time=startTime, end_time=endTime,
-      max_photos=maxPhotos, start_from=startFrom, count=countVal, fields=fieldsVal})
-end
-
-function luaVkApi.getNewsComments(countVal, filtersVal, repostsVal, startTime, endTime, 
-    lastCommentsCount, startFrom, fieldsVal)
-  return luaVkApi.invokeApi("newsfeed.getComments", {count=countVal, filters=filtersVal,
-      reposts=repostsVal, start_time=startTime, end_time=endTime,
-      last_comments_count=lastCommentsCount, start_from=startFrom, fields=fieldsVal})
-end
-
-function luaVkApi.getUserMentions(ownerId, startTime, endTime, offsetVal, countVal)
-  return luaVkApi.invokeApi("newsfeed.getMentions", {owner_id=ownerId, start_time=startTime,
-      end_time=endTime, offset=offsetVal, count=countVal})
-end
-
-function luaVkApi.getBanned(isExtended, fieldsVal, nameCase)
-  return luaVkApi.invokeApi("newsfeed.getBanned", {extended=isExtended, fields=fieldsVal,
-      name_case=nameCase})
-end
-
-function luaVkApi.addBan(userIds, groupIds)
-  return luaVkApi.invokeApi("newsfeed.addBan", {user_ids=userIds, group_ids=userIds})
-end 
-
-function luaVkApi.deleteBan(userIds, groupIds)
-  return luaVkApi.invokeApi("newsfeed.deleteBan", {user_ids=userIds, group_ids=userIds})
-end 
-
-function luaVkApi.ignoreItem(typeVal, ownerId, itemId)
-  return luaVkApi.invokeApi("newsfeed.ignoreItem", {type=typeVal, ownner_id=ownerId,
-      item_id=itemId})
-end 
-
-function luaVkApi.unignoreItem(typeVal, ownerId, itemId)
-  return luaVkApi.invokeApi("newsfeed.unignoreItem", {type=typeVal, ownner_id=ownerId,
-      item_id=itemId})
-end 
-
-function luaVkApi.searchNews(keyWord, isExtended, countVal, latitudeVal, longitudeVal,
-    startTime, endTime, startFrom, fieldsVal)
-  return luaVkApi.invokeApi("newsfeed.search", {q=keyWord, extended=isExtended, count=countVal,
-      latitude-latitudeVal, longitude=longitudeVal, start_time=startTime, endTime=endTime, 
-      start_from=startFrom, fields=fieldsVal})
-end
-
-function luaVkApi.getLists(listIds, isExtended)
-  return luaVkApi.invokeApi("newsfeed.getLists", {list_ids=listIds, extended=isExtended})
-end
-
-function luaVkApi.saveList(listId, titleVal, sourceIds, noReposts)
-  return luaVkApi.invokeApi("newsfeed.saveList", {list_id=listId, title=titleVal, 
-  source_ids=sourceIds, no_reposts=noReposts})
-end 
-
-function luaVkApi.deleteList(listId)
-  return luaVkApi.invokeApi("newsfeed.deleteList", {list_id=listId})
-end
-
-function luaVkApi.unsubscribe(typeVal, ownerId, itemId)
-  return luaVkApi.invokeApi("newsfeed.unsubscribe", {type=typeVal, owner_id=ownerId,
-      item_id=itemId})
-end
-
-function luaVkApi.getSuggestedSources(offsetVal, countVal, shuffleVal, fieldsVal)
-  return luaVkApi.invokeApi("newsfeed.getSuggestedSources", {offset=offsetVal, count=countVal,
-      shuffle=shuffleVal, fieldsVal})
+function luaVkApi.searchNews(keyWord, countVal)
+  if countVal == nil then
+    countVal = "200"
+  end
+  return luaVkApi.invokeApi("newsfeed.search", {q=keyWord, count=countVal})
 end
 
 -----------------------
 --      Likes        --
 -----------------------
-function luaVkApi.putLikerIds(typeVal, ownerId, itemId, pageUrl, filterVal,
-    friendsOnly, isExtended, offsetVal, countVal, skipOwn)
-  return luaVkApi.invokeApi("likes.getList", {type=typeVal, owner_id=ownerId,
-      item_id=itemId, page_url=pageUrl, filter=filterVal, friends_only=friendsOnly,
-      extended=isExtended, offset=offsetVal, count=countVal, skip_own=skipOwn})
-end
-
-function luaVkApi.putLike(entityType, ownerId, itemId, accessKey, refStr)
-  return luaVkApi.invokeApi("likes.add", {type=entityType, owner_id=ownerId,
-      item_id=itemId, access_key=accessKey, ref=refStr})
-end
-
-function luaVkApi.deleteLike(entityType, ownerId, itemId)
-  return luaVkApi.invokeApi("likes.delete", {type=entityType, owner_id=ownerId,
-      item_id=itemId})
-end
-
-function luaVkApi.isLiked(userId, entityType, ownerId, itemId)
-  return luaVkApi.invokeApi("likes.isLiked", {user_id=userId, type=entityType,
-      owner_id=ownerId, item_id=itemId})
+function luaVkApi.putLike(itemId, entityType)
+  return luaVkApi.invokeApi("likes.add", {item_id=itemId, type=entityType})
 end
 
 -----------------------
@@ -706,52 +578,6 @@ end
 -----------------------
 --    Favorites      --
 -----------------------
-function luaVkApi.getBookmarkers(offsetVal, countVal)
-  return luaVkApi.invokeApi("fave.getUsers", {offset=offsetVal, count=countVal})
-end
-
-function luaVkApi.getLikedPhotos(offsetVal, countVal, photoSizes)
-  return luaVkApi.invokeApi("fave.getPhotos", {offset=offsetVal, count=countVal,
-      photo_sizes=photoSizes})
-end
-
-function luaVkApi.getLikedPosts(offsetVal, countVal, isExtended)
-  return luaVkApi.invokeApi("fave.getPosts", {offset=offsetVal, count=countVal,
-      extended=isExtended})
-end
-
-function luaVkApi.getLikedVideos(offsetVal, countVal, isExtended)
-  return luaVkApi.invokeApi("fave.getVideos", {offset=offsetVal, count=countVal,
-      extended=isExtended})
-end
-
-function luaVkApi.getLikedLinks(offsetVal, countVal)
-  return luaVkApi.invokeApi("fave.getLinks", {offset=offsetVal, count=countVal})
-end
-
-function luaVkApi.bookmarkUser(userId)
-  return luaVkApi.invokeApi("fave.addUser", {user_id=userId})
-end
-
-function luaVkApi.removeBookmarkedUser(userId)
-  return luaVkApi.invokeApi("fave.removeUser", {user_id=userId})
-end
-
-function luaVkApi.bookmarkGroup(groupId)
-  return luaVkApi.invokeApi("fave.addGroup", {group_id=groupId})
-end
-
-function luaVkApi.removeBookmarkedGroup(userId)
-  return luaVkApi.invokeApi("fave.removeGroup", {user_id=userId})
-end
-
-function luaVkApi.bookmarkLink(linkStr, textStr)
-  return luaVkApi.invokeApi("fave.addLink", {link=linkStr, text=textStr})
-end
-
-function luaVkApi.removeBookmarkedLink(linkId)
-  return luaVkApi.invokeApi("fave.removeLink", {link_id=linkId})
-end
 
 -----------------------
 --   Notifications   --

@@ -388,18 +388,82 @@ end
 -----------------------
 --      News         --
 -----------------------
-function luaVkApi.getNewsFeed(countVal) --not all parameters are listed here
-  if countVal == nil then
-    countVal = "100"
-  end
-  return luaVkApi.invokeApi("newsfeed.get", {count=countVal})
+function luaVkApi.getNewsFeed(filtersVal, returnBanned, startTime, endTime, maxPhotos,
+    sourceIds, startFrom, countVal, fieldsVal)
+  return luaVkApi.invokeApi("newsfeed.get", {filters=filtersVal, return_banned=returnBanned, 
+      start_time=startTime, end_time=endTime, max_photos=maxPhotos, source_ids=sourceIds, 
+      start_from=startFrom, count=countVal, fields=fieldsVal})
 end
 
-function luaVkApi.searchNews(keyWord, countVal)
-  if countVal == nil then
-    countVal = "200"
-  end
-  return luaVkApi.invokeApi("newsfeed.search", {q=keyWord, count=countVal})
+function luaVkApi.getRecommendedNews(startTime, endTime, maxPhotos, startFrom, countVal,
+    fieldsVal)
+  return luaVkApi.invokeApi("newsfeed.getRecommended", {start_time=startTime, end_time=endTime,
+      max_photos=maxPhotos, start_from=startFrom, count=countVal, fields=fieldsVal})
+end
+
+function luaVkApi.getNewsComments(countVal, filtersVal, repostsVal, startTime, endTime, 
+    lastCommentsCount, startFrom, fieldsVal)
+  return luaVkApi.invokeApi("newsfeed.getComments", {count=countVal, filters=filtersVal,
+      reposts=repostsVal, start_time=startTime, end_time=endTime,
+      last_comments_count=lastCommentsCount, start_from=startFrom, fields=fieldsVal})
+end
+
+function luaVkApi.getUserMentions(ownerId, startTime, endTime, offsetVal, countVal)
+  return luaVkApi.invokeApi("newsfeed.getMentions", {owner_id=ownerId, start_time=startTime,
+      end_time=endTime, offset=offsetVal, count=countVal})
+end
+
+function luaVkApi.getBanned(isExtended, fieldsVal, nameCase)
+  return luaVkApi.invokeApi("newsfeed.getBanned", {extended=isExtended, fields=fieldsVal,
+      name_case=nameCase})
+end
+
+function luaVkApi.addBan(userIds, groupIds)
+  return luaVkApi.invokeApi("newsfeed.addBan", {user_ids=userIds, group_ids=userIds})
+end 
+
+function luaVkApi.deleteBan(userIds, groupIds)
+  return luaVkApi.invokeApi("newsfeed.deleteBan", {user_ids=userIds, group_ids=userIds})
+end 
+
+function luaVkApi.ignoreItem(typeVal, ownerId, itemId)
+  return luaVkApi.invokeApi("newsfeed.ignoreItem", {type=typeVal, ownner_id=ownerId,
+      item_id=itemId})
+end 
+
+function luaVkApi.unignoreItem(typeVal, ownerId, itemId)
+  return luaVkApi.invokeApi("newsfeed.unignoreItem", {type=typeVal, ownner_id=ownerId,
+      item_id=itemId})
+end 
+
+function luaVkApi.searchNews(keyWord, isExtended, countVal, latitudeVal, longitudeVal,
+    startTime, endTime, startFrom, fieldsVal)
+  return luaVkApi.invokeApi("newsfeed.search", {q=keyWord, extended=isExtended, count=countVal,
+      latitude-latitudeVal, longitude=longitudeVal, start_time=startTime, endTime=endTime, 
+      start_from=startFrom, fields=fieldsVal})
+end
+
+function luaVkApi.getLists(listIds, isExtended)
+  return luaVkApi.invokeApi("newsfeed.getLists", {list_ids=listIds, extended=isExtended})
+end
+
+function luaVkApi.saveList(listId, titleVal, sourceIds, noReposts)
+  return luaVkApi.invokeApi("newsfeed.saveList", {list_id=listId, title=titleVal, 
+  source_ids=sourceIds, no_reposts=noReposts})
+end 
+
+function luaVkApi.deleteList(listId)
+  return luaVkApi.invokeApi("newsfeed.deleteList", {list_id=listId})
+end
+
+function luaVkApi.unsubscribe(typeVal, ownerId, itemId)
+  return luaVkApi.invokeApi("newsfeed.unsubscribe", {type=typeVal, owner_id=ownerId,
+      item_id=itemId})
+end
+
+function luaVkApi.getSuggestedSources(offsetVal, countVal, shuffleVal, fieldsVal)
+  return luaVkApi.invokeApi("newsfeed.getSuggestedSources", {offset=offsetVal, count=countVal,
+      shuffle=shuffleVal, fieldsVal})
 end
 
 -----------------------

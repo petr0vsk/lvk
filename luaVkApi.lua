@@ -592,6 +592,70 @@ end
 -----------------------
 --      Boards       --
 -----------------------
+function luaVkApi.getBoardTopics(groupId, topicIds, orderVal, offsetVal, countVal, 
+    isExtended, previewVal, previewLength)
+  return luaVkApi.invokeApi("board.getTopics", {group_id=groupId, topic_ids=topicIds,
+      order=orderVal, offset=offsetVal, count=countVal, extended=isExtended,
+      preview=previewVal, preview_length=previewLength})
+end
+
+function luaVkApi.getBoardComments(groupId, topicId, needLikes, startCommentId, offsetVal,
+    countVal, isExtended, sortVal)
+  return luaVkApi.invokeApi("board.getComments", {group_id=groupId, topic_id=topicId,
+      need_likes=needLikes, start_comment_id=startCommentId, offset=offsetVal, count=countVal,
+      extended=isExtended, sort=sortVal})
+end
+
+function luaVkApi.addBoardTopic(groupId, titleVal, textVal, fromGroup, attachmentsVal)
+  return luaVkApi.invokeApi("board.addTopic", {group_id=groupId, title=titleVal,
+      text=textVal, from_group=fromGroup, attachments=attachmentsVal})
+end
+
+function luaVkApi.addCommentToBoardTopic(groupId, topicId, textVal, attachmentsVal, fromGroup,
+    sticketId)
+  return luaVkApi.invokeApi("board.addComment", {group_id=groupId, topic_id=topicId,
+      text=textVal, attachments=attachmentsVal, from_group=fromGroup, sticker_id=stickerId})
+end
+
+function luaVkApi.deleteBoardTopic(groupId, topicId)
+  return luaVkApi.invokeApi("board.deleteTopic", {group_id=groupId, topic_id=topicId})
+end
+
+function luaVkApi.editBoardTopic(groupId, topicId, titleVal)
+  return luaVkApi.invokeApi("board.editTopic", {group_id=groupId, topic_id=topicId,
+      title=titleVal})
+end
+
+function luaVkApi.editBoardTopicComment(groupId, topicId, commentId, textVal, attachmentsVal)
+  return luaVkApi.invokeApi("board.editComment", {group_id=groupId, topic_id=topicId,
+      comment_id=commentId, text=textVal, attachments=attachmentsVal})
+end
+
+function luaVkApi.restoreBoardTopicComment(groupId, topicId, commentId)
+  return luaVkApi.invokeApi("board.restoreComment", {group_id=groupId, topic_id=topicId,
+      comment_id=commentId})
+end
+
+function luaVkApi.deleteBoardTopicComment(groupId, topicId, commentId)
+  return luaVkApi.invokeApi("board.deleteComment", {group_id=groupId, topic_id=topicId,
+      comment_id=commentId})
+end
+
+function luaVkApi.openBoardTopic(groupId, topicId)
+  return luaVkApi.invokeApi("board.openTopic", {group_id=groupId, topic_id=topicId})
+end
+
+function luaVkApi.closeBoardTopic(groupId, topicId)
+  return luaVkApi.invokeApi("board.closeTopic", {group_id=groupId, topic_id=topicId})
+end
+
+function luaVkApi.fixBoardTopic(groupId, topicId)
+  return luaVkApi.invokeApi("board.fixTopic", {group_id=groupId, topic_id=topicId})
+end
+
+function luaVkApi.unfixBoardTopic(groupId, topicId)
+  return luaVkApi.invokeApi("board.unfixTopic", {group_id=groupId, topic_id=topicId})
+end
 
 -----------------------
 --      Videos       --

@@ -41,10 +41,22 @@ function luaVkApi.getUsersInfo(userIds, returnedFields, nameCase)
       name_case=nameCase})
 end
 
- --not all parameters are listed here
-function luaVkApi.searchUsers(queryString, sortVal, offsetVal, countVal, returnedFields)
+function luaVkApi.searchUsers(queryString, sortVal, offsetVal, countVal, returnedFields,
+    cityVal, countryVal, hometownVal, universityCountry, universityVal, universityYear,
+    universityFaculty, universityChair, sexVal, statusVal, ageFrom, ageTo, birthDay,
+    birthMonth, birthYear, isOnline, hasPhoto, schoolCountry, schoolCity, schoolClass,
+    schoolVal, schoolYear, religionVal, interestsVal, companyVal, positionVal, groupId,
+    fromList)
   return luaVkApi.invokeApi("users.search", {q=queryString, sort=sortVal, offset=offsetVal,
-      count=countVal, fields=returnedFields})
+      count=countVal, fields=returnedFields, city=cityVal, country=countryVal, 
+      hometown-hometownVal, university_country=universityCountry, university=universityVal,
+      university_year=universityYear, university_faculty=universityFaculty, 
+      university_chair=universityChair, sex=sexVal, status=statusVal, age_from=ageFrom,
+      age_to=ageTo, birth_day=birthDay, birth_month=birthMonth, birth_year=birthYear,
+      online-isOnline, has_photo=hasPhoto, school_country=schoolCountry,
+      school_city=schoolCity, school_class=schoolClass, school=schoolVal, 
+      school_year=schoolYear, religion=religionVal, interests=interestVal,
+      company=complanyVal, position=positionVal, group_id=groupId, from_list=fromList})
 end
 
 function luaVkApi.isAppUser(userId)
@@ -59,6 +71,17 @@ end
 function luaVkApi.getFollowers(userId, nameCase, offsetVal, countVal, fieldsVal)
   return luaVkApi.invokeApi("users.getFollowers", {user_id=userId, name_case=nameCase,
       offset=offsetVal, count=countVal, fields=fieldsVal})
+end
+
+function luaVkApi.reportUser(userId, typeVal, commentVal)
+  return luaVkApi.invokeApi("users.report", {user_id=userId, type=typeVal, comment=commentVal})
+end
+
+function luaVkApi.getNearbyUsers(latitudeVal, longitudeVal, accuracyVal, timeoutVal, radiusVal,
+    fieldsVal, nameCaseVal)
+  return luaVkApi.invokeApi("users.getNearby", {latitude=latitudeVal, longitude=longitudeVal,
+      accuracy=accuracyVal, timeout=timeoutVal, radius=radiusVal, fields=fieldsVal,
+      name_case=nameCase})
 end
 
 -----------------------

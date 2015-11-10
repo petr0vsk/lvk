@@ -563,6 +563,42 @@ end
 -----------------------
 --       Pages       --
 -----------------------
+function luaVkApi.getPages(ownerId, pageId, isGlobal, sitePreview, titleVal, needSource,
+    needHtml)
+  return luaVkApi.invokeApi("pages.get", {owner_id=ownerId, page_id=pageId, global=isGlobal,
+      site_preview=sitePreview, title=titleVal, need_source=needSource, need_html=needHtml})
+end
+
+function luaVkApi.savePage(textVal, pageId, groupId, userId, titleVal)
+  return luaVkApi.invokeApi("pages.save", {text=textVal, page_id=pageId, group_id=groupId,
+      user_id=userId, title=titleVal})
+end
+
+function luaVkApi.savePageAccess(pageId, groupId, userId, viewVal, editVal)
+  return luaVkApi.invokeApi("pages.saveAccess", {page_id=pageId, group_id=groupId, user_id=userId,
+      view=viewVal, edit=editVal})
+end
+
+function luaVkApi.getPageHistory(pageId, groupId, userId)
+  return luaVkApi.invokeApi("pages.getHistory", {page_id=pageId, group_id=groupId, user_id=userId})
+end
+
+function luaVkApi.getPageTitles(groupId)
+  return luaVkApi.invokeApi("pages.getTitles", {group_id=groupId})
+end
+
+function luaVkApi.getPageVersion(versionId, groupId, userId, needHtml)
+  return luaVkApi.invokeApi("pages.getVersion", {version_id=versionId, group_id=groupId,
+      user_id=userId, need_html=needHtml})
+end
+
+function luaVkApi.parseWiki(textVal, groupId)
+  return luaVkApi.invokeApi("pages.parseWiki", {text=textVal, group_id=groupId})
+end
+
+function luaVkApi.clearPageCache(urlVal)
+  return luaVkApi.invokeApi("pages.clearCache", {url=urlVal})
+end
 
 -----------------------
 --    Communities    --

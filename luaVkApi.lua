@@ -724,7 +724,7 @@ function luaVkApi.editNote(noteId, titleVal, textVal, privacyView, privacyCommen
       privacy_view=privacyView, privacy_comment=privacyComment})
 end
 
-function luaVkApi.deleteNote(noteId
+function luaVkApi.deleteNote(noteId)
   return luaVkApi.invokeApi("notes.delete", {note_id=noteId})
 end
 

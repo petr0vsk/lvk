@@ -1,4 +1,4 @@
-luaVkApi
+lua-vk-api
 =========
 
 Lua library for vk.com REST API

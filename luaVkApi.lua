@@ -600,6 +600,56 @@ end
 -----------------------
 --       Notes       --
 -----------------------
+function luaVkApi.getNotes(noteIds, userId, offsetVal, countVal, sortVal)
+  return luaVkApi.invokeApi("notes.get", {note_ids=noteIds, user_id=userId,
+      offset=offsetVal, count=countVal, sort=sortVal})
+end
+
+function luaVkApi.getNotesById(noteId, userId, needViki)
+  return luaVkApi.invokeApi("notes.getById", {note_id=noteId, user_id=userId,
+      need_wiki=needWiki})
+end
+
+function luaVkApi.getFriendsNotes(offsetVal, countVal)
+  return luaVkApi.invokeApi("notes.getFriendsNotes", {offset=offsetVal, count=countVal})
+end
+
+function luaVkApi.addNote(titleVal, textVal, privacyView, privacyComment)
+  return luaVkApi.invokeApi("notes.add", {title=titleVal, text=textVal,
+      privacy_view=privacyView, privacy_comment=privacyComment})
+end
+
+function luaVkApi.editNote(noteId, titleVal, textVal, privacyView, privacyComment)
+  return luaVkApi.invokeApi("notes.edit", {note_id=noteId, title=titleVal, text=textVal,
+      privacy_view=privacyView, privacy_comment=privacyComment})
+end
+
+function luaVkApi.deleteNote(noteId
+  return luaVkApi.invokeApi("notes.delete", {note_id=noteId})
+end
+
+function luaVkApi.getNoteComments(noteId, ownerId, sortVal, offsetVal, countVal)
+  return luaVkApi.invokeApi("notes.getComments", {note_id=noteId, owner_id=ownerId,
+      sort=sortVal, offset=offsetVal, count=countVal})
+end
+
+function luaVkApi.createNoteComment(noteId, ownerId, replyTo, messageVal)
+  return luaVkApi.invokeApi("notes.createComment", {note_id=noteId, owner_id=ownerId,
+      reply_to=replyTo, message=messageVal})
+end
+
+function luaVkApi.editNoteComment(commentId, ownerId, messageVal)
+  return luaVkApi.invokeApi("notes.editComment", {comment_id=commentId, owner_id=ownerId,
+      message=messageVal})
+end
+
+function luaVkApi.deleteNoteComment(commentId, ownerId)
+  return luaVkApi.invokeApi("notes.deleteComment", {comment_id=commentId, owner_id=ownerId})
+end 
+
+function luaVkApi.restoreNoteComment(commentId, ownerId)
+  return luaVkApi.invokeApi("notes.restoreComment", {comment_id=commentId, owner_id=ownerId})
+end 
 
 -----------------------
 --      Places       --

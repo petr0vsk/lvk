@@ -612,8 +612,119 @@ end
 -----------------------
 --     Messages      --
 -----------------------
-function luaVkApi.getPrivateMessages()
-  return luaVkApi.invokeApi("messages.get")
+function luaVkApi.getPrivateMessages(outVal, offsetVal, countVal, timeOffset, filtersVal,
+    previewLength, lastMessageId)
+  return luaVkApi.invokeApi("messages.get", {out=outVal, offset=offsetVal, count=countVal,
+      time_offset=timeOffset, filters=filtersVal, preview_length=previewLength, 
+      last_message_id=lastMessageId})
+end
+
+function luaVkApi.getDialogs(offsetVal, countVal, startMessageId, previewLength, unreadVal)
+  return luaVkApi.invokeApi("messages.getDialogs", {offset=offsetVal, count=countVal,
+      start_message_id=startMessageId, preview_length=previewLength, unread=unreadVal})
+end
+
+function luaVkApi.getMessagesById(messageIds, previewLength)
+  return luaVkApi.invokeApi("messages.getById", {message_ids=messageIds, preview_length=previewLength})
+end
+
+function luaVkApi.searchMessages(query, previewLength, offsetVal, countVal)
+  return luaVkApi.invokeApi("messages.search", {q=query, preview_length=previewLength,
+      offset=offsetVal, count=countVal})
+end
+
+function luaVkApi.getMessageHistory(offsetVal, countVal, userId, chatId, peerId, startMessageId,
+    revVal)
+  return luaVkApi.invokeApi("messages.getHistory", {offset=offsetVal, count=countVal, user_id=userId,
+      chat_id=chatId, peer_id=peerId, start_message_id, rev=revVal})
+end
+
+function luaVkApi.sendMessage(userId, peerId, domainVal, chatId, userIds, messageStr, guidVal,
+    latVal, longVal, attachmentVal, forwardMessages, stickerId)
+  return luaVkApi.invokeApi("messages.send", {user_id=userId, peer_id=peerId, domain=domainVal,
+      chat_id=chatId, user_ids=userIds, message=messageStr, guid=guidVal, lat=latVal,
+      long=longVal, attachment=attachmentVal, forward_messages=forwardMessages, sticker_id=stickerId})
+end
+
+function luaVkApi.deleteMessages(messageIds)
+  return luaVkApi.invokeApi("messages.delete", {message_ids=messageIds})
+end
+
+function luaVkApi.deleteDialog(userId, peerId, offsetVal, countVal)
+  return luaVkApi.invokeApi("messages.deleteDialog", {user_id=userId, peer_id=peerId, offset=offsetVal,
+      count=countVal})
+end
+
+function luaVkApi.restoreMessage(messageId)
+  return luaVkApi.invokeApi("messages.restore", {message_id=messageId})
+end
+
+function luaVkApi.markAsRead(messageIds, peer_id, startMessageId)
+  return luaVkApi.invokeApi("messages.markAsRead", {message_ids=messageIds, peer_id=peerId,
+      start_message_id=startMessageId})
+end
+
+function luaVkApi.markAsImportant(messageIds, isImportant)
+  return luaVkApi.invokeApi("messages.markAsImportant", {message_ids=messageIds, important=isImportant})
+end
+
+function luaVkApi.getLongPollServer(useSSL, needPts)
+  return luaVkApi.invokeApi("messages.getLongPollServer", {use_ssl=useSSL, need_pts=needPts})
+end
+
+function luaVkApi.getLongPollHistory(tsVal, ptsVal, previewLength, isOnlines, fieldsVal, 
+    eventsLimit, msgsLimit, maxMsgId)
+  return luaVkApi.invokeApi("messages.getLongPollHistory", {ts=tsVal, pts=ptsVal, 
+      preview_length=previewLength, onlines=isOnlines, fields=fieldsVal, events_limit=eventsLimit,
+      msgs_limit=msgsLimit, max_msg_id=maxMsgId})
+end
+
+function luaVkApi.getChat(chatId, chatIds, fieldsVal, nameCase)
+  return luaVkApi.invokeApi("messages.getChat", {chat_id=chatId, chat_ids=chatIds, fields=fieldsVal,
+      name_case=nameCase})
+end
+
+function luaVkApi.createChat(userIds, titleVal)
+  return luaVkApi.invokeApi("messages.createChat", {user_ids=userIds, title=titleVal})
+end
+
+function luaVkApi.editChat(chatId, titleVal)
+  return luaVkApi.invokeApi("messages.editChat", {chat_id=chatId, title=titleVal})
+end
+
+function luaVkApi.getChatUsers(chatId, chatIds, fieldsVal, nameCase)
+  return luaVkApi.invokeApi("messages.getChatUsers", {chat_id=chatId, chat_ids=chatIds,
+      fields=fieldsVal, name_case=nameCase})
+end
+
+function luaVkApi.setActivity(userId, typeVal, peerId)
+  return luaVkApi.invokeApi("messages.setActivity", {user_id=userId, type=typeVal,
+      peer_id=peerId})
+end
+
+function luaVkApi.searchDialogs(query, limitVal, fieldsVal)
+  return luaVkApi.invokeApi("messages.searchDialogs", {q=query, limit=limitVal,
+      fields=fieldsVal})
+end
+
+function luaVkApi.addChatUser(chatId, userId)
+  return luaVkApi.invokeApi("messages.addChatUser", {chat_id=chatId, user_id=userId})
+end
+
+function luaVkApi.removeChatUser(chatId, userId)
+  return luaVkApi.invokeApi("messages.removeChatUser", {chat_id=chatId, user_id=userId})
+end
+
+function luaVkApi.getLastActivity(userId)
+  return luaVkApi.invokeApi("messages.getLastActivity", {user_id=userId})
+end
+
+function luaVkApi.setChatPhoto(fileVal)
+  return luaVkApi.invokeApi("messages.setChatPhoto", {file=fileVal})
+end
+
+function luaVkApi.deleteChatPhoto(chatId)
+  return luaVkApi.invokeApi("messages.deleteChatPhoto", {chat_id=chatId})
 end
 
 -----------------------

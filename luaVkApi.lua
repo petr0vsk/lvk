@@ -559,6 +559,102 @@ end
 -----------------------
 --    Audio files    --
 -----------------------
+function luaVkApi.getAudios(ownerId, albumId, audioIds, needUser, offsetVal, countVal)
+  return luaVkApi.invokeApi("audio.get", {owner_id=ownerId, album_id=albumId,
+      audio_ids=audioIds, need_user=needUser, offset=offsetVal, count=countVal})
+end
+
+function luaVkApi.getAudiosById(audioIds)
+  return luaVkApi.invokeApi("audio.getById", {audios=audioIds})
+end
+
+function luaVkApi.getLyrics(lyricsId)
+  return luaVkApi.invokeApi("audio.getLyrics", {lyrics_id=lyricsId})
+end
+
+function luaVkApi.searchAudios(query, autoComplete, lyricsVal, performerOnly, sortVal,
+    searchOwn, offsetVal, countVal)
+  return luaVkApi.invokeApi("audio.search", {q=query, auto_compleate=autoComplete,
+      lyrics=lyricsVal, performer_only=performerOnly, sort=sortVal, search_own=searchOwn,
+      offset=offsetVal, count=countVal})
+end
+
+function luaVkApi.getAudioUploadServer()
+  return luaVkApi.invokeApi("audio.getUploadServer")
+end
+
+function luaVkApi.saveAudio(serverVal, audioVal, hashVal, artistVal, titleVal)
+  return luaVkApi.invokeApi("audio.save", {server=serverVal, audio=audioVal, hash=hashVal,
+      artist=artistVal, title=titleVal})
+end
+
+function luaVkApi.addAudio(audioId, ownerId, groupId, albumId)
+  return luaVkApi.invokeApi("audio.add", {audio_id=audioId, owner_id=ownerId, group_id=groupId,
+      album_id=albumId})
+end
+
+function luaVkApi.deleteAudio(audioId, ownerId)
+  return luaVkApi.invokeApi("audio.delete", {audio_id=audioId, owner_id=ownerId})
+end
+
+function luaVkApi.editAudio(ownerId, audioId, artistVal, titleVal, textVal, genreId, noSearch)
+  return luaVkApi.invokeApi("audio.edit", {owner_id=ownerId, audio_id=audioId, artist=artistVal,
+      title=titleVal, text=textVal, genre_id=genreId, no_search=noSearch})
+end
+
+function luaVkApi.reorderAudio(audioId, ownerId, beforeVal, afterVal)
+  return luaVkApi.invokeApi("audio.reorder", {audio_id=audioId, owner_id=ownerId, before=beforeVal,
+      after=afterVal})
+end
+
+function luaVkApi.restoreAudio(audioId, ownerId)
+  return luaVkApi.invokeApi("audio.restore", {audio_id=audioId, owner_id=ownerId})
+end
+
+function luaVkApi.getAudioAlbums(ownerId, offsetVal, countVal)
+  return luaVkApi.invokeApi("audio.getAlbums", {owner_id=ownerId, offset=offsetVal,
+      count=countVal})
+end
+
+function luaVkApi.addAudioAlbum(groupId, titleVal)
+  return luaVkApi.invokeApi("audio.addAlbum", {group_id=groupId, title=titleVal})
+end
+
+function luaVkApi.editAudioAlbum(groupId, albumId, titleVal)
+  return luaVkApi.invokeApi("audio.editAlbum", {group_id=groupId, album_id=albumId,
+      title=titleVal})
+end
+
+function luaVkApi.deleteAudioAlbum(groupId, albumId)
+  return luaVkApi.invokeApi("audio.deleteAlbum", {group_id=groupId, album_id=albumId})
+end
+
+function luaVkApi.moveAudioToAlbum(groupId, albumId, audioIds)
+  return luaVkApi.invokeApi("audio.moveToAlbum", {group_id=groupId, album_id=albumId,
+      audio_ids=audioIds})
+end
+
+function luaVkApi.setAudioBroadcast(audioVal, targetIds)
+  return luaVkApi.invokeApi("audio.setBroadcast", {audio=audioVal, target_ids=targetIds})
+end
+
+function luaVkApi.getAudioBroadcastList(filterVal, isActive)
+  return luaVkApi.invokeApi("audio.getBroadcastList", {filter=filterVal,active=isActive})
+end
+
+function luaVkApi.getAudioRecommendations(targetAudio, userId, offsetVal, countVal, isShuffle)
+  return luaVkApi.invokeApi("audio.getRecommendations", {target_audio=targetAudio, user_id=userId,
+      offset=offsetVal, count=countVal, shuffle=isShuffle})
+end
+
+function luaVkApi.getPopularAudios(onlyEng, genreId, offsetVal, countVal)
+  return luaVkApi.invokeApi("audio.getPopular", {only_eng, genre_id, offset=offsetVal,
+      count=countVal})
+end
+
+function luaVkApi.getAudiosCount(ownerId)
+  return luaVkApi.invokeApi("audio.getCount", {owner_id=ownerId})
+end
 
 -----------------------
 --       Pages       --

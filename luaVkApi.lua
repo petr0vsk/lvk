@@ -887,6 +887,96 @@ end
 -----------------------
 --      Account      --
 -----------------------
+function luaVkApi.getUserCounters(fiterVal)
+  return luaVkApi.invokeApi("account.getCounters", {filter=fiterVal})
+end
+
+function luaVkApi.setAccountNameInMenu(userId, nameVal)
+  return luaVkApi.invokeApi("account.setNameInMenu", {user_id=userId, name=nameVal})
+end
+
+function luaVkApi.setAccountOnline(voipVal)
+  return luaVkApi.invokeApi("account.setOnline", {voip=voipVal})
+end
+
+function luaVkApi.setAccountOffline()
+  return luaVkApi.invokeApi("account.setOffline")
+end
+
+function luaVkApi.lookupAccountContacts(contactsVal, serviceVal, mycontactVal, returnAll,
+    fieldsVal)
+  return luaVkApi.invokeApi("account.lookupContacts", {contacts=contactsVal, service=serviceVal,
+	  mycontact=mycontactVal, return_all=returnAll, fields=fieldsVal})
+end
+
+function luaVkApi.registerDevice(tokenVal, deviceModel, deviceYear, deviceId, systemVersion,
+	settingsVal, sandboxVal)
+  return luaVkApi.invokeApi("account.registerDevice", {token=tokenVal, device_model=deviceModel,
+      device_year=deviceYear, device_id=deviceId, system_version=systemVersion, settings=settingsVal,
+	  sandbox=sandboxVal})
+end
+
+function luaVkApi.setSilenceMode(deviceId, timeVal, chatId, userId, soundVal)
+  return luaVkApi.invokeApi("account.setSilenceMode", {device_id=deviceId, time=timeVal,
+	  chat_id=chatId, user_id=userId, sound=soundVal})
+end
+
+function luaVkApi.getPushSettings(deviceId)
+  return luaVkApi.invokeApi("account.getPushSettings", {device_id=deviceId})
+end
+
+function luaVkApi.setPushSettings(deviceId, settingsVal, keyStr, valueStr)
+  return luaVkApi.invokeApi("account.setPushSettings", {device_id=deviceId, settings=settingsVal,
+	  key=keyStr, value=valueStr})
+end
+
+function luaVkApi.getAppPermissions(userId)
+  return luaVkApi.invokeApi("account.getAppPermissions", {user_id=userId})
+end
+
+function luaVkApi.getActiveOffers(offsetVal, countVal)
+  return luaVkApi.invokeApi("account.getActiveOffers", {offset=offsetVal, count=countVal})
+end
+
+function luaVkApi.banUser(userId)
+  return luaVkApi.invokeApi("account.banUser", {user_id=userId})
+end
+
+function luaVkApi.unbanUser(userId)
+  return luaVkApi.invokeApi("account.unbanUser", {user_id=userId})
+end
+
+function luaVkApi.getBanned(offsetVal, countVal)
+  return luaVkApi.invokeApi("account.getBanned", {offset=offsetVal, count=countVal})
+end
+
+function luaVkApi.getInfo(fieldsVal)
+  return luaVkApi.invokeApi("account.getInfo", {fields=fieldsVal})
+end
+
+function luaVkApi.setInfo(introVal, ownPostsDefault, noWallReplies)
+  return luaVkApi.invokeApi("account.setInfo", {intro=introVal, own_posts_default=ownPostsDefault,
+	  no_wall_replies=noWallReplies})
+end
+
+function luaVkApi.changePassword(restoreSid, changePasswordHash, oldPassword, newPassword)
+  return luaVkApi.invokeApi("account.changePassword", {restore_sid=restoreSid,
+	  change_password_hash=changePasswordHash, old_password=oldPassword, new_password=newPassword})
+end
+
+function luaVkApi.getProfileInfo()
+  return luaVkApi.invokeApi("account.getProfileInfo")
+end
+
+function luaVkApi.saveProfileInfo(firstName, lastName, maidenName, screenName, cancelRequestId,
+	sexVal, relationVal, relationPartnerId, bdateVal, bdateVisibility, homeTown, countryId,
+	cityId, statusVal)
+  return luaVkApi.invokeApi("account.saveProfileInfo", {first_name=firstName, last_name=lastName,
+	  maiden_name=maidenName, screen_name=screenName, cancel_request_id=cancelRequestId,
+	  sex=sexVal, relation=relationVal, relation_partner_id=relationPartnerId, bdate=bdateVal,
+	  bdate_visibility=bdateVisibility, home_town=homeTown, counry_id=countryId,
+	  city_id=cityId, status=statusVal})
+end
 
 -----------------------
 --     Messages      --

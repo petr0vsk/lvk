@@ -28,3 +28,10 @@ print(luaVkApi.getStatus(userId)) --print user status for mentioned user
 ## Required packages
 
 - ssl.https: https://github.com/brunoos/luasec/blob/master/src/https.lua
+
+
+**Copyright © 2015 Last Khajiit <last.khajiit@gmail.com>**
+
+This work is free. You can redistribute it and/or modify it under the
+terms of the Do What The Fuck You Want To Public License, Version 2,
+as published by Sam Hocevar. See the COPYING file for more details.

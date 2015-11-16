@@ -1032,6 +1032,10 @@ function luaVkApi.registerDevice(tokenVal, deviceModel, deviceYear, deviceId, sy
 	  sandbox=sandboxVal})
 end
 
+function luaVkApi.unregisterDevice(deviceId, isSandbox)
+  return luaVkApi.invokeApi("account.unregisterDevice", {device_id=deviceId, sandbox=isSandbox})
+end
+
 function luaVkApi.setSilenceMode(deviceId, timeVal, chatId, userId, soundVal)
   return luaVkApi.invokeApi("account.setSilenceMode", {device_id=deviceId, time=timeVal,
 	  chat_id=chatId, user_id=userId, sound=soundVal})

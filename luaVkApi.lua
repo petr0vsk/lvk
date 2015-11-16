@@ -998,6 +998,61 @@ function luaVkApi.getAlbumsByVideo(targetId, ownerId, videoId, isExtended)
       video_id=videoId, extended=isExtended})
 end
 
+function luaVkApi.getVideoComments(ownerId, videoId, needLikes, startCommentId, offsetVal,
+    countVal, sortVal, isExtended)
+  return luaVkApi.invokeApi("video.getComments", {owner_id=ownerId, video_id=videoId, 
+      need_likes=needLikes, start_comment_id=startCommentId, offset=offsetVal,
+      count=countVal, sort=sortVal, extended=isExtended})
+end
+
+function luaVkApi.createVideoComment(ownerId, videoId, messageVal, attachmentsVal,
+    fromGroup, replyToComment, stickerId)
+  return luaVkApi.invokeApi("video.createComment", {owner_id=ownerId, video_id=videoId, 
+      message=messageVal, attachments=attachmentsVal, from_group=gromGroup,
+      reply_to_comment=replyToComment, sticker_id=stickerId})
+end
+
+function luaVkApi.deleteVideoComment(ownerId, commentId)
+  return luaVkApi.invokeApi("video.deleteComment", {owner_id=ownerId, comment_id=commentId})
+end
+
+function luaVkApi.restoreVideoComment(ownerId, commentId)
+  return luaVkApi.invokeApi("video.restoreComment", {owner_id=ownerId, comment_id=commentId})
+end
+
+function luaVkApi.editVideoComment(ownerId, commentId, messageVal, attachmentsVal)
+  return luaVkApi.invokeApi("video.editComment", {owner_id=ownerId, comment_id=commentId,
+      message=messageVal, attachments=attachmentsVal})
+end
+
+function luaVkApi.getVideoTags(ownerId, videoId)
+  return luaVkApi.invokeApi("video.getTags", {owner_id=ownerId, video_id=videoId})
+end
+
+function luaVkApi.putVideoTag(userId, ownerId, videoId, taggedName)
+  return luaVkApi.invokeApi("video.putTag", {user_id=userId, owner_id=ownerId, 
+      video_id=videoId, tagged_name=taggedName})
+end
+
+function luaVkApi.removeVideoTag(tagId, ownerId, videoId)
+  return luaVkApi.invokeApi("video.removeTag", {tag_id=tagId, owner_id=ownerId, 
+      video_id=videoId})
+end
+
+function luaVkApi.getNewVideoTags(offsetVal, countVal)
+  return luaVkApi.invokeApi("video.getNewTags", {offset=offsetVal, count=countVal})
+end
+
+function luaVkApi.reportVideo(ownerId, videoId, reasonVal, commentVal, query)
+  return luaVkApi.invokeApi("video.report", {owner_id=ownerId, video_id=videoId,
+      reason=reasonVal, comment=commentVal, search_query=query})
+end
+
+function luaVkApi.reportVideoComment(ownerId, commentId, reasonVal)
+  return luaVkApi.invokeApi("video.reportComment", {owner_id=ownerId, comment_id=commentId,
+      reason=reasonVal})
+end
+
 -----------------------
 --       Notes       --
 -----------------------

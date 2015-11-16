@@ -908,6 +908,95 @@ end
 -----------------------
 --      Videos       --
 -----------------------
+function luaVkApi.getVideosInfo(ownerId, videoIds, albumId, countVal, offsetVal,
+    isExtended)
+  return luaVkApi.invokeApi("video.get", {owner_id=ownerId, videos=videoIds,
+      album_id=albumId, count=countVal, offset=offsetVal, extended=isExtended})
+end
+
+function luaVkApi.editVideoInfo(ownerId, videoId, nameVal, descVal, privacyView,
+    privacyComment, noComments, isRepeat)
+  return luaVkApi.invokeApi("video.edit", {owner_id=ownerId, video_id=videoId,
+      name=nameVal, desc=descVal, privacy_view=privacyView, 
+      privacy_comment=privacyComment, no_comments=noComments, repeat=isRepeat})
+end
+
+function luaVkApi.addVideo(targetId, videoId, ownerId)
+  return luaVkApi.invokeApi("video.add", {target_id=targetId, owner_id=ownerId,
+      video_id=videoId})
+end
+
+function luaVkApi.saveVideo(nameVal, descVal, isPrivate, wallPost, linkVal,
+    groupId, albumId, privacyView, privacyComment, noComments, isRepeat)
+  return luaVkApi.invokeApi("video.save", {name=nameVal, description=descVal,
+      is_private=isPrivate, wallpost=wallPost, link=linkVal, group_id=groupId,
+      album_id=albumId, privacy_view=privacyView, privacy_comment=privacyComment,
+      no_comments=noComments, is_repeat=isRepeat})
+end
+
+function luaVkApi.deleteVideo(videoId, ownerId, targetId)
+  return luaVkApi.invokeApi("video.delete", {video_id=videoId, owner_id=ownerId,
+      target_id=targetId})
+end
+
+function luaVkApi.restoreVideo(videoId, ownerId)
+  return luaVkApi.invokeApi("video.restore", {video_id=videoId, owner_id=ownerId})
+end
+
+function luaVkApi.searchVideos(query, sortVal, isHD, isAdult, filtersVal, searchOwn,
+    offsetVal, longerThan, shorterThan, countVal, isExtended)
+  return luaVkApi.invokeApi("video.search", {q=query, sort=sortVal, hd=isHD,
+      adult=isAdult, filters=filtersVal, search_own=searchOwn, offset=offsetVal,
+      longer=longerThen, shorter=shorterThan, count=countVal, extended=isExtended})
+end
+
+function luaVkApi.getUserVideos(userId, offsetVal, countVal, isExtended)
+  return luaVkApi.invokeApi("video.getUserVideos", {user_id=userId, offset=offsetVal, 
+      count=countVal, extended=isExtended})
+end
+
+function luaVkApi.getVideoAlbums(ownerId, offsetVal, countVal, isExtended, needSystem)
+  return luaVkApi.invokeApi("video.getAlbums", {owner_is=ownerId, offset=offsetVal, 
+      count=countVal, extended=isExtended, need_system=needSystem})
+end
+
+function luaVkApi.getVideoAlbumById(ownerId, albumId)
+  return luaVkApi.invokeApi("video.getAlbumById", {owner_is=ownerId, album_id=albumId})
+end
+
+function luaVkApi.addVideoAlbum(groupId, titleVal, privacyVal)
+  return luaVkApi.invokeApi("video.addAlbum", {group_iid=groupId, title=titleVal,
+      privacy=privacyVal})
+end
+
+function luaVkApi.editVideoAlbum(groupId, albumId, titleVal, privacyVal)
+  return luaVkApi.invokeApi("video.editAlbum", {group_id=groupId, album_id=albumId, 
+      title=titleVal, privacy=privacyVal})
+end
+
+function luaVkApi.deleteVideoAlbum(groupId, albumId)
+  return luaVkApi.invokeApi("video.deleteAlbum", {group_id=groupId, album_id=albumId})
+end
+
+function luaVkApi.reorderVideoAlbums(ownerId, albumId, beforeVal, afterVal)
+  return luaVkApi.invokeApi("video.reorderAlbums", {owner_id=ownerId, album_id=albumId,
+      before=beforeVal, after=afterVal})
+end
+
+function luaVkApi.addVideoToAlbum(targetId, albumId, albumIds, ownerId, videoId)
+  return luaVkApi.invokeApi("video.addToAlbum", {target_id=targetId, album_id=albumId,
+      album_ids=albumIds, owner_id=ownerId, video_id=videoId})
+end
+
+function luaVkApi.removeVideoFromAlbum(targetId, albumId, albumIds, ownerId, videoId)
+  return luaVkApi.invokeApi("video.removeFromAlbum", {target_id=targetId, album_id=albumId,
+      album_ids=albumIds, owner_id=ownerId, video_id=videoId})
+end
+
+function luaVkApi.getAlbumsByVideo(targetId, ownerId, videoId, isExtended)
+  return luaVkApi.invokeApi("video.getAlbumsByVideo", {target_id=targetId, owner_id=ownerId, 
+      video_id=videoId, extended=isExtended})
+end
 
 -----------------------
 --       Notes       --

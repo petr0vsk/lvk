@@ -699,26 +699,142 @@ end
 -----------------------
 --    Communities    --
 -----------------------
-function luaVkApi.joinCommunity(groupId)
-  return luaVkApi.invokeApi("groups.join", {group_id=groupId})
+function luaVkApi.isCommunityMember(groupId, userId, userIds, isExtended)
+  return luaVkApi.invokeApi("groups.isMember", {group_id=groupId, user_id=userId,
+        user_ids=userIds, extended=isExtended})
 end
 
-function luaVkApi.searchCommunities(searchWord, countVal)
-  if countVal == nil then
-    countVal = "1000"
-  end
-  return luaVkApi.invokeApi("groups.search", {q=searchWord, count=countVal})
+function luaVkApi.getCommunitiesById(groupIds, groupId, fieldsVal)
+  return luaVkApi.invokeApi("groups.getById", {group_ids=groupIds, group_id=group_Id,
+      fields=fieldsVal})
 end
 
-function luaVkApi.getCommunityById(groupId)
-  return luaVkApi.invokeApi("groups.getById", {group_id=groupId})
+function luaVkApi.getCommunities(userId, isExtended, filterVal, fieldsVal,
+    offsetVal, countVal)
+  return luaVkApi.invokeApi("groups.get", {user_id=groupId, extended=isExtended,
+      filter=filterVal, fields=fieldsVal, offset=offsetVal, count=countVal})
 end
 
-function luaVkApi.getUserCommunities(userId, countVal)
-  if countVal == nil then
-    countVal = "1000"
-  end
-  return luaVkApi.invokeApi("groups.get", {user_id=groupId, count=countVal})
+function luaVkApi.getCommunityMembers(groupId, sortVal, offsetVal, countVal,
+    fieldsVal, filterVal)
+  return luaVkApi.invokeApi("groups.getMembers", {group_id=groupId, sort=sortVal,
+      offset=offsetVal, count=countVal, fields=fieldsVal, filter=filterVal})
+end
+
+function luaVkApi.joinCommunity(groupId, notSure)
+  return luaVkApi.invokeApi("groups.join", {group_id=groupId, not_sure=notSure})
+end
+
+function luaVkApi.leaveCommunity(groupId)
+  return luaVkApi.invokeApi("groups.leave", {group_id=groupId})
+end
+
+function luaVkApi.searchCommunities(query, typeVal, countryId, cityId, 
+    isFuture, sortVal, offsetVal, countVal)
+  return luaVkApi.invokeApi("groups.search", {q=query, type=typeVal, country_id=countryId,
+      city_id=cityId, future=isFuture, sort=sortVal, offset=offsetVal, count=countVal})
+end
+
+function luaVkApi.getCommunitiesInvites(offsetVal, countVal, isExtended)
+  return luaVkApi.invokeApi("groups.getInvites", {offset=offsetVal, count=countVal,
+      extended=isExtended})
+end
+
+function luaVkApi.getInvitedUsers(groupId, offsetVal, countVal, fieldsVal, nameCase)
+  return luaVkApi.invokeApi("groups.getInvitedUsers", {group_id=groupId, offset=offsetVal,
+      count=countVal, fields=fieldsVal, name_case=nameCase})
+end
+
+function luaVkApi.banUserForCommunity(groupId, userId, endDate, reasonVal, commentVal,
+    commentVisible)
+  return luaVkApi.invokeApi("groups.banUser", {group_id=groupId, user_id=userId, 
+    end_date=endDate, reason=reasonVal, comment=commentVal, 
+    comment_visible=commentVisible})
+end
+
+function luaVkApi.unbanUserForCommunity(groupId, userId)
+  return luaVkApi.invokeApi("groups.unbanUser", {group_id=groupId, user_id=userId})
+end
+
+function luaVkApi.getBannedUsersForCommunity(groupId, ofsetVal, countVal, fieldsVal,
+    userId)
+  return luaVkApi.invokeApi("groups.getBanned", {group_id=groupId, offset=offsetVal, 
+      count=countVal, fields=fieldsVal, user_id=userId})
+end
+
+function luaVkApi.createCommunity(titleVal, descriptionVal, typeVal, subtypeVal)
+  return luaVkApi.invokeApi("groups.create", {title=titleVal, description=descriptionVal,
+      type=typeVal, subtype=subtypeVal})
+end
+
+function luaVkApi.editCommunity(groupId, titleVal, descriptionVal, screenname,
+    accessVal, websiteVal, subjectVal, emailVal, phoneVal, rssVal, eventStartDate, 
+    eventFinishDate, eventGroupId, publicCategory, publicSubcategory, publicDate,
+    wallVal, topicsVal, photosVal, videoVal, audioVal, linksVal, eventsVal, placesVal,
+    contactsVal, docsVal, wikiVal)
+  return luaVkApi.invokeApi("groups.edit", {group_id=groupId, title=titleVal, 
+      description=descriptionVal, screen_name=screenName, access=accessVal,
+      website=sebsiteVal, subject=subjectVal, email=emailVal, phone=phoneVal, rss=rssVal,
+      event_start_date=eventStartDate, event_finish_date=eventFinishDate,
+      event_group_id=eventGroupId, public_category=publicCategory, 
+      public_subcategory=publicSubcategory, public_date=publicDate, wall=wallVal,
+      topics=topicsVal, photos=photosVal, video=videoVal, audio=audioVal, links=linksVal,
+      events=eventsVal, places=placesVal, contacts=contactsVal, docs=docsVal,
+      wiki=wikiVal})
+end
+
+function luaVkApi.editPlace(groupId, titleVal, adressVal, countryId, cityId, latitudeVal,
+    longitudeVal)
+  return luaVkApi.invokeApi("groups.editPlace", {group_id=groupId, title=titleVal, 
+      adress=adressVal, country_id=countryId, city_id=cityId, latitude=latitudeVal,
+      longitude=longitudeVal})
+end
+
+function luaVkApi.getCommunitySettings(groupId)
+  return luaVkApi.invokeApi("groups.getSettings", {group_id=groupId})
+end
+
+function luaVkApi.getCommunityRequests(groupId, offsetVal, countVal, fieldsVal)
+  return luaVkApi.invokeApi("groups.getRequests", {group_id=groupId, offset=offsetVal,
+      count=countVal, fields=fieldsVal})
+end
+
+function luaVkApi.editCommunityManager(groupId, userId, roleVal, isContact, 
+    contactPosition, contactPhone, contactEmail)
+  return luaVkApi.invokeApi("groups.editManager", {group_id=groupId, user_id=userId,
+      role=roleVal, is_contact=isContact, contact_position=contactPosition,
+      contact_phone=contactPhone, contact_email=contactEmail})
+end
+
+function luaVkApi.inviteToCommunity(groupId, userId)
+  return luaVkApi.invokeApi("groups.invite", {group_id=groupId, user_id=userId})
+end
+
+function luaVkApi.addCommunityLink(groupId, linkVal, text)
+  return luaVkApi.invokeApi("groups.addLink", {group_id=groupId, link=linkVal,
+      text=textVal})
+end
+
+function luaVkApi.deleteCommunityLink(groupId, linkId)
+  return luaVkApi.invokeApi("groups.addLink", {group_id=groupId, link_id=linkId})
+end
+
+function luaVkApi.editCommunityLink(groupId, linkId, textVal)
+  return luaVkApi.invokeApi("groups.editLink", {group_id=groupId, link_id=linkId,
+      text=textVal})
+end
+
+function luaVkApi.reorderCommunityLink(groupId, linkId, afterVal)
+  return luaVkApi.invokeApi("groups.reorderLink", {group_id=groupId, link_id=linkId,
+      after=afterVal})
+end
+
+function luaVkApi.removeUserFromCommunity(groupId, userId)
+  return luaVkApi.invokeApi("groups.removeUser", {group_id=groupId, user_id=userId})
+end
+
+function luaVkApi.approveUserRequestToCommunity(groupId, userId)
+  return luaVkApi.invokeApi("groups.approveRequest", {group_id=groupId, user_id=userId})
 end
 
 -----------------------

@@ -1,4 +1,5 @@
 local https = require("ssl.https")
+local json = require ("dkjson")
 
 local luaVkApi = {}
 
@@ -8,6 +9,9 @@ local authUrl = "https://oauth.vk.com/authorize" .. "?client_id={APP_ID}"
 local apiRequest = "https://api.vk.com/method/{METHOD_NAME}" .. "?{PARAMETERS}"
   .. "&access_token={ACCESS_TOKEN}" .. "&v={API_VERSION}"
 
+-----------------------
+--Common util methods--
+-----------------------
 function luaVkApi.invokeApi(method, params)
   -- load properties
   file = io.open("luaVkApi.properties")
@@ -17,7 +21,6 @@ function luaVkApi.invokeApi(method, params)
       properties[key] = value
     end
   end
-
   -- parse method parameters
   local parameters = ""
   if params ~= nil then
@@ -31,6 +34,16 @@ function luaVkApi.invokeApi(method, params)
   reqUrl = string.gsub(reqUrl, "{API_VERSION}", properties.apiVersion)
   reqUrl = string.gsub(reqUrl, "{PARAMETERS}&", parameters)
   return https.request(reqUrl)
+end
+
+function luaVkApi.stringToJSON(jsonString_)
+  local jsonString = jsonString_
+  return json.decode(jsonString, 1, nil)
+end
+
+function luaVkApi.jsonToString(jsonObject_)
+  local jsonObject = jsonObject_
+  return json.encode(jsonObject)
 end
 
 -----------------------
@@ -915,10 +928,10 @@ function luaVkApi.getVideosInfo(ownerId, videoIds, albumId, countVal, offsetVal,
 end
 
 function luaVkApi.editVideoInfo(ownerId, videoId, nameVal, descVal, privacyView,
-    privacyComment, noComments, isRepeat)
+    privacyComment, noComments)
   return luaVkApi.invokeApi("video.edit", {owner_id=ownerId, video_id=videoId,
       name=nameVal, desc=descVal, privacy_view=privacyView, 
-      privacy_comment=privacyComment, no_comments=noComments, repeat=isRepeat})
+      privacy_comment=privacyComment, no_comments=noComments})
 end
 
 function luaVkApi.addVideo(targetId, videoId, ownerId)

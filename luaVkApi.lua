@@ -2422,6 +2422,9 @@ end
 -----------------------
 function luaVkApi.getAppsCatalog(sortVal, offsetVal, countVal, platformVal, isExtended,
     returnFriends, fieldsVal, nameCase, query, genreId, filterVal)
+  if not countVal then
+    return requiredParameterMsg .. " countVal"
+  end
   return luaVkApi.invokeApi("apps.getCatalog", {sort=sortVal, offset=offsetVal, count=countVal,
       platform=platformVal, extended=isExtended, return_friends=returnFriends, fields=fieldsVal, 
       name_case=nameCase, q=query, genre_id=genreId, filter=filterVal})
@@ -2434,6 +2437,9 @@ function luaVkApi.getApp(appId, appIds, platformVal, isExtended, returnFriends, 
 end
 
 function luaVkApi.sendAppRequest(userId, textVal, typeVal, nameVal, keyVal, separateVal)
+  if not userId then
+    return requiredParameterMsg .. " userId"
+  end
   return luaVkApi.invokeApi("apps.sendRequest", {user_id, text=textVal, type=typeVal, name=nameVal,
       key=keyVal, separate=separateVal})
 end
@@ -2448,11 +2454,17 @@ function luaVkApi.getFriendsList(isExtended, countVal, offsetVal, typeVal, field
 end
 
 function luaVkApi.getLeaderboard(typeVal, globalVal, isExtended)
+  if not typeVal then
+    return requiredParameterMsg .. " typeVal"
+  end
   return luaVkApi.invokeApi("apps.getLeaderboard", {type=typeVal, global=globalVal, 
       extended=isExtended})
 end
 
 function luaVkApi.getScore(userId)
+  if not userId then
+    return requiredParameterMsg .. " userId"
+  end
   return luaVkApi.invokeApi("apps.getScore", {user_id=userId})
 end
 
@@ -2460,10 +2472,16 @@ end
 --     Service       --
 -----------------------
 function luaVkApi.checkLink(urlStr)
+  if not urlStr then
+    return requiredParameterMsg .. " urlStr"
+  end
   return luaVkApi.invokeApi("utils.checkLink", {url=urlStr})
 end
 
 function luaVkApi.resolveScreenName(screenNsme)
+  if not screenNsme then
+    return requiredParameterMsg .. " screenNsme"
+  end
   return luaVkApi.invokeApi("utils.resolveScreenName", {screen_name=screenNsme})
 end
 
@@ -2480,11 +2498,17 @@ function luaVkApi.getCountries(needAll, codeStr, offsetVal, countVal)
 end
 
 function luaVkApi.getRegions(countryId, query, offsetVal, countVal)
+  if not countryId then
+    return requiredParameterMsg .. " countryId"
+  end
   return luaVkApi.invokeApi("database.getRegions", {country_id=countryId, q=query,
       offset=offsetVal, count=countVal})
 end
 
 function luaVkApi.getStreetsById(streetIds)
+  if not streetIds then
+    return requiredParameterMsg .. " streetIds"
+  end
   return luaVkApi.invokeApi("database.getStreetsById", {street_ids=streetIds})
 end
 
@@ -2493,6 +2517,9 @@ function luaVkApi.getCountriesById(countryIds)
 end
 
 function luaVkApi.getCities(countryId, regionId, query, needAll, offsetVal, countVal)
+  if not countryId then
+    return requiredParameterMsg .. " countryId"
+  end
   return luaVkApi.invokeApi("database.getCities", {country_id=countryId, region_id=regionId,
       q=query, need_all=needAll, offset=offsetVal, count=countVal})
 end
@@ -2507,6 +2534,9 @@ function luaVkApi.getUniversities(query, countryId, cityId, offsetVal, countVal)
 end
 
 function luaVkApi.getSchools(query, cityId, offsetVal, countVal)
+  if not cityId then
+    return requiredParameterMsg .. " cityId"
+  end
   return luaVkApi.invokeApi("database.getSchools", {q=query, city_id=cityId, offset=offsetVal,
       count=countVal})
 end
@@ -2516,11 +2546,17 @@ function luaVkApi.getSchoolClasses(countryId)
 end
 
 function luaVkApi.getFaculties(universityId, offsetVal, countVal)
+  if not universityId then
+    return requiredParameterMsg .. " universityId"
+  end
   return luaVkApi.invokeApi("database.getFaculties", {university_id=universityId, offset=offsetVal,
       count=countVal})
 end
 
 function luaVkApi.getChairs(facultyId, offsetVal, countVal)
+  if not facultyId then
+    return requiredParameterMsg .. " facultyId"
+  end
   return luaVkApi.invokeApi("database.getChairs", {faculty_id=facultyId, offset=offsetVal,
       count=countVal})
 end

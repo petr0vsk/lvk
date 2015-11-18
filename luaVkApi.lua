@@ -955,11 +955,17 @@ function luaVkApi.savePage(textVal, pageId, groupId, userId, titleVal)
 end
 
 function luaVkApi.savePageAccess(pageId, groupId, userId, viewVal, editVal)
+  if not pageId then
+    return requiredParameterMsg .. " pageId"
+  end
   return luaVkApi.invokeApi("pages.saveAccess", {page_id=pageId, group_id=groupId, user_id=userId,
       view=viewVal, edit=editVal})
 end
 
 function luaVkApi.getPageHistory(pageId, groupId, userId)
+  if not pageId then
+    return requiredParameterMsg .. " pageId"
+  end
   return luaVkApi.invokeApi("pages.getHistory", {page_id=pageId, group_id=groupId, user_id=userId})
 end
 
@@ -968,15 +974,24 @@ function luaVkApi.getPageTitles(groupId)
 end
 
 function luaVkApi.getPageVersion(versionId, groupId, userId, needHtml)
+  if not versionId then
+    return requiredParameterMsg .. " versionId"
+  end
   return luaVkApi.invokeApi("pages.getVersion", {version_id=versionId, group_id=groupId,
       user_id=userId, need_html=needHtml})
 end
 
 function luaVkApi.parseWiki(textVal, groupId)
+  if not textVal then
+    return requiredParameterMsg .. " textVal"
+  end
   return luaVkApi.invokeApi("pages.parseWiki", {text=textVal, group_id=groupId})
 end
 
 function luaVkApi.clearPageCache(urlVal)
+  if not textVal then
+    return requiredParameterMsg .. " textVal"
+  end
   return luaVkApi.invokeApi("pages.clearCache", {url=urlVal})
 end
 
@@ -984,6 +999,9 @@ end
 --    Communities    --
 -----------------------
 function luaVkApi.isCommunityMember(groupId, userId, userIds, isExtended)
+  if not groupId then
+    return requiredParameterMsg .. " groupId"
+  end
   return luaVkApi.invokeApi("groups.isMember", {group_id=groupId, user_id=userId,
         user_ids=userIds, extended=isExtended})
 end
@@ -1010,11 +1028,17 @@ function luaVkApi.joinCommunity(groupId, notSure)
 end
 
 function luaVkApi.leaveCommunity(groupId)
+  if not groupId then
+    return requiredParameterMsg .. " groupId"
+  end
   return luaVkApi.invokeApi("groups.leave", {group_id=groupId})
 end
 
 function luaVkApi.searchCommunities(query, typeVal, countryId, cityId, 
     isFuture, sortVal, offsetVal, countVal)
+  if not query then
+    return requiredParameterMsg .. " query"
+  end
   return luaVkApi.invokeApi("groups.search", {q=query, type=typeVal, country_id=countryId,
       city_id=cityId, future=isFuture, sort=sortVal, offset=offsetVal, count=countVal})
 end
@@ -1025,23 +1049,41 @@ function luaVkApi.getCommunitiesInvites(offsetVal, countVal, isExtended)
 end
 
 function luaVkApi.getInvitedUsers(groupId, offsetVal, countVal, fieldsVal, nameCase)
+  if not groupId then
+    return requiredParameterMsg .. " groupId"
+  end
   return luaVkApi.invokeApi("groups.getInvitedUsers", {group_id=groupId, offset=offsetVal,
       count=countVal, fields=fieldsVal, name_case=nameCase})
 end
 
 function luaVkApi.banUserForCommunity(groupId, userId, endDate, reasonVal, commentVal,
     commentVisible)
+  if not groupId then
+    return requiredParameterMsg .. " groupId"
+  end
+  if not userId then
+    return requiredParameterMsg .. " userId"
+  end
   return luaVkApi.invokeApi("groups.banUser", {group_id=groupId, user_id=userId, 
     end_date=endDate, reason=reasonVal, comment=commentVal, 
     comment_visible=commentVisible})
 end
 
 function luaVkApi.unbanUserForCommunity(groupId, userId)
+  if not groupId then
+    return requiredParameterMsg .. " groupId"
+  end
+  if not userId then
+    return requiredParameterMsg .. " userId"
+  end
   return luaVkApi.invokeApi("groups.unbanUser", {group_id=groupId, user_id=userId})
 end
 
 function luaVkApi.getBannedUsersForCommunity(groupId, ofsetVal, countVal, fieldsVal,
     userId)
+  if not groupId then
+    return requiredParameterMsg .. " groupId"
+  end
   return luaVkApi.invokeApi("groups.getBanned", {group_id=groupId, offset=offsetVal, 
       count=countVal, fields=fieldsVal, user_id=userId})
 end
@@ -1056,6 +1098,9 @@ function luaVkApi.editCommunity(groupId, titleVal, descriptionVal, screenname,
     eventFinishDate, eventGroupId, publicCategory, publicSubcategory, publicDate,
     wallVal, topicsVal, photosVal, videoVal, audioVal, linksVal, eventsVal, placesVal,
     contactsVal, docsVal, wikiVal)
+  if not groupId then
+    return requiredParameterMsg .. " groupId"
+  end
   return luaVkApi.invokeApi("groups.edit", {group_id=groupId, title=titleVal, 
       description=descriptionVal, screen_name=screenName, access=accessVal,
       website=sebsiteVal, subject=subjectVal, email=emailVal, phone=phoneVal, rss=rssVal,
@@ -1069,55 +1114,112 @@ end
 
 function luaVkApi.editPlace(groupId, titleVal, adressVal, countryId, cityId, latitudeVal,
     longitudeVal)
+  if not groupId then
+    return requiredParameterMsg .. " groupId"
+  end
   return luaVkApi.invokeApi("groups.editPlace", {group_id=groupId, title=titleVal, 
       adress=adressVal, country_id=countryId, city_id=cityId, latitude=latitudeVal,
       longitude=longitudeVal})
 end
 
 function luaVkApi.getCommunitySettings(groupId)
+  if not groupId then
+    return requiredParameterMsg .. " groupId"
+  end
   return luaVkApi.invokeApi("groups.getSettings", {group_id=groupId})
 end
 
 function luaVkApi.getCommunityRequests(groupId, offsetVal, countVal, fieldsVal)
+  if not groupId then
+    return requiredParameterMsg .. " groupId"
+  end
   return luaVkApi.invokeApi("groups.getRequests", {group_id=groupId, offset=offsetVal,
       count=countVal, fields=fieldsVal})
 end
 
 function luaVkApi.editCommunityManager(groupId, userId, roleVal, isContact, 
     contactPosition, contactPhone, contactEmail)
+  if not groupId then
+    return requiredParameterMsg .. " groupId"
+  end
+  if not userId then
+    return requiredParameterMsg .. " userId"
+  end
   return luaVkApi.invokeApi("groups.editManager", {group_id=groupId, user_id=userId,
       role=roleVal, is_contact=isContact, contact_position=contactPosition,
       contact_phone=contactPhone, contact_email=contactEmail})
 end
 
 function luaVkApi.inviteToCommunity(groupId, userId)
+  if not groupId then
+    return requiredParameterMsg .. " groupId"
+  end
+  if not userId then
+    return requiredParameterMsg .. " userId"
+  end
   return luaVkApi.invokeApi("groups.invite", {group_id=groupId, user_id=userId})
 end
 
 function luaVkApi.addCommunityLink(groupId, linkVal, text)
+  if not groupId then
+    return requiredParameterMsg .. " groupId"
+  end
+  if not linkVal then
+    return requiredParameterMsg .. " linkVal"
+  end
   return luaVkApi.invokeApi("groups.addLink", {group_id=groupId, link=linkVal,
       text=textVal})
 end
 
 function luaVkApi.deleteCommunityLink(groupId, linkId)
+  if not groupId then
+    return requiredParameterMsg .. " groupId"
+  end
+  if not linkId then
+    return requiredParameterMsg .. " linkId"
+  end
   return luaVkApi.invokeApi("groups.addLink", {group_id=groupId, link_id=linkId})
 end
 
 function luaVkApi.editCommunityLink(groupId, linkId, textVal)
+  if not groupId then
+    return requiredParameterMsg .. " groupId"
+  end
+  if not linkId then
+    return requiredParameterMsg .. " linkId"
+  end
   return luaVkApi.invokeApi("groups.editLink", {group_id=groupId, link_id=linkId,
       text=textVal})
 end
 
 function luaVkApi.reorderCommunityLink(groupId, linkId, afterVal)
+  if not groupId then
+    return requiredParameterMsg .. " groupId"
+  end
+  if not linkId then
+    return requiredParameterMsg .. " linkId"
+  end
   return luaVkApi.invokeApi("groups.reorderLink", {group_id=groupId, link_id=linkId,
       after=afterVal})
 end
 
 function luaVkApi.removeUserFromCommunity(groupId, userId)
+  if not groupId then
+    return requiredParameterMsg .. " groupId"
+  end
+  if not userId then
+    return requiredParameterMsg .. " userId"
+  end
   return luaVkApi.invokeApi("groups.removeUser", {group_id=groupId, user_id=userId})
 end
 
 function luaVkApi.approveUserRequestToCommunity(groupId, userId)
+  if not groupId then
+    return requiredParameterMsg .. " groupId"
+  end
+  if not userId then
+    return requiredParameterMsg .. " userId"
+  end
   return luaVkApi.invokeApi("groups.approveRequest", {group_id=groupId, user_id=userId})
 end
 
@@ -1126,6 +1228,9 @@ end
 -----------------------
 function luaVkApi.getBoardTopics(groupId, topicIds, orderVal, offsetVal, countVal, 
     isExtended, previewVal, previewLength)
+  if not groupId then
+    return requiredParameterMsg .. " groupId"
+  end
   return luaVkApi.invokeApi("board.getTopics", {group_id=groupId, topic_ids=topicIds,
       order=orderVal, offset=offsetVal, count=countVal, extended=isExtended,
       preview=previewVal, preview_length=previewLength})
@@ -1133,59 +1238,146 @@ end
 
 function luaVkApi.getBoardComments(groupId, topicId, needLikes, startCommentId, offsetVal,
     countVal, isExtended, sortVal)
+  if not groupId then
+    return requiredParameterMsg .. " groupId"
+  end
+  if not topicId then
+    return requiredParameterMsg .. " topicId"
+  end
   return luaVkApi.invokeApi("board.getComments", {group_id=groupId, topic_id=topicId,
       need_likes=needLikes, start_comment_id=startCommentId, offset=offsetVal, count=countVal,
       extended=isExtended, sort=sortVal})
 end
 
 function luaVkApi.addBoardTopic(groupId, titleVal, textVal, fromGroup, attachmentsVal)
+  if not groupId then
+    return requiredParameterMsg .. " groupId"
+  end
+  if not titleVal then
+    return requiredParameterMsg .. " titleVal"
+  end
   return luaVkApi.invokeApi("board.addTopic", {group_id=groupId, title=titleVal,
       text=textVal, from_group=fromGroup, attachments=attachmentsVal})
 end
 
 function luaVkApi.addCommentToBoardTopic(groupId, topicId, textVal, attachmentsVal, fromGroup,
     sticketId)
+  if not groupId then
+    return requiredParameterMsg .. " groupId"
+  end
+  if not topicId then
+    return requiredParameterMsg .. " topicId"
+  end
   return luaVkApi.invokeApi("board.addComment", {group_id=groupId, topic_id=topicId,
       text=textVal, attachments=attachmentsVal, from_group=fromGroup, sticker_id=stickerId})
 end
 
 function luaVkApi.deleteBoardTopic(groupId, topicId)
+  if not groupId then
+    return requiredParameterMsg .. " groupId"
+  end
+  if not topicId then
+    return requiredParameterMsg .. " topicId"
+  end
   return luaVkApi.invokeApi("board.deleteTopic", {group_id=groupId, topic_id=topicId})
 end
 
 function luaVkApi.editBoardTopic(groupId, topicId, titleVal)
+  if not groupId then
+    return requiredParameterMsg .. " groupId"
+  end
+  if not topicId then
+    return requiredParameterMsg .. " topicId"
+  end
+  if not titleVal then
+    return requiredParameterMsg .. " titleVal"
+  end
   return luaVkApi.invokeApi("board.editTopic", {group_id=groupId, topic_id=topicId,
       title=titleVal})
 end
 
 function luaVkApi.editBoardTopicComment(groupId, topicId, commentId, textVal, attachmentsVal)
+  if not groupId then
+    return requiredParameterMsg .. " groupId"
+  end
+  if not topicId then
+    return requiredParameterMsg .. " topicId"
+  end
+  if not commentId then
+    return requiredParameterMsg .. " commentId"
+  end
+  if not textVal or not attachmentsVal then
+    return requiredParameterMsg .. " textVal or attachmentsVal"
+  end
   return luaVkApi.invokeApi("board.editComment", {group_id=groupId, topic_id=topicId,
       comment_id=commentId, text=textVal, attachments=attachmentsVal})
 end
 
 function luaVkApi.restoreBoardTopicComment(groupId, topicId, commentId)
+  if not groupId then
+    return requiredParameterMsg .. " groupId"
+  end
+  if not topicId then
+    return requiredParameterMsg .. " topicId"
+  end
+  if not commentId then
+    return requiredParameterMsg .. " commentId"
+  end
   return luaVkApi.invokeApi("board.restoreComment", {group_id=groupId, topic_id=topicId,
       comment_id=commentId})
 end
 
 function luaVkApi.deleteBoardTopicComment(groupId, topicId, commentId)
+  if not groupId then
+    return requiredParameterMsg .. " groupId"
+  end
+  if not topicId then
+    return requiredParameterMsg .. " topicId"
+  end
+  if not commentId then
+    return requiredParameterMsg .. " commentId"
+  end
   return luaVkApi.invokeApi("board.deleteComment", {group_id=groupId, topic_id=topicId,
       comment_id=commentId})
 end
 
 function luaVkApi.openBoardTopic(groupId, topicId)
+  if not groupId then
+    return requiredParameterMsg .. " groupId"
+  end
+  if not topicId then
+    return requiredParameterMsg .. " topicId"
+  end
   return luaVkApi.invokeApi("board.openTopic", {group_id=groupId, topic_id=topicId})
 end
 
 function luaVkApi.closeBoardTopic(groupId, topicId)
+  if not groupId then
+    return requiredParameterMsg .. " groupId"
+  end
+  if not topicId then
+    return requiredParameterMsg .. " topicId"
+  end
   return luaVkApi.invokeApi("board.closeTopic", {group_id=groupId, topic_id=topicId})
 end
 
 function luaVkApi.fixBoardTopic(groupId, topicId)
+  if not groupId then
+    return requiredParameterMsg .. " groupId"
+  end
+  if not topicId then
+    return requiredParameterMsg .. " topicId"
+  end
   return luaVkApi.invokeApi("board.fixTopic", {group_id=groupId, topic_id=topicId})
 end
 
 function luaVkApi.unfixBoardTopic(groupId, topicId)
+  if not groupId then
+    return requiredParameterMsg .. " groupId"
+  end
+  if not topicId then
+    return requiredParameterMsg .. " topicId"
+  end
   return luaVkApi.invokeApi("board.unfixTopic", {group_id=groupId, topic_id=topicId})
 end
 
@@ -1200,12 +1392,24 @@ end
 
 function luaVkApi.editVideoInfo(ownerId, videoId, nameVal, descVal, privacyView,
     privacyComment, noComments)
+  if not videoId then
+    return requiredParameterMsg .. " videoId"
+  end
   return luaVkApi.invokeApi("video.edit", {owner_id=ownerId, video_id=videoId,
       name=nameVal, desc=descVal, privacy_view=privacyView, 
       privacy_comment=privacyComment, no_comments=noComments})
 end
 
 function luaVkApi.addVideo(targetId, videoId, ownerId)
+  if not targetId then
+    return requiredParameterMsg .. " targetId"
+  end
+  if not videoId then
+    return requiredParameterMsg .. " videoId"
+  end
+  if not ownerId then
+    return requiredParameterMsg .. " ownerId"
+  end
   return luaVkApi.invokeApi("video.add", {target_id=targetId, owner_id=ownerId,
       video_id=videoId})
 end
@@ -1219,16 +1423,28 @@ function luaVkApi.saveVideo(nameVal, descVal, isPrivate, wallPost, linkVal,
 end
 
 function luaVkApi.deleteVideo(videoId, ownerId, targetId)
+  if not videoId then
+    return requiredParameterMsg .. " videoId"
+  end
   return luaVkApi.invokeApi("video.delete", {video_id=videoId, owner_id=ownerId,
       target_id=targetId})
 end
 
 function luaVkApi.restoreVideo(videoId, ownerId)
+  if not videoId then
+    return requiredParameterMsg .. " videoId"
+  end
+  if not ownerId then
+    return requiredParameterMsg .. " ownerId"
+  end
   return luaVkApi.invokeApi("video.restore", {video_id=videoId, owner_id=ownerId})
 end
 
 function luaVkApi.searchVideos(query, sortVal, isHD, isAdult, filtersVal, searchOwn,
     offsetVal, longerThan, shorterThan, countVal, isExtended)
+  if not query then
+    return requiredParameterMsg .. " query"
+  end
   return luaVkApi.invokeApi("video.search", {q=query, sort=sortVal, hd=isHD,
       adult=isAdult, filters=filtersVal, search_own=searchOwn, offset=offsetVal,
       longer=longerThen, shorter=shorterThan, count=countVal, extended=isExtended})
@@ -1245,6 +1461,9 @@ function luaVkApi.getVideoAlbums(ownerId, offsetVal, countVal, isExtended, needS
 end
 
 function luaVkApi.getVideoAlbumById(ownerId, albumId)
+  if not albumId then
+    return requiredParameterMsg .. " albumId"
+  end
   return luaVkApi.invokeApi("video.getAlbumById", {owner_is=ownerId, album_id=albumId})
 end
 
@@ -1254,6 +1473,12 @@ function luaVkApi.addVideoAlbum(groupId, titleVal, privacyVal)
 end
 
 function luaVkApi.editVideoAlbum(groupId, albumId, titleVal, privacyVal)
+  if not albumId then
+    return requiredParameterMsg .. " albumId"
+  end
+  if not titleVal then
+    return requiredParameterMsg .. " titleVal"
+  end
   return luaVkApi.invokeApi("video.editAlbum", {group_id=groupId, album_id=albumId, 
       title=titleVal, privacy=privacyVal})
 end
@@ -1263,21 +1488,42 @@ function luaVkApi.deleteVideoAlbum(groupId, albumId)
 end
 
 function luaVkApi.reorderVideoAlbums(ownerId, albumId, beforeVal, afterVal)
+  if not albumId then
+    return requiredParameterMsg .. " albumId"
+  end
   return luaVkApi.invokeApi("video.reorderAlbums", {owner_id=ownerId, album_id=albumId,
       before=beforeVal, after=afterVal})
 end
 
 function luaVkApi.addVideoToAlbum(targetId, albumId, albumIds, ownerId, videoId)
+  if not ownerId then
+    return requiredParameterMsg .. " ownerId"
+  end
+  if not videoId then
+    return requiredParameterMsg .. " videoId"
+  end
   return luaVkApi.invokeApi("video.addToAlbum", {target_id=targetId, album_id=albumId,
       album_ids=albumIds, owner_id=ownerId, video_id=videoId})
 end
 
 function luaVkApi.removeVideoFromAlbum(targetId, albumId, albumIds, ownerId, videoId)
+  if not ownerId then
+    return requiredParameterMsg .. " ownerId"
+  end
+  if not videoId then
+    return requiredParameterMsg .. " videoId"
+  end
   return luaVkApi.invokeApi("video.removeFromAlbum", {target_id=targetId, album_id=albumId,
       album_ids=albumIds, owner_id=ownerId, video_id=videoId})
 end
 
 function luaVkApi.getAlbumsByVideo(targetId, ownerId, videoId, isExtended)
+  if not ownerId then
+    return requiredParameterMsg .. " ownerId"
+  end
+  if not videoId then
+    return requiredParameterMsg .. " videoId"
+  end
   return luaVkApi.invokeApi("video.getAlbumsByVideo", {target_id=targetId, owner_id=ownerId, 
       video_id=videoId, extended=isExtended})
 end
@@ -1291,34 +1537,58 @@ end
 
 function luaVkApi.createVideoComment(ownerId, videoId, messageVal, attachmentsVal,
     fromGroup, replyToComment, stickerId)
+  if not videoId then
+    return requiredParameterMsg .. " videoId"
+  end
   return luaVkApi.invokeApi("video.createComment", {owner_id=ownerId, video_id=videoId, 
       message=messageVal, attachments=attachmentsVal, from_group=gromGroup,
       reply_to_comment=replyToComment, sticker_id=stickerId})
 end
 
 function luaVkApi.deleteVideoComment(ownerId, commentId)
+  if not commentId then
+    return requiredParameterMsg .. " commentId"
+  end
   return luaVkApi.invokeApi("video.deleteComment", {owner_id=ownerId, comment_id=commentId})
 end
 
 function luaVkApi.restoreVideoComment(ownerId, commentId)
+  if not commentId then
+    return requiredParameterMsg .. " commentId"
+  end
   return luaVkApi.invokeApi("video.restoreComment", {owner_id=ownerId, comment_id=commentId})
 end
 
 function luaVkApi.editVideoComment(ownerId, commentId, messageVal, attachmentsVal)
+  if not commentId then
+    return requiredParameterMsg .. " commentId"
+  end
   return luaVkApi.invokeApi("video.editComment", {owner_id=ownerId, comment_id=commentId,
       message=messageVal, attachments=attachmentsVal})
 end
 
 function luaVkApi.getVideoTags(ownerId, videoId)
+  if not videoId then
+    return requiredParameterMsg .. " videoId"
+  end
   return luaVkApi.invokeApi("video.getTags", {owner_id=ownerId, video_id=videoId})
 end
 
 function luaVkApi.putVideoTag(userId, ownerId, videoId, taggedName)
+  if not videoId then
+    return requiredParameterMsg .. " videoId"
+  end
   return luaVkApi.invokeApi("video.putTag", {user_id=userId, owner_id=ownerId, 
       video_id=videoId, tagged_name=taggedName})
 end
 
 function luaVkApi.removeVideoTag(tagId, ownerId, videoId)
+  if not tagId then
+    return requiredParameterMsg .. " tagId"
+  end
+  if not videoId then
+    return requiredParameterMsg .. " videoId"
+  end
   return luaVkApi.invokeApi("video.removeTag", {tag_id=tagId, owner_id=ownerId, 
       video_id=videoId})
 end
@@ -1328,11 +1598,23 @@ function luaVkApi.getNewVideoTags(offsetVal, countVal)
 end
 
 function luaVkApi.reportVideo(ownerId, videoId, reasonVal, commentVal, query)
+  if not ownerId then
+    return requiredParameterMsg .. " ownerId"
+  end
+  if not videoId then
+    return requiredParameterMsg .. " videoId"
+  end
   return luaVkApi.invokeApi("video.report", {owner_id=ownerId, video_id=videoId,
       reason=reasonVal, comment=commentVal, search_query=query})
 end
 
 function luaVkApi.reportVideoComment(ownerId, commentId, reasonVal)
+  if not ownerId then
+    return requiredParameterMsg .. " ownerId"
+  end
+  if not commentId then
+    return requiredParameterMsg .. " commentId"
+  end
   return luaVkApi.invokeApi("video.reportComment", {owner_id=ownerId, comment_id=commentId,
       reason=reasonVal})
 end
@@ -1355,39 +1637,75 @@ function luaVkApi.getFriendsNotes(offsetVal, countVal)
 end
 
 function luaVkApi.addNote(titleVal, textVal, privacyView, privacyComment)
+  if not titleVal then
+    return requiredParameterMsg .. " titleVal"
+  end
+  if not textVal then
+    return requiredParameterMsg .. " textVal"
+  end
   return luaVkApi.invokeApi("notes.add", {title=titleVal, text=textVal,
       privacy_view=privacyView, privacy_comment=privacyComment})
 end
 
 function luaVkApi.editNote(noteId, titleVal, textVal, privacyView, privacyComment)
+  if not noteId then
+    return requiredParameterMsg .. " noteId"
+  end
+  if not titleVal then
+    return requiredParameterMsg .. " titleVal"
+  end
+  if not textVal then
+    return requiredParameterMsg .. " textVal"
+  end
   return luaVkApi.invokeApi("notes.edit", {note_id=noteId, title=titleVal, text=textVal,
       privacy_view=privacyView, privacy_comment=privacyComment})
 end
 
 function luaVkApi.deleteNote(noteId)
+  if not noteId then
+    return requiredParameterMsg .. " noteId"
+  end
   return luaVkApi.invokeApi("notes.delete", {note_id=noteId})
 end
 
 function luaVkApi.getNoteComments(noteId, ownerId, sortVal, offsetVal, countVal)
+  if not noteId then
+    return requiredParameterMsg .. " noteId"
+  end
   return luaVkApi.invokeApi("notes.getComments", {note_id=noteId, owner_id=ownerId,
       sort=sortVal, offset=offsetVal, count=countVal})
 end
 
 function luaVkApi.createNoteComment(noteId, ownerId, replyTo, messageVal)
+  if not noteId then
+    return requiredParameterMsg .. " noteId"
+  end
+  if not messageVal then
+    return requiredParameterMsg .. " messageVal"
+  end
   return luaVkApi.invokeApi("notes.createComment", {note_id=noteId, owner_id=ownerId,
       reply_to=replyTo, message=messageVal})
 end
 
 function luaVkApi.editNoteComment(commentId, ownerId, messageVal)
+  if not commentId then
+    return requiredParameterMsg .. " commentId"
+  end
   return luaVkApi.invokeApi("notes.editComment", {comment_id=commentId, owner_id=ownerId,
       message=messageVal})
 end
 
 function luaVkApi.deleteNoteComment(commentId, ownerId)
+  if not commentId then
+    return requiredParameterMsg .. " commentId"
+  end
   return luaVkApi.invokeApi("notes.deleteComment", {comment_id=commentId, owner_id=ownerId})
 end 
 
 function luaVkApi.restoreNoteComment(commentId, ownerId)
+  if not commentId then
+    return requiredParameterMsg .. " commentId"
+  end
   return luaVkApi.invokeApi("notes.restoreComment", {comment_id=commentId, owner_id=ownerId})
 end 
 
@@ -1396,16 +1714,34 @@ end
 -----------------------
 function luaVkApi.addPlace(typeVal, titleVal, latitudeVal, longitudeVal, countryVal,
     cityVal, addresVal)
+  if not titleVal then
+    return requiredParameterMsg .. " titleVal"
+  end
+  if not latitudeVal then
+    return requiredParameterMsg .. " latitudeVal"
+  end
+  if not longitudeVal then
+    return requiredParameterMsg .. " longitudeVal"
+  end
   return luaVkApi.invokeApi("places.add", {type=typeVal, title=titleVal, latitude=latitudeVal,
       longitude=longitudeVal, country=countryVal, city=cityVal, addres=adressVal})
 end
 
 function luaVkApi.getPlacesById(placesVal)
+  if not placesVal then
+    return requiredParameterMsg .. " placesVal"
+  end
   return luaVkApi.invokeApi("places.getById", {places=placesVal})
 end
 
 function luaVkApi.searchPlaces(query, cityId, latitudeVal, longitudeVal, radiusVal,
     offsetVal, countVal)
+  if not latitudeVal then
+    return requiredParameterMsg .. " latitudeVal"
+  end
+  if not longitudeVal then
+    return requiredParameterMsg .. " longitudeVal"
+  end
   return luaVkApi.invokeApi("places.search", {q=query, city=cityId, latitude=latitudeVal,
       longitude=longitudeVal, radius=radiusVal, offset=offsetVal, count=countVal})
 end

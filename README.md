@@ -18,11 +18,20 @@ accessToken=ee272c9214611c082d397def7da4368d2baa5d1805aa3dcbb989a2e52bf0cec8c69d
 and add luaVkApi to your code:
 ```lua
 local luaVkApi = require "luaVkApi";
+```
 
+Now you can invoke all VK REST API methods, for examplpe:
+```lua
 print(luaVkApi.getStatus()) --print current user status
 
 local userId = "201838325"
 print(luaVkApi.getStatus(userId)) --print user status for mentioned user
+```
+Response is usual string, but you can use _stringToJSON_ method for comverting to table:
+```lua
+statusStr = luaVkApi.getStatus()
+status = luaVkApi.stringToJSON(statusStr)
+print(status.response.text)
 ```
 
 ## Required packages

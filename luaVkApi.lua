@@ -1772,6 +1772,9 @@ function luaVkApi.getUserCounters(fiterVal)
 end
 
 function luaVkApi.setAccountNameInMenu(userId, nameVal)
+  if not userId then
+    return requiredParameterMsg .. " userId"
+  end
   return luaVkApi.invokeApi("account.setNameInMenu", {user_id=userId, name=nameVal})
 end
 
@@ -1790,7 +1793,13 @@ function luaVkApi.lookupAccountContacts(contactsVal, serviceVal, mycontactVal, r
 end
 
 function luaVkApi.registerDevice(tokenVal, deviceModel, deviceYear, deviceId, systemVersion,
-	settingsVal, sandboxVal)
+    settingsVal, sandboxVal)
+  if not tokenVal then
+    return requiredParameterMsg .. " tokenVal"
+  end
+  if not deviceId then
+    return requiredParameterMsg .. " deviceId"
+  end
   return luaVkApi.invokeApi("account.registerDevice", {token=tokenVal, device_model=deviceModel,
       device_year=deviceYear, device_id=deviceId, system_version=systemVersion, settings=settingsVal,
 	  sandbox=sandboxVal})
@@ -1810,11 +1819,17 @@ function luaVkApi.getPushSettings(deviceId)
 end
 
 function luaVkApi.setPushSettings(deviceId, settingsVal, keyStr, valueStr)
+  if not deviceId then
+    return requiredParameterMsg .. " deviceId"
+  end
   return luaVkApi.invokeApi("account.setPushSettings", {device_id=deviceId, settings=settingsVal,
 	  key=keyStr, value=valueStr})
 end
 
 function luaVkApi.getAppPermissions(userId)
+  if not userId then
+    return requiredParameterMsg .. " userId"
+  end
   return luaVkApi.invokeApi("account.getAppPermissions", {user_id=userId})
 end
 
@@ -1823,10 +1838,16 @@ function luaVkApi.getActiveOffers(offsetVal, countVal)
 end
 
 function luaVkApi.banUser(userId)
+  if not userId then
+    return requiredParameterMsg .. " userId"
+  end
   return luaVkApi.invokeApi("account.banUser", {user_id=userId})
 end
 
 function luaVkApi.unbanUser(userId)
+  if not userId then
+    return requiredParameterMsg .. " userId"
+  end
   return luaVkApi.invokeApi("account.unbanUser", {user_id=userId})
 end
 
@@ -1878,6 +1899,9 @@ function luaVkApi.getDialogs(offsetVal, countVal, startMessageId, previewLength,
 end
 
 function luaVkApi.getMessagesById(messageIds, previewLength)
+  if not messageIds then
+    return requiredParameterMsg .. " messageIds"
+  end
   return luaVkApi.invokeApi("messages.getById", {message_ids=messageIds, preview_length=previewLength})
 end
 
@@ -1894,6 +1918,9 @@ end
 
 function luaVkApi.sendMessage(userId, peerId, domainVal, chatId, userIds, messageStr, guidVal,
     latVal, longVal, attachmentVal, forwardMessages, stickerId)
+  if not messageStr or not attachmentVal then
+    return requiredParameterMsg .. " messageStr or attachmentVal"
+  end
   return luaVkApi.invokeApi("messages.send", {user_id=userId, peer_id=peerId, domain=domainVal,
       chat_id=chatId, user_ids=userIds, message=messageStr, guid=guidVal, lat=latVal,
       long=longVal, attachment=attachmentVal, forward_messages=forwardMessages, sticker_id=stickerId})
@@ -1909,6 +1936,9 @@ function luaVkApi.deleteDialog(userId, peerId, offsetVal, countVal)
 end
 
 function luaVkApi.restoreMessage(messageId)
+  if not messageIds then
+    return requiredParameterMsg .. " messageIds"
+  end
   return luaVkApi.invokeApi("messages.restore", {message_id=messageId})
 end
 
@@ -1938,10 +1968,19 @@ function luaVkApi.getChat(chatId, chatIds, fieldsVal, nameCase)
 end
 
 function luaVkApi.createChat(userIds, titleVal)
+  if not userIds then
+    return requiredParameterMsg .. " userIds"
+  end
   return luaVkApi.invokeApi("messages.createChat", {user_ids=userIds, title=titleVal})
 end
 
 function luaVkApi.editChat(chatId, titleVal)
+  if not chatId then
+    return requiredParameterMsg .. " chatId"
+  end
+  if not titleVal then
+    return requiredParameterMsg .. " titleVal"
+  end
   return luaVkApi.invokeApi("messages.editChat", {chat_id=chatId, title=titleVal})
 end
 
@@ -1961,22 +2000,40 @@ function luaVkApi.searchDialogs(query, limitVal, fieldsVal)
 end
 
 function luaVkApi.addChatUser(chatId, userId)
+  if not userId then
+    return requiredParameterMsg .. " userId"
+  end
   return luaVkApi.invokeApi("messages.addChatUser", {chat_id=chatId, user_id=userId})
 end
 
 function luaVkApi.removeChatUser(chatId, userId)
+  if not chatId then
+    return requiredParameterMsg .. " chatId"
+  end
+  if not userId then
+    return requiredParameterMsg .. " userId"
+  end
   return luaVkApi.invokeApi("messages.removeChatUser", {chat_id=chatId, user_id=userId})
 end
 
 function luaVkApi.getLastActivity(userId)
+  if not userId then
+    return requiredParameterMsg .. " userId"
+  end
   return luaVkApi.invokeApi("messages.getLastActivity", {user_id=userId})
 end
 
 function luaVkApi.setChatPhoto(fileVal)
+  if not fileVal then
+    return requiredParameterMsg .. " fileVal"
+  end
   return luaVkApi.invokeApi("messages.setChatPhoto", {file=fileVal})
 end
 
 function luaVkApi.deleteChatPhoto(chatId)
+  if not chatId then
+    return requiredParameterMsg .. " chatId"
+  end
   return luaVkApi.invokeApi("messages.deleteChatPhoto", {chat_id=chatId})
 end
 
@@ -2022,11 +2079,29 @@ function luaVkApi.deleteBan(userIds, groupIds)
 end 
 
 function luaVkApi.ignoreItem(typeVal, ownerId, itemId)
+  if not typeVal then
+    return requiredParameterMsg .. " typeVal"
+  end
+  if not ownerId then
+    return requiredParameterMsg .. " ownerId"
+  end
+  if not itemId then
+    return requiredParameterMsg .. " itemId"
+  end
   return luaVkApi.invokeApi("newsfeed.ignoreItem", {type=typeVal, ownner_id=ownerId,
       item_id=itemId})
 end 
 
 function luaVkApi.unignoreItem(typeVal, ownerId, itemId)
+  if not typeVal then
+    return requiredParameterMsg .. " typeVal"
+  end
+  if not ownerId then
+    return requiredParameterMsg .. " ownerId"
+  end
+  if not itemId then
+    return requiredParameterMsg .. " itemId"
+  end
   return luaVkApi.invokeApi("newsfeed.unignoreItem", {type=typeVal, ownner_id=ownerId,
       item_id=itemId})
 end 
@@ -2043,15 +2118,27 @@ function luaVkApi.getLists(listIds, isExtended)
 end
 
 function luaVkApi.saveList(listId, titleVal, sourceIds, noReposts)
+  if not titleVal then
+    return requiredParameterMsg .. " titleVal"
+  end
   return luaVkApi.invokeApi("newsfeed.saveList", {list_id=listId, title=titleVal, 
   source_ids=sourceIds, no_reposts=noReposts})
 end 
 
 function luaVkApi.deleteList(listId)
+  if not listId then
+    return requiredParameterMsg .. " listId"
+  end
   return luaVkApi.invokeApi("newsfeed.deleteList", {list_id=listId})
 end
 
 function luaVkApi.unsubscribe(typeVal, ownerId, itemId)
+  if not typeVal then
+    return requiredParameterMsg .. " typeVal"
+  end
+  if not itemId then
+    return requiredParameterMsg .. " itemId"
+  end
   return luaVkApi.invokeApi("newsfeed.unsubscribe", {type=typeVal, owner_id=ownerId,
       item_id=itemId})
 end
@@ -2064,24 +2151,45 @@ end
 -----------------------
 --      Likes        --
 -----------------------
-function luaVkApi.putLikerIds(typeVal, ownerId, itemId, pageUrl, filterVal,
+function luaVkApi.getLikerIds(typeVal, ownerId, itemId, pageUrl, filterVal,
     friendsOnly, isExtended, offsetVal, countVal, skipOwn)
+  if not typeVal then
+    return requiredParameterMsg .. " typeVal"
+  end
   return luaVkApi.invokeApi("likes.getList", {type=typeVal, owner_id=ownerId,
       item_id=itemId, page_url=pageUrl, filter=filterVal, friends_only=friendsOnly,
       extended=isExtended, offset=offsetVal, count=countVal, skip_own=skipOwn})
 end
 
 function luaVkApi.putLike(entityType, ownerId, itemId, accessKey, refStr)
+  if not typeVal then
+    return requiredParameterMsg .. " typeVal"
+  end
+  if not itemId then
+    return requiredParameterMsg .. " itemId"
+  end
   return luaVkApi.invokeApi("likes.add", {type=entityType, owner_id=ownerId,
       item_id=itemId, access_key=accessKey, ref=refStr})
 end
 
 function luaVkApi.deleteLike(entityType, ownerId, itemId)
+  if not typeVal then
+    return requiredParameterMsg .. " typeVal"
+  end
+  if not itemId then
+    return requiredParameterMsg .. " itemId"
+  end
   return luaVkApi.invokeApi("likes.delete", {type=entityType, owner_id=ownerId,
       item_id=itemId})
 end
 
 function luaVkApi.isLiked(userId, entityType, ownerId, itemId)
+  if not typeVal then
+    return requiredParameterMsg .. " typeVal"
+  end
+  if not itemId then
+    return requiredParameterMsg .. " itemId"
+  end
   return luaVkApi.invokeApi("likes.isLiked", {user_id=userId, type=entityType,
       owner_id=ownerId, item_id=itemId})
 end
@@ -2090,22 +2198,43 @@ end
 --      Polls        --
 -----------------------
 function luaVkApi.getPollById(ownerId, isBoard, pollId)
+  if not pollId then
+    return requiredParameterMsg .. " pollId"
+  end
   return luaVkApi.invokeApi("polls.getById", {owner_id=ownerId, is_board=isBoard, 
       poll_id=pollId})
 end
 
 function luaVkApi.addVote(ownerId, pollId, answerId, isBoard)
+  if not pollId then
+    return requiredParameterMsg .. " pollId"
+  end
+  if not answerId then
+    return requiredParameterMsg .. " answerId"
+  end
   return luaVkApi.invokeApi("polls.addVote", {owner_id=ownerId, poll_id=pollId, 
       answer_id=answerId, is_board=isBoard})
 end
 
 function luaVkApi.deleteVote(ownerId, pollId, answerId, isBoard)
+  if not pollId then
+    return requiredParameterMsg .. " pollId"
+  end
+  if not answerId then
+    return requiredParameterMsg .. " answerId"
+  end
   return luaVkApi.invokeApi("polls.deleteVote", {owner_id=ownerId, poll_id=pollId, 
       answer_id=answerId, is_board=isBoard})
 end
 
 function luaVkApi.getVoters(ownerId, pollId, answerIds, isBoard, friendsOnly, offsetVal,
     countVal, fieldsVal, nameCase)
+  if not pollId then
+    return requiredParameterMsg .. " pollId"
+  end
+  if not answerIds then
+    return requiredParameterMsg .. " answerIds"
+  end
   return luaVkApi.invokeApi("polls.getVoters", {owner_id=ownerId, poll_id=pollId, 
       answer_ids=answerIds, is_board=isBoard, friends_only=friendsOnly, offset=offsetVal,
       count=countVal, fields=fieldsVal, name_case=nameCase})
@@ -2118,6 +2247,12 @@ end
 
 function luaVkApi.editPoll(ownerId, pollId, questionStr, addAnswers, editAnswers, 
     deleteAnswers)
+  if not ownerId then
+    return requiredParameterMsg .. " ownerId"
+  end
+  if not pollId then
+    return requiredParameterMsg .. " pollId"
+  end
   return luaVkApi.invokeApi("polls.edit", {owner_id=ownerId, poll_id=pollId,
       question=questionStr, question=questionStr, add_answers=addAnswers,
       edit_answers=editAnswers, delete_answers=deleteAnswers})
@@ -2131,6 +2266,9 @@ function luaVkApi.getDocuments(countVal, offsetVal, ownerId)
 end
 
 function luaVkApi.getDocumentsById(docsVal)
+  if not docsVal then
+    return requiredParameterMsg .. " docsVal"
+  end
   return luaVkApi.invokeApi("docs.getById", {docs=docsVal})
 end
 
@@ -2143,14 +2281,29 @@ function luaVkApi.getWallUploadServer(groupId)
 end
 
 function luaVkApi.saveDoc(docFile, titleVal, tagsVal)
+  if not docFile then
+    return requiredParameterMsg .. " docFile"
+  end
   return luaVkApi.invokeApi("docs.save", {file=docFile, title=titleVal, tags=tagsVal})
 end
 
 function luaVkApi.deleteDoc(ownerId, docId)
+  if not ownerId then
+    return requiredParameterMsg .. " ownerId"
+  end
+  if not docId then
+    return requiredParameterMsg .. " docId"
+  end
   return luaVkApi.invokeApi("docs.delete", {owner_id=ownerId, doc_id=docId})
 end
 
 function luaVkApi.addDoc(ownerId, docId, accessKey)
+  if not ownerId then
+    return requiredParameterMsg .. " ownerId"
+  end
+  if not docId then
+    return requiredParameterMsg .. " docId"
+  end
   return luaVkApi.invokeApi("docs.add", {owner_id=ownerId, doc_id=docId, access_key=accessKey})
 end
 
@@ -2181,26 +2334,44 @@ function luaVkApi.getLikedLinks(offsetVal, countVal)
 end
 
 function luaVkApi.bookmarkUser(userId)
+  if not userId then
+    return requiredParameterMsg .. " userId"
+  end
   return luaVkApi.invokeApi("fave.addUser", {user_id=userId})
 end
 
 function luaVkApi.removeBookmarkedUser(userId)
+  if not userId then
+    return requiredParameterMsg .. " userId"
+  end
   return luaVkApi.invokeApi("fave.removeUser", {user_id=userId})
 end
 
 function luaVkApi.bookmarkGroup(groupId)
+  if not groupId then
+    return requiredParameterMsg .. " groupId"
+  end
   return luaVkApi.invokeApi("fave.addGroup", {group_id=groupId})
 end
 
-function luaVkApi.removeBookmarkedGroup(userId)
-  return luaVkApi.invokeApi("fave.removeGroup", {user_id=userId})
+function luaVkApi.removeBookmarkedGroup(groupId)
+  if not groupId then
+    return requiredParameterMsg .. " groupId"
+  end
+  return luaVkApi.invokeApi("fave.removeGroup", {group_id=groupId})
 end
 
 function luaVkApi.bookmarkLink(linkStr, textStr)
+  if not linkStr then
+    return requiredParameterMsg .. " linkStr"
+  end
   return luaVkApi.invokeApi("fave.addLink", {link=linkStr, text=textStr})
 end
 
 function luaVkApi.removeBookmarkedLink(linkId)
+  if not linkId then
+    return requiredParameterMsg .. " linkId"
+  end
   return luaVkApi.invokeApi("fave.removeLink", {link_id=linkId})
 end
 
@@ -2229,6 +2400,12 @@ function luaVkApi.trackVisitor()
 end
 
 function luaVkApi.trackVisitor(ownerId, postId)
+  if not ownerId then
+    return requiredParameterMsg .. " ownerId"
+  end
+  if not postId then
+    return requiredParameterMsg .. " postId"
+  end
   return luaVkApi.invokeApi("stats.getPostReach", {owner_id=ownerId, post_id=postId})
 end
 

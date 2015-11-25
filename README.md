@@ -1,10 +1,6 @@
 lua-vk-api
 =========
 
-Lua library for vk.com REST API
-
----
-
 ## Description
 
 Lua wrapper-functions for [REST API methods](https://vk.com/dev/methods) of [vk.com](https://vk.com). Implementation for 5.40 version of API.

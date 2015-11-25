@@ -1,11 +1,8 @@
 lua-vk-api
 =========
-
-## Description
-
 Lua wrapper-functions for [REST API methods](https://vk.com/dev/methods) of [vk.com](https://vk.com). Implementation for 5.40 version of API.
 
-## Usage
+### Usage
 
 Set up your *accessToken* in *luaVkApi.properties*, for instance:
 ```
@@ -30,12 +27,12 @@ status = luaVkApi.stringToJSON(statusStr)
 print(status.response.text)
 ```
 
-## Required packages
+### Required packages
 
 - ssl.https: https://github.com/brunoos/luasec/blob/master/src/https.lua
 - dkjson: https://github.com/LuaDist/dkjson
 
-## Contributing
+### Contributing
 
 1. Fork it!
 2. Create your feature branch: `git checkout -b my-new-feature`

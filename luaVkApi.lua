@@ -1178,7 +1178,7 @@ function luaVkApi.deleteCommunityLink(groupId, linkId)
   if not linkId then
     return requiredParameterMsg .. " linkId"
   end
-  return luaVkApi.invokeApi("groups.addLink", {group_id=groupId, link_id=linkId})
+  return luaVkApi.invokeApi("groups.deleteLink", {group_id=groupId, link_id=linkId})
 end
 
 function luaVkApi.editCommunityLink(groupId, linkId, textVal)

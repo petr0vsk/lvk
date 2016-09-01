@@ -1859,9 +1859,8 @@ function luaVkApi.getInfo(fieldsVal)
   return luaVkApi.invokeApi("account.getInfo", {fields=fieldsVal})
 end
 
-function luaVkApi.setInfo(introVal, ownPostsDefault, noWallReplies)
-  return luaVkApi.invokeApi("account.setInfo", {intro=introVal, own_posts_default=ownPostsDefault,
-	  no_wall_replies=noWallReplies})
+function luaVkApi.setInfo(nameVal, value)
+  return luaVkApi.invokeApi("account.setInfo", {name=nameVal, value=val})
 end
 
 function luaVkApi.changePassword(restoreSid, changePasswordHash, oldPassword, newPassword)

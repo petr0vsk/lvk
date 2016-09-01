@@ -2402,6 +2402,11 @@ function luaVkApi.removeBookmarkedLink(linkId)
   return luaVkApi.invokeApi("fave.removeLink", {link_id=linkId})
 end
 
+function luaVkApi.getLikedMarketItems(countVal, offsetVal, isExtended)
+  return luaVkApi.invokeApi("fave.getMarketItems", {offset=offsetVal, count=countVal,
+      extended=isExtended})
+end
+
 -----------------------
 --   Notifications   --
 -----------------------

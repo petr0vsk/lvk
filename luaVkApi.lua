@@ -2037,6 +2037,16 @@ function luaVkApi.deleteChatPhoto(chatId)
   return luaVkApi.invokeApi("messages.deleteChatPhoto", {chat_id=chatId})
 end
 
+function luaVkApi.getMessageHistoryAttachments(peerId, mediaType, startFrom,
+	countVal, photoSizes, fieldsVal)
+  if not peerId then
+    return requiredParameterMsg .. " peerId"
+  end
+  return luaVkApi.invokeApi("messages.getHistoryAttachments", {peer_id=peerId,
+  	media_type=mediaType, start_from=startFrom, count=countVal, photo_sizes=photoSizes,
+  	fields=fieldsVal})
+end
+
 -----------------------
 --      News         --
 -----------------------

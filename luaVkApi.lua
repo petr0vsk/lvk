@@ -645,8 +645,7 @@ function luaVkApi.saveMarketAlbumPhoto(groupId, photoVal, serverVal, attachments
       server=serverVal, hash=hashVal})
 end
 
-function luaVkApi.saveMarketPhoto(groupId, photoVal, serverVal, attachmentsVal, cropData
-	cropHash)
+function luaVkApi.saveMarketPhoto(groupId, photoVal, serverVal, attachmentsVal, cropData, cropHash)
   if not groupId then
     return requiredParameterMsg .. " groupId"
   end

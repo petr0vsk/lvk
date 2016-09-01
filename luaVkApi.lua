@@ -1619,6 +1619,44 @@ function luaVkApi.reportVideoComment(ownerId, commentId, reasonVal)
       reason=reasonVal})
 end
 
+function luaVkApi.hideVideoCatalogSection(sectionId)
+  if not sectionId then
+    return requiredParameterMsg .. " sectionId"
+  end
+  return luaVkApi.invokeApi("video.hideCatalogSection", {section_id=sectionId})
+end
+
+function luaVkApi.getVideoCatalogSection(sectionId, fromVal, countVal, isExtended)
+  if not sectionId then
+    return requiredParameterMsg .. " sectionId"
+  end
+  if not fromVal then
+    return requiredParameterMsg .. " fromVal"
+  end
+  return luaVkApi.invokeApi("video.getCatalogSection", {section_id=sectionId, from=fromVal,
+  	count=countVal, extended=isExtended})
+end
+
+function luaVkApi.getVideoCatalog(countVal, itemsCount, fromVal, isExtended, filtersVal,
+	isGrouped)
+  return luaVkApi.invokeApi("video.getCatalog", {count=countVal, items_count=itemsCount,
+  	form=fromVal, extended=isExtended, filters=filtersVal, grouped=isGrouped})
+end
+
+function luaVkApi.reorderVideos(ownerId, videoId, targetId, albumId, beforeOwnerId,
+	beforeVideoId, afterOwnerId, afterVideoId)
+  if not ownerId then
+    return requiredParameterMsg .. " ownerId"
+  end
+  if not videoId then
+    return requiredParameterMsg .. " videoId"
+  end
+  return luaVkApi.invokeApi("video.reorderVideos", {owner_id=ownerId, video_id=videoId,
+  	target_id=targetId, album_id=albumId, before_owner_id=beforeOwnerId,
+  	before_video_id=beforeVideoId, after_owner_id=afterOwnerId,
+  	after_video_id=afterVideoId})
+end
+
 -----------------------
 --       Notes       --
 -----------------------

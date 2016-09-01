@@ -1273,6 +1273,74 @@ function luaVkApi.approveUserRequestToCommunity(groupId, userId)
   return luaVkApi.invokeApi("groups.approveRequest", {group_id=groupId, user_id=userId})
 end
 
+function luaVkApi.setGroupCallbackSettings(groupId, messageNew, photoNew, audioNew,
+	videoNew, wallReplyNew, wallReplyEdit, wallPostNew, boardPostNew, boardPostEdit,
+	boardPostRestore, boardPostDelete, photoCommentNew, videoCommentNew, marketCommentNew,
+	groupJoin, groupLeave)
+  if not groupId then
+    return requiredParameterMsg .. " groupId"
+  end
+  return luaVkApi.invokeApi("groups.setCallbackSettings", {group_id=groupId, message_new=messageNew,
+  	photo_new=photoNew, audio_new=audioNew, video_new=videoNew, wall_reply_new=wallReplyNew,
+  	wall_reply_edit=wallReplyEdit, wall_post_new=wallPostNew, board_post_new=boardPostNew,
+  	board_post_edit=boardPostEdit, board_post_restore=boardPostRestore,
+  	board_post_delete=boardPostDelete, photo_comment_new=photoCommentNew,
+  	video_comment_new=videoCommentNew, market_comment_new=marketCommentNew, group_join=groupJoin,
+  	group_leave=groupLeave})
+end
+
+function luaVkApi.setCallbackServerSettings(groupId, secretKey)
+  if not groupId then
+    return requiredParameterMsg .. " groupId"
+  end
+  return luaVkApi.invokeApi("groups.setCallbackServerSettings", {group_id=groupId, secret_key=secretKey})
+end
+
+function luaVkApi.setCallbackServer(groupId, serverUrl)
+  if not groupId then
+    return requiredParameterMsg .. " groupId"
+  end
+  return luaVkApi.invokeApi("groups.setCallbackServer", {group_id=groupId, server_url=serverUrl})
+end
+
+function luaVkApi.getCallbackSettings(groupId)
+  if not groupId then
+    return requiredParameterMsg .. " groupId"
+  end
+  return luaVkApi.invokeApi("groups.getCallbackSettings", {group_id=groupId})
+end
+
+function luaVkApi.getCallbackServerSettings(groupId)
+  if not groupId then
+    return requiredParameterMsg .. " groupId"
+  end
+  return luaVkApi.invokeApi("groups.getCallbackServerSettings", {group_id=groupId})
+end
+
+function luaVkApi.getCallbackConfirmationCode(groupId)
+  if not groupId then
+    return requiredParameterMsg .. " groupId"
+  end
+  return luaVkApi.invokeApi("groups.getCallbackConfirmationCode", {group_id=groupId})
+end
+
+function luaVkApi.getCallbackConfirmationCode(groupId)
+  if not groupId then
+    return requiredParameterMsg .. " groupId"
+  end
+  return luaVkApi.invokeApi("groups.getCallbackConfirmationCode", {group_id=groupId})
+end
+
+function luaVkApi.getGroupCatalogInfo(isExtended, subcategoriesVal)
+  return luaVkApi.invokeApi("groups.getCatalogInfo", {extended=isExtended,
+  	subcategories=subcategoriesVal})
+end
+
+function luaVkApi.getGroupCatalog(categoryId, subcategoryId)
+  return luaVkApi.invokeApi("groups.getCatalogInfo", {category_id=categoryId,
+  	subcategory_id=subcategoryId})
+end
+
 -----------------------
 --      Boards       --
 -----------------------

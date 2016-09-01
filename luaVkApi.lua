@@ -2757,6 +2757,64 @@ function luaVkApi.getGifts(userId, countVal, offsetVal)
 end
 
 -----------------------
+--      Leads        --
+-----------------------
+function luaVkApi.completeLead(vkSid, secretVal, commentVal)
+  if not vkSid then
+    return requiredParameterMsg .. " vkSid"
+  end
+  if not secretVal then
+    return requiredParameterMsg .. " secretVal"
+  end
+  return luaVkApi.invokeApi("leads.complete", {vk_sid=vkSid, secret=secretVal, comment=commentVal})
+end
+
+function luaVkApi.startLead(leadId, secretVal, uId, testMode, isForce)
+  if not leadId then
+    return requiredParameterMsg .. " leadId"
+  end
+  if not secretVal then
+    return requiredParameterMsg .. " secretVal"
+  end
+  return luaVkApi.invokeApi("leads.start", {lead_id=leadId, secret=secretVal, uid=uId,
+  	aid=aId, test_mode=testMode, force=isForce})
+end
+
+function luaVkApi.getLeadStats(leadId, secretVal, dateStart, dateEnd)
+  if not leadId then
+    return requiredParameterMsg .. " leadId"
+  end
+  return luaVkApi.invokeApi("leads.getStats", {lead_id=leadId, secret=secretVal, date_start=dateStart,
+  	date_end=dateEnd})
+end
+
+function luaVkApi.getLeadUsers(offerId, secretVal, offsetVal, countVal, statusVal, isReverse)
+  if not offerId then
+    return requiredParameterMsg .. " offerId"
+  end
+  if not secret then
+    return requiredParameterMsg .. " secret"
+  end
+  return luaVkApi.invokeApi("leads.getUsers", {offer_id=offerId, secret=secretVal, offset=offsetVal,
+  	count=countVal, status=statusVal, reverse=isReverse})
+end
+
+function luaVkApi.checkLeadUser(leadId, testResult, testMode, autoStart, ageVal, countryVal)
+  if not leadId then
+    return requiredParameterMsg .. " leadId"
+  end
+  return luaVkApi.invokeApi("leads.getUsers", {lead_id=leadId, test_result=testResult, test_mode=testMode,
+  	auto_start=autoStart, age=ageVal, country=countryVal})
+end
+
+function luaVkApi.metricHit(dataVala)
+  if not dataVala then
+    return requiredParameterMsg .. " dataVala"
+  end
+  return luaVkApi.invokeApi("leads.metricHit", {data=dataVala})
+end
+
+-----------------------
 --      Other        --
 -----------------------
 function luaVkApi.executeCode(codeStr)

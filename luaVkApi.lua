@@ -1809,9 +1809,9 @@ function luaVkApi.unregisterDevice(deviceId, isSandbox)
   return luaVkApi.invokeApi("account.unregisterDevice", {device_id=deviceId, sandbox=isSandbox})
 end
 
-function luaVkApi.setSilenceMode(deviceId, timeVal, chatId, userId, soundVal)
+function luaVkApi.setSilenceMode(deviceId, timeVal, peerId, soundVal)
   return luaVkApi.invokeApi("account.setSilenceMode", {device_id=deviceId, time=timeVal,
-	  chat_id=chatId, user_id=userId, sound=soundVal})
+	  peer_id=peerId, sound=soundVal})
 end
 
 function luaVkApi.getPushSettings(deviceId)
@@ -1919,13 +1919,13 @@ function luaVkApi.getMessageHistory(offsetVal, countVal, userId, chatId, peerId,
       chat_id=chatId, peer_id=peerId, start_message_id, rev=revVal})
 end
 
-function luaVkApi.sendMessage(userId, peerId, domainVal, chatId, userIds, messageStr, guidVal,
+function luaVkApi.sendMessage(userId, peerId, domainVal, chatId, userIds, messageStr, randomId,
     latVal, longVal, attachmentVal, forwardMessages, stickerId)
   if not messageStr or not attachmentVal then
     return requiredParameterMsg .. " messageStr or attachmentVal"
   end
   return luaVkApi.invokeApi("messages.send", {user_id=userId, peer_id=peerId, domain=domainVal,
-      chat_id=chatId, user_ids=userIds, message=messageStr, guid=guidVal, lat=latVal,
+      chat_id=chatId, user_ids=userIds, message=messageStr, random_id=randomId, lat=latVal,
       long=longVal, attachment=attachmentVal, forward_messages=forwardMessages, sticker_id=stickerId})
 end
 

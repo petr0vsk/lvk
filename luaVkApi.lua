@@ -2309,6 +2309,31 @@ function luaVkApi.addDoc(ownerId, docId, accessKey)
   return luaVkApi.invokeApi("docs.add", {owner_id=ownerId, doc_id=docId, access_key=accessKey})
 end
 
+function luaVkApi.getDocTypes(ownerId)
+  if not ownerId then
+    return requiredParameterMsg .. " ownerId"
+  end
+  return luaVkApi.invokeApi("docs.getTypes", {owner_id=ownerId})
+end
+
+function luaVkApi.searchDocs(queryStr, countVal, offsetVal)
+  if not queryStr then
+    return requiredParameterMsg .. " queryStr"
+  end
+  return luaVkApi.invokeApi("docs.search", {q=queryStr, count=countVal, offset=offsetVal})
+end
+
+function luaVkApi.editDoc(ownerId, docId, titleVal, tagsVal)
+  if not ownerId then
+    return requiredParameterMsg .. " ownerId"
+  end
+  if not docId then
+    return requiredParameterMsg .. " docId"
+  end
+  return luaVkApi.invokeApi("docs.edit", {owner_id=ownerId, doc_id=docId, title=titleVal,
+  	tags=tagsVal})
+end
+
 -----------------------
 --    Favorites      --
 -----------------------

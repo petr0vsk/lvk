@@ -627,6 +627,56 @@ function luaVkApi.editPhotoComment(ownerId, commentId, messageVal, attachmentsVa
   return luaVkApi.invokeApi("photos.editComment", {owner_id=ownerId, comment_id=commentId,
       message=messageVal, attachments=attachmentsVal})
 end
+
+function luaVkApi.saveMarketAlbumPhoto(groupId, photoVal, serverVal, attachmentsVal)
+  if not groupId then
+    return requiredParameterMsg .. " groupId"
+  end
+  if not photoVal then
+    return requiredParameterMsg .. " photoVal"
+  end
+  if not serverVal then
+    return requiredParameterMsg .. " serverVal"
+  end
+  if not hashVal then
+    return requiredParameterMsg .. " hashVal"
+  end
+  return luaVkApi.invokeApi("photos.saveMarketAlbumPhoto", {group_id=groupId, photo=photoVal,
+      server=serverVal, hash=hashVal})
+end
+
+function luaVkApi.saveMarketPhoto(groupId, photoVal, serverVal, attachmentsVal, cropData, cropHash)
+  if not groupId then
+    return requiredParameterMsg .. " groupId"
+  end
+  if not photoVal then
+    return requiredParameterMsg .. " photoVal"
+  end
+  if not serverVal then
+    return requiredParameterMsg .. " serverVal"
+  end
+  if not hashVal then
+    return requiredParameterMsg .. " hashVal"
+  end
+  return luaVkApi.invokeApi("photos.saveMarketPhoto", {group_id=groupId, photo=photoVal,
+      server=serverVal, hash=hashVal, crop_data=cropData, crop_hash=cropHash})
+end
+
+function luaVkApi.getMarketAlbumUploadServer(groupId)
+  if not groupId then
+    return requiredParameterMsg .. " groupId"
+  end
+  return luaVkApi.invokeApi("photos.getMarketAlbumUploadServer", {group_id=groupId})
+end
+
+function luaVkApi.getMarketUploadServer(groupId, mainPhoto, cropX, cropY, cropWidth)
+  if not groupId then
+    return requiredParameterMsg .. " groupId"
+  end
+  return luaVkApi.invokeApi("photos.getMarketUploadServer", {group_id=groupId, main_photo=mainPhoto,
+  	crop_x=cropX, crop_y=cropY, crop_width=cropWidth})
+end
+
 -----------------------
 --     Friends       --
 -----------------------
@@ -1223,6 +1273,74 @@ function luaVkApi.approveUserRequestToCommunity(groupId, userId)
   return luaVkApi.invokeApi("groups.approveRequest", {group_id=groupId, user_id=userId})
 end
 
+function luaVkApi.setGroupCallbackSettings(groupId, messageNew, photoNew, audioNew,
+	videoNew, wallReplyNew, wallReplyEdit, wallPostNew, boardPostNew, boardPostEdit,
+	boardPostRestore, boardPostDelete, photoCommentNew, videoCommentNew, marketCommentNew,
+	groupJoin, groupLeave)
+  if not groupId then
+    return requiredParameterMsg .. " groupId"
+  end
+  return luaVkApi.invokeApi("groups.setCallbackSettings", {group_id=groupId, message_new=messageNew,
+  	photo_new=photoNew, audio_new=audioNew, video_new=videoNew, wall_reply_new=wallReplyNew,
+  	wall_reply_edit=wallReplyEdit, wall_post_new=wallPostNew, board_post_new=boardPostNew,
+  	board_post_edit=boardPostEdit, board_post_restore=boardPostRestore,
+  	board_post_delete=boardPostDelete, photo_comment_new=photoCommentNew,
+  	video_comment_new=videoCommentNew, market_comment_new=marketCommentNew, group_join=groupJoin,
+  	group_leave=groupLeave})
+end
+
+function luaVkApi.setCallbackServerSettings(groupId, secretKey)
+  if not groupId then
+    return requiredParameterMsg .. " groupId"
+  end
+  return luaVkApi.invokeApi("groups.setCallbackServerSettings", {group_id=groupId, secret_key=secretKey})
+end
+
+function luaVkApi.setCallbackServer(groupId, serverUrl)
+  if not groupId then
+    return requiredParameterMsg .. " groupId"
+  end
+  return luaVkApi.invokeApi("groups.setCallbackServer", {group_id=groupId, server_url=serverUrl})
+end
+
+function luaVkApi.getCallbackSettings(groupId)
+  if not groupId then
+    return requiredParameterMsg .. " groupId"
+  end
+  return luaVkApi.invokeApi("groups.getCallbackSettings", {group_id=groupId})
+end
+
+function luaVkApi.getCallbackServerSettings(groupId)
+  if not groupId then
+    return requiredParameterMsg .. " groupId"
+  end
+  return luaVkApi.invokeApi("groups.getCallbackServerSettings", {group_id=groupId})
+end
+
+function luaVkApi.getCallbackConfirmationCode(groupId)
+  if not groupId then
+    return requiredParameterMsg .. " groupId"
+  end
+  return luaVkApi.invokeApi("groups.getCallbackConfirmationCode", {group_id=groupId})
+end
+
+function luaVkApi.getCallbackConfirmationCode(groupId)
+  if not groupId then
+    return requiredParameterMsg .. " groupId"
+  end
+  return luaVkApi.invokeApi("groups.getCallbackConfirmationCode", {group_id=groupId})
+end
+
+function luaVkApi.getGroupCatalogInfo(isExtended, subcategoriesVal)
+  return luaVkApi.invokeApi("groups.getCatalogInfo", {extended=isExtended,
+  	subcategories=subcategoriesVal})
+end
+
+function luaVkApi.getGroupCatalog(categoryId, subcategoryId)
+  return luaVkApi.invokeApi("groups.getCatalogInfo", {category_id=categoryId,
+  	subcategory_id=subcategoryId})
+end
+
 -----------------------
 --      Boards       --
 -----------------------
@@ -1619,6 +1737,44 @@ function luaVkApi.reportVideoComment(ownerId, commentId, reasonVal)
       reason=reasonVal})
 end
 
+function luaVkApi.hideVideoCatalogSection(sectionId)
+  if not sectionId then
+    return requiredParameterMsg .. " sectionId"
+  end
+  return luaVkApi.invokeApi("video.hideCatalogSection", {section_id=sectionId})
+end
+
+function luaVkApi.getVideoCatalogSection(sectionId, fromVal, countVal, isExtended)
+  if not sectionId then
+    return requiredParameterMsg .. " sectionId"
+  end
+  if not fromVal then
+    return requiredParameterMsg .. " fromVal"
+  end
+  return luaVkApi.invokeApi("video.getCatalogSection", {section_id=sectionId, from=fromVal,
+  	count=countVal, extended=isExtended})
+end
+
+function luaVkApi.getVideoCatalog(countVal, itemsCount, fromVal, isExtended, filtersVal,
+	isGrouped)
+  return luaVkApi.invokeApi("video.getCatalog", {count=countVal, items_count=itemsCount,
+  	form=fromVal, extended=isExtended, filters=filtersVal, grouped=isGrouped})
+end
+
+function luaVkApi.reorderVideos(ownerId, videoId, targetId, albumId, beforeOwnerId,
+	beforeVideoId, afterOwnerId, afterVideoId)
+  if not ownerId then
+    return requiredParameterMsg .. " ownerId"
+  end
+  if not videoId then
+    return requiredParameterMsg .. " videoId"
+  end
+  return luaVkApi.invokeApi("video.reorderVideos", {owner_id=ownerId, video_id=videoId,
+  	target_id=targetId, album_id=albumId, before_owner_id=beforeOwnerId,
+  	before_video_id=beforeVideoId, after_owner_id=afterOwnerId,
+  	after_video_id=afterVideoId})
+end
+
 -----------------------
 --       Notes       --
 -----------------------
@@ -1809,9 +1965,9 @@ function luaVkApi.unregisterDevice(deviceId, isSandbox)
   return luaVkApi.invokeApi("account.unregisterDevice", {device_id=deviceId, sandbox=isSandbox})
 end
 
-function luaVkApi.setSilenceMode(deviceId, timeVal, chatId, userId, soundVal)
+function luaVkApi.setSilenceMode(deviceId, timeVal, peerId, soundVal)
   return luaVkApi.invokeApi("account.setSilenceMode", {device_id=deviceId, time=timeVal,
-	  chat_id=chatId, user_id=userId, sound=soundVal})
+	  peer_id=peerId, sound=soundVal})
 end
 
 function luaVkApi.getPushSettings(deviceId)
@@ -1859,9 +2015,8 @@ function luaVkApi.getInfo(fieldsVal)
   return luaVkApi.invokeApi("account.getInfo", {fields=fieldsVal})
 end
 
-function luaVkApi.setInfo(introVal, ownPostsDefault, noWallReplies)
-  return luaVkApi.invokeApi("account.setInfo", {intro=introVal, own_posts_default=ownPostsDefault,
-	  no_wall_replies=noWallReplies})
+function luaVkApi.setInfo(nameVal, value)
+  return luaVkApi.invokeApi("account.setInfo", {name=nameVal, value=val})
 end
 
 function luaVkApi.changePassword(restoreSid, changePasswordHash, oldPassword, newPassword)
@@ -1888,6 +2043,9 @@ end
 -----------------------
 function luaVkApi.getPrivateMessages(outVal, offsetVal, countVal, timeOffset, filtersVal,
     previewLength, lastMessageId)
+  if outVal < 0 or timeOffset < 0 or filtersVal < 0 then
+    return "ERROR! Parameters outVal, timeOffset, filtersVal should be positive."
+  end
   return luaVkApi.invokeApi("messages.get", {out=outVal, offset=offsetVal, count=countVal,
       time_offset=timeOffset, filters=filtersVal, preview_length=previewLength, 
       last_message_id=lastMessageId})
@@ -1916,13 +2074,13 @@ function luaVkApi.getMessageHistory(offsetVal, countVal, userId, chatId, peerId,
       chat_id=chatId, peer_id=peerId, start_message_id, rev=revVal})
 end
 
-function luaVkApi.sendMessage(userId, peerId, domainVal, chatId, userIds, messageStr, guidVal,
+function luaVkApi.sendMessage(userId, peerId, domainVal, chatId, userIds, messageStr, randomId,
     latVal, longVal, attachmentVal, forwardMessages, stickerId)
   if not messageStr or not attachmentVal then
     return requiredParameterMsg .. " messageStr or attachmentVal"
   end
   return luaVkApi.invokeApi("messages.send", {user_id=userId, peer_id=peerId, domain=domainVal,
-      chat_id=chatId, user_ids=userIds, message=messageStr, guid=guidVal, lat=latVal,
+      chat_id=chatId, user_ids=userIds, message=messageStr, random_id=randomId, lat=latVal,
       long=longVal, attachment=attachmentVal, forward_messages=forwardMessages, sticker_id=stickerId})
 end
 
@@ -2317,6 +2475,31 @@ function luaVkApi.addDoc(ownerId, docId, accessKey)
   return luaVkApi.invokeApi("docs.add", {owner_id=ownerId, doc_id=docId, access_key=accessKey})
 end
 
+function luaVkApi.getDocTypes(ownerId)
+  if not ownerId then
+    return requiredParameterMsg .. " ownerId"
+  end
+  return luaVkApi.invokeApi("docs.getTypes", {owner_id=ownerId})
+end
+
+function luaVkApi.searchDocs(queryStr, countVal, offsetVal)
+  if not queryStr then
+    return requiredParameterMsg .. " queryStr"
+  end
+  return luaVkApi.invokeApi("docs.search", {q=queryStr, count=countVal, offset=offsetVal})
+end
+
+function luaVkApi.editDoc(ownerId, docId, titleVal, tagsVal)
+  if not ownerId then
+    return requiredParameterMsg .. " ownerId"
+  end
+  if not docId then
+    return requiredParameterMsg .. " docId"
+  end
+  return luaVkApi.invokeApi("docs.edit", {owner_id=ownerId, doc_id=docId, title=titleVal,
+  	tags=tagsVal})
+end
+
 -----------------------
 --    Favorites      --
 -----------------------
@@ -2383,6 +2566,11 @@ function luaVkApi.removeBookmarkedLink(linkId)
     return requiredParameterMsg .. " linkId"
   end
   return luaVkApi.invokeApi("fave.removeLink", {link_id=linkId})
+end
+
+function luaVkApi.getLikedMarketItems(countVal, offsetVal, isExtended)
+  return luaVkApi.invokeApi("fave.getMarketItems", {offset=offsetVal, count=countVal,
+      extended=isExtended})
 end
 
 -----------------------
@@ -2576,6 +2764,64 @@ end
 -----------------------
 function luaVkApi.getGifts(userId, countVal, offsetVal)
   return luaVkApi.invokeApi("gifts.get", {user_id=userId, count=countVal, offset=offsetVal})
+end
+
+-----------------------
+--      Leads        --
+-----------------------
+function luaVkApi.completeLead(vkSid, secretVal, commentVal)
+  if not vkSid then
+    return requiredParameterMsg .. " vkSid"
+  end
+  if not secretVal then
+    return requiredParameterMsg .. " secretVal"
+  end
+  return luaVkApi.invokeApi("leads.complete", {vk_sid=vkSid, secret=secretVal, comment=commentVal})
+end
+
+function luaVkApi.startLead(leadId, secretVal, uId, testMode, isForce)
+  if not leadId then
+    return requiredParameterMsg .. " leadId"
+  end
+  if not secretVal then
+    return requiredParameterMsg .. " secretVal"
+  end
+  return luaVkApi.invokeApi("leads.start", {lead_id=leadId, secret=secretVal, uid=uId,
+  	aid=aId, test_mode=testMode, force=isForce})
+end
+
+function luaVkApi.getLeadStats(leadId, secretVal, dateStart, dateEnd)
+  if not leadId then
+    return requiredParameterMsg .. " leadId"
+  end
+  return luaVkApi.invokeApi("leads.getStats", {lead_id=leadId, secret=secretVal, date_start=dateStart,
+  	date_end=dateEnd})
+end
+
+function luaVkApi.getLeadUsers(offerId, secretVal, offsetVal, countVal, statusVal, isReverse)
+  if not offerId then
+    return requiredParameterMsg .. " offerId"
+  end
+  if not secret then
+    return requiredParameterMsg .. " secret"
+  end
+  return luaVkApi.invokeApi("leads.getUsers", {offer_id=offerId, secret=secretVal, offset=offsetVal,
+  	count=countVal, status=statusVal, reverse=isReverse})
+end
+
+function luaVkApi.checkLeadUser(leadId, testResult, testMode, autoStart, ageVal, countryVal)
+  if not leadId then
+    return requiredParameterMsg .. " leadId"
+  end
+  return luaVkApi.invokeApi("leads.getUsers", {lead_id=leadId, test_result=testResult, test_mode=testMode,
+  	auto_start=autoStart, age=ageVal, country=countryVal})
+end
+
+function luaVkApi.metricHit(dataVala)
+  if not dataVala then
+    return requiredParameterMsg .. " dataVala"
+  end
+  return luaVkApi.invokeApi("leads.metricHit", {data=dataVala})
 end
 
 -----------------------

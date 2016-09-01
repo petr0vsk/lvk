@@ -1888,6 +1888,9 @@ end
 -----------------------
 function luaVkApi.getPrivateMessages(outVal, offsetVal, countVal, timeOffset, filtersVal,
     previewLength, lastMessageId)
+  if outVal < 0 or timeOffset < 0 or filtersVal < 0 then
+    return "ERROR! Parameters outVal, timeOffset, filtersVal should be positive."
+  end
   return luaVkApi.invokeApi("messages.get", {out=outVal, offset=offsetVal, count=countVal,
       time_offset=timeOffset, filters=filtersVal, preview_length=previewLength, 
       last_message_id=lastMessageId})

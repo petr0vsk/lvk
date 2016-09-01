@@ -627,6 +627,57 @@ function luaVkApi.editPhotoComment(ownerId, commentId, messageVal, attachmentsVa
   return luaVkApi.invokeApi("photos.editComment", {owner_id=ownerId, comment_id=commentId,
       message=messageVal, attachments=attachmentsVal})
 end
+
+function luaVkApi.saveMarketAlbumPhoto(groupId, photoVal, serverVal, attachmentsVal)
+  if not groupId then
+    return requiredParameterMsg .. " groupId"
+  end
+  if not photoVal then
+    return requiredParameterMsg .. " photoVal"
+  end
+  if not serverVal then
+    return requiredParameterMsg .. " serverVal"
+  end
+  if not hashVal then
+    return requiredParameterMsg .. " hashVal"
+  end
+  return luaVkApi.invokeApi("photos.saveMarketAlbumPhoto", {group_id=groupId, photo=photoVal,
+      server=serverVal, hash=hashVal})
+end
+
+function luaVkApi.saveMarketPhoto(groupId, photoVal, serverVal, attachmentsVal, cropData
+	cropHash)
+  if not groupId then
+    return requiredParameterMsg .. " groupId"
+  end
+  if not photoVal then
+    return requiredParameterMsg .. " photoVal"
+  end
+  if not serverVal then
+    return requiredParameterMsg .. " serverVal"
+  end
+  if not hashVal then
+    return requiredParameterMsg .. " hashVal"
+  end
+  return luaVkApi.invokeApi("photos.saveMarketPhoto", {group_id=groupId, photo=photoVal,
+      server=serverVal, hash=hashVal, crop_data=cropData, crop_hash=cropHash})
+end
+
+function luaVkApi.getMarketAlbumUploadServer(groupId)
+  if not groupId then
+    return requiredParameterMsg .. " groupId"
+  end
+  return luaVkApi.invokeApi("photos.getMarketAlbumUploadServer", {group_id=groupId})
+end
+
+function luaVkApi.getMarketUploadServer(groupId, mainPhoto, cropX, cropY, cropWidth)
+  if not groupId then
+    return requiredParameterMsg .. " groupId"
+  end
+  return luaVkApi.invokeApi("photos.getMarketUploadServer", {group_id=groupId, main_photo=mainPhoto,
+  	crop_x=cropX, crop_y=cropY, crop_width=cropWidth})
+end
+
 -----------------------
 --     Friends       --
 -----------------------

@@ -2825,6 +2825,307 @@ function luaVkApi.metricHit(dataVala)
 end
 
 -----------------------
+--      Market       --
+-----------------------
+function luaVkApi.getMarketItems(ownerId, albumId, countVal, offsetVal, isExtended)
+  if not ownerId then
+    return requiredParameterMsg .. " ownerId"
+  end
+  return luaVkApi.invokeApi("market.get", {owner_id=ownerId, album_id=albumId, count=countVal,
+      offset=offsetVal, extended=isExtended})
+end
+
+function luaVkApi.getMarketItemsById(itemIds, isExtended)
+  if not itemIds then
+    return requiredParameterMsg .. " itemIds"
+  end
+  return luaVkApi.invokeApi("market.getById", {item_ids=itemIds, extended=isExtended})
+end
+
+function luaVkApi.searchMarketItems(ownerId, albumId, query, priceFrom, priceTo, tagsVal,
+    sortVal, revVal, offsetVal, countVal, isExtended)
+  if not ownerId then
+    return requiredParameterMsg .. " ownerId"
+  end
+  return luaVkApi.invokeApi("market.search", {owner_id=ownerId, album_id=albumId, 
+      q=query, price_from=priceFrom, price_to=priceTo, tags=tagsVal, sort=sortVal,
+	  rev=revVal, offset=offsetVal, count=countVal, extended=isExtended})
+end
+
+function luaVkApi.getMarketAlbums(ownerId, offsetVal, countVal)
+  if not ownerId then
+    return requiredParameterMsg .. " ownerId"
+  end
+  return luaVkApi.invokeApi("market.getAlbums", {owner_id=ownerId, offset=offsetVal,
+      count=countVal})
+end
+
+function luaVkApi.getMarketAlbumsById(ownerId, albumIds)
+  if not ownerId then
+    return requiredParameterMsg .. " ownerId"
+  end
+  if not albumIds then
+    return requiredParameterMsg .. " albumIds"
+  end  
+  return luaVkApi.invokeApi("market.getAlbumById", {owner_id=ownerId, album_ids=albumIds})
+end
+
+function luaVkApi.createMarketComment(ownerId, itemId, messageVal, attachmentsVal,
+    fromGroup, replyToComment, stickerId, guId)
+  if not ownerId then
+    return requiredParameterMsg .. " ownerId"
+  end
+  if not itemId then
+    return requiredParameterMsg .. " itemId"
+  end
+  if not messageVal or not attachmentsVal then
+    return requiredParameterMsg .. " attachmentsVal or messageVal"
+  end  
+  return luaVkApi.invokeApi("market.createComment", {owner_id=ownerId, item_id=itemId,
+      message=messageVal, attachments=attachmentsVal, from_group=fromGroup,
+	  reply_to_comment=replyToComment, sticker_id=stickerId, guid=guId})
+end
+
+function luaVkApi.getMarketComments(ownerId, itemId, needLikes, startCommentId,
+    offsetVal, countVal, sortVal, isExtended, fieldsVal)
+  if not ownerId then
+    return requiredParameterMsg .. " ownerId"
+  end
+  if not itemId then
+    return requiredParameterMsg .. " itemId"
+  end
+  return luaVkApi.invokeApi("market.getComments", {owner_id=ownerId, item_id=itemId,
+      need_likes=needLikes, start_comment_id=startCommentId, offset=offsetVal,
+	  count=countVal, sort=sortVal, extended=isExtended, fields=fieldsVal})
+end
+
+function luaVkApi.deleteMarketComment(ownerId, commentId)
+  if not ownerId then
+    return requiredParameterMsg .. " ownerId"
+  end
+  if not commentId then
+    return requiredParameterMsg .. " commentId"
+  end
+  return luaVkApi.invokeApi("market.deleteComment", {owner_id=ownerId, 
+      comment_id=commentId})
+end
+
+function luaVkApi.restoreMarketComment(ownerId, commentId)
+  if not ownerId then
+    return requiredParameterMsg .. " ownerId"
+  end
+  if not commentId then
+    return requiredParameterMsg .. " commentId"
+  end
+  return luaVkApi.invokeApi("market.restoreComment", {owner_id=ownerId, 
+      comment_id=commentId})
+end
+
+function luaVkApi.editMarketComment(ownerId, commentId, messageVal, attachmentsVal)
+  if not ownerId then
+    return requiredParameterMsg .. " ownerId"
+  end
+  if not commentId then
+    return requiredParameterMsg .. " commentId"
+  end
+  if not messageVal or not attachmentsVal then
+    return requiredParameterMsg .. " attachmentsVal or messageVal"
+  end
+  return luaVkApi.invokeApi("market.editComment", {owner_id=ownerId, 
+      comment_id=commentId, message=messageVal, attachments=attachmentsVal})
+end
+
+function luaVkApi.reportMarketComment(ownerId, commentId, reasonVal)
+  if not ownerId then
+    return requiredParameterMsg .. " ownerId"
+  end
+  if not commentId then
+    return requiredParameterMsg .. " commentId"
+  end
+  if not reasonVal then
+    return requiredParameterMsg .. " reasonVal"
+  end
+  return luaVkApi.invokeApi("market.reportComment", {owner_id=ownerId, 
+      comment_id=commentId, reason=reasonVal})
+end
+
+function luaVkApi.getMarketCategories(countVal, offsetVal)
+  return luaVkApi.invokeApi("market.getCategories", {count=countVal, offset=offsetVal})
+end
+
+function luaVkApi.reportMarketItem(ownerId, itemId, reasonVal)
+  if not ownerId then
+    return requiredParameterMsg .. " ownerId"
+  end
+  if not itemId then
+    return requiredParameterMsg .. " itemId"
+  end
+  if not reasonVal then
+    return requiredParameterMsg .. " reasonVal"
+  end
+  return luaVkApi.invokeApi("market.report", {owner_id=ownerId, item_id=itemId,
+      reason=reasonVal})
+end
+
+function luaVkApi.addMarketItem(ownerId, nameVal, descriptionVal, categoryId,
+    priceVal, isDeleted, mainPhotoId, photoIds)
+  if not ownerId then
+    return requiredParameterMsg .. " ownerId"
+  end
+  if not nameVal then
+    return requiredParameterMsg .. " nameVal"
+  end
+  if not descriptionVal then
+    return requiredParameterMsg .. " descriptionVal"
+  end
+  if not categoryId then
+    return requiredParameterMsg .. " categoryId"
+  end
+  if not priceVal then
+    return requiredParameterMsg .. " priceVal"
+  end
+  if not mainPhotoId then
+    return requiredParameterMsg .. " mainPhotoId"
+  end
+  return luaVkApi.invokeApi("market.add", {owner_id=ownerId, name=nameVal,
+      description=descriptionVal, category_id=categoryId, price=priceVal,
+	  deleted=isDeleted, main_photo_id=mainPhotoId, photo_ids=photoIds})
+end
+
+function luaVkApi.editMarketItem(ownerId, itemId, nameVal, descriptionVal, categoryId,
+    priceVal, isDeleted, mainPhotoId, photoIds)
+  if not ownerId then
+    return requiredParameterMsg .. " ownerId"
+  end
+  if not itemId then
+    return requiredParameterMsg .. " itemId"
+  end
+  if not nameVal then
+    return requiredParameterMsg .. " nameVal"
+  end
+  if not descriptionVal then
+    return requiredParameterMsg .. " descriptionVal"
+  end
+  if not categoryId then
+    return requiredParameterMsg .. " categoryId"
+  end
+  if not priceVal then
+    return requiredParameterMsg .. " priceVal"
+  end
+  if not mainPhotoId then
+    return requiredParameterMsg .. " mainPhotoId"
+  end
+  return luaVkApi.invokeApi("market.edit", {owner_id=ownerId, item_id=itemId, 
+	  name=nameVal, description=descriptionVal, category_id=categoryId, price=priceVal,
+	  deleted=isDeleted, main_photo_id=mainPhotoId, photo_ids=photoIds})
+end
+
+function luaVkApi.deleteMarketItem(ownerId, itemId)
+  if not ownerId then
+    return requiredParameterMsg .. " ownerId"
+  end
+  if not itemId then
+    return requiredParameterMsg .. " itemId"
+  end
+  return luaVkApi.invokeApi("market.delete", {owner_id=ownerId, item_id=itemId})
+end
+
+function luaVkApi.restoreMarketItem(ownerId, itemId)
+  if not ownerId then
+    return requiredParameterMsg .. " ownerId"
+  end
+  if not itemId then
+    return requiredParameterMsg .. " itemId"
+  end
+  return luaVkApi.invokeApi("market.restore", {owner_id=ownerId, item_id=itemId})
+end
+
+function luaVkApi.reorderMarketItems(ownerId, albumId, itemId, beforeVal, afterVal)
+  if not ownerId then
+    return requiredParameterMsg .. " ownerId"
+  end
+  if not itemId then
+    return requiredParameterMsg .. " itemId"
+  end
+  return luaVkApi.invokeApi("market.reorderItems", {owner_id=ownerId, album_id=albumId,
+      item_id=itemId, before=beforeVal, after=afterVal})
+end
+
+function luaVkApi.reorderMarketAlbums(ownerId, albumId, beforeVal, afterVal)
+  if not ownerId then
+    return requiredParameterMsg .. " ownerId"
+  end
+  if not albumId then
+    return requiredParameterMsg .. " albumId"
+  end
+  return luaVkApi.invokeApi("market.reorderAlbums", {owner_id=ownerId, album_id=albumId,
+      before=beforeVal, after=afterVal})
+end
+
+function luaVkApi.addMarketAlbum(ownerId, titleVal, photoId, mainAlbum)
+  if not ownerId then
+    return requiredParameterMsg .. " ownerId"
+  end
+  if not titleVal then
+    return requiredParameterMsg .. " titleVal"
+  end
+  return luaVkApi.invokeApi("market.addAlbum", {owner_id=ownerId, title=titleVal,
+      photo_id=photoId, main_album=mainAlbum})
+end
+
+function luaVkApi.editMarketAlbum(ownerId, albumId, titleVal, photoId, mainAlbum)
+  if not ownerId then
+    return requiredParameterMsg .. " ownerId"
+  end
+  if not albumId then
+    return requiredParameterMsg .. " albumId"
+  end
+  if not titleVal then
+    return requiredParameterMsg .. " titleVal"
+  end
+  return luaVkApi.invokeApi("market.editAlbum", {owner_id=ownerId, album_id=albumId,
+      title=titleVal, photo_id=photoId, main_album=mainAlbum})
+end
+
+function luaVkApi.deleteMarketAlbum(ownerId, albumId)
+  if not ownerId then
+    return requiredParameterMsg .. " ownerId"
+  end
+  if not albumId then
+    return requiredParameterMsg .. " albumId"
+  end
+  return luaVkApi.invokeApi("market.deleteAlbum", {owner_id=ownerId, album_id=albumId})
+end
+
+function luaVkApi.removeFromMarketAlbum(ownerId, itemId, albumIds)
+  if not ownerId then
+    return requiredParameterMsg .. " ownerId"
+  end
+  if not itemId then
+    return requiredParameterMsg .. " itemId"
+  end
+  if not albumIds then
+    return requiredParameterMsg .. " albumIds"
+  end
+  return luaVkApi.invokeApi("market.removeFromAlbum", {owner_id=ownerId, item_id=itemId,
+      album_ids=albumIds})
+end
+
+function luaVkApi.addToMarketAlbum(ownerId, itemId, albumIds)
+  if not ownerId then
+    return requiredParameterMsg .. " ownerId"
+  end
+  if not itemId then
+    return requiredParameterMsg .. " itemId"
+  end
+  if not albumIds then
+    return requiredParameterMsg .. " albumIds"
+  end
+  return luaVkApi.invokeApi("market.addToAlbum", {owner_id=ownerId, item_id=itemId,
+      album_ids=albumIds})
+end
+
+-----------------------
 --      Other        --
 -----------------------
 function luaVkApi.executeCode(codeStr)

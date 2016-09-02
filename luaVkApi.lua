@@ -8,7 +8,7 @@ local authUrl = "https://oauth.vk.com/authorize" .. "?client_id={APP_ID}"
   .. "&display={DISPLAY}" .. "&v={API_VERSION}" .. "&response_type=token"
 local apiRequest = "https://api.vk.com/method/{METHOD_NAME}" .. "?{PARAMETERS}"
   .. "&access_token={ACCESS_TOKEN}" .. "&v={API_VERSION}"
-local requiredParameterMsg = "ERROR! This parameter is required:"
+local requiredParameterMsg = "ERROR! Some of required parameters is missed:"
 
 -----------------------
 --Common util methods--
@@ -45,6 +45,17 @@ end
 function luaVkApi.jsonToString(jsonObject_)
   local jsonObject = jsonObject_
   return json.encode(jsonObject)
+end
+
+function luaVkApi.allRequiredParamsFilled(...)
+  local requiredParams = params_
+  local areAllFilled = true
+  for i = 1, #arg do
+    if not arg[i] then
+      areAllFilled = false
+    end
+  end
+  return areAllFilled
 end
 
 -----------------------
@@ -88,13 +99,11 @@ function luaVkApi.getFollowers(userId, nameCase, offsetVal, countVal, fieldsVal)
 end
 
 function luaVkApi.reportUser(userId, typeVal, commentVal)
-  if not userId then
-    return requiredParameterMsg .. " userId"
+  if luaVkApi.allRequiredParamsFilled(userId, typeVal) then
+	return luaVkApi.invokeApi("users.report", {user_id=userId, type=typeVal, comment=commentVal})
+  else
+    return requiredParameterMsg .. " userId, typeVal"
   end
-  if not typeVal then
-    return requiredParameterMsg .. " typeVal"
-  end
-  return luaVkApi.invokeApi("users.report", {user_id=userId, type=typeVal, comment=commentVal})
 end
 
 function luaVkApi.getNearbyUsers(latitudeVal, longitudeVal, accuracyVal, timeoutVal, radiusVal,

@@ -23,7 +23,7 @@ print(luaVkApi.getStatus()) --print current user status
 local userId = "201838325"
 print(luaVkApi.getStatus(userId)) --print user status for mentioned user
 ```
-Response is usual string, but you can use _stringToJSON_ method for comverting to table:
+Response is usual string, but you can use _stringToJSON_ method for converting to table:
 ```lua
 statusStr = luaVkApi.getStatus()
 status = luaVkApi.stringToJSON(statusStr)

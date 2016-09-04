@@ -16,14 +16,14 @@ and add luaVkApi to your code:
 local luaVkApi = require "luaVkApi";
 ```
 
-Now you can invoke all VK REST API methods, for examplpe:
+Now you can invoke all VK REST API methods, for example:
 ```lua
 print(luaVkApi.getStatus()) --print current user status
 
 local userId = "201838325"
 print(luaVkApi.getStatus(userId)) --print user status for mentioned user
 ```
-Response is usual string, but you can use _stringToJSON_ method for comverting to table:
+The response is usual string, but you can use _stringToJSON_ method for converting it to table:
 ```lua
 statusStr = luaVkApi.getStatus()
 status = luaVkApi.stringToJSON(statusStr)

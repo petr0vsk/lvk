@@ -1,7 +1,7 @@
 package = "luaVkApi"
 version = "0.3"
 source = {
-  url = "https://github.com/last-khajiit/luaVkApi.git",
+  url = "https://github.com/last-khajiit/luaVkApi",
   tag = "luaVkApi-0.3"
 }
 description = {

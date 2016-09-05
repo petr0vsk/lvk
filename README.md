@@ -32,14 +32,8 @@ print(status.response.text)
 
 ### Required Luarocks packages
 
-- luasec: https://github.com/brunoos/luasec
-- dkjson: https://github.com/LuaDist/dkjson
-
-For installation run these commands:
-```
-luarocks install --local dkjson
-luarocks install --local luasec
-```
+- [luasec](https://luarocks.org/modules/brunoos/luasec)
+- [dkjson](https://luarocks.org/modules/dhkolf/dkjson)
 
 
 

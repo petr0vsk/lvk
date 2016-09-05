@@ -1,7 +1,7 @@
-lua-vk-api
+luaVkApi v0.3
 =========
 
- [![Build Status](https://travis-ci.org/last-khajiit/lua-vk-api.svg?branch=master)](https://travis-ci.org/last-khajiit/lua-vk-api) [![Join the chat at https://gitter.im/lua-vk-api/Lobby](https://badges.gitter.im/lua-vk-api/Lobby.svg)](https://gitter.im/lua-vk-api/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+[![release](https://img.shields.io/badge/release-v0.3-brightgreen.png?style=default)](https://github.com/last-khajiit/vkb/releases/latest) [![Build Status](https://travis-ci.org/last-khajiit/lua-vk-api.svg?branch=master)](https://travis-ci.org/last-khajiit/lua-vk-api) [![Join the chat at https://gitter.im/lua-vk-api/Lobby](https://badges.gitter.im/lua-vk-api/Lobby.svg)](https://gitter.im/lua-vk-api/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 Lua wrapper library for [REST API](https://vk.com/dev/methods) of [vk.com](https://vk.com). Implementation for 5.53 version of API.
 

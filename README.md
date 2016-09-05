@@ -30,10 +30,18 @@ status = luaVkApi.stringToJSON(statusStr)
 print(status.response.text)
 ```
 
-### Required packages
+### Required Luarocks packages
 
-- ssl.https: https://github.com/brunoos/luasec/blob/master/src/https.lua
+- luasec: https://github.com/brunoos/luasec
 - dkjson: https://github.com/LuaDist/dkjson
+
+For installation run these commands:
+```
+luarocks install --local dkjson
+luarocks install --local luasec
+```
+
+
 
 *Feel free to make pull requests!*
 

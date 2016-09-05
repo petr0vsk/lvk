@@ -11,7 +11,7 @@ local apiRequest = "https://api.vk.com/method/{METHOD_NAME}" .. "?{PARAMETERS}"
 -----------------------
 function luaVkApi.invokeApi(method, params)
   -- load properties
-  file = io.open("luaVkApi.properties")
+  local file = io.open("luaVkApi.properties")
   local properties = {}
   for line in file:lines() do
     for key, value in string.gmatch(line, "(.-)=(.-)$") do
@@ -1613,7 +1613,7 @@ end
 --    Documents      --
 -----------------------
 function luaVkApi.getDocuments(countVal, offsetVal, ownerId)
-  return luaVkApi.invokeApi("docs.get", {count=countVal, offset=offsetId, owner_id=ownerId})
+  return luaVkApi.invokeApi("docs.get", {count=countVal, offset=offsetVal, owner_id=ownerId})
 end
 
 function luaVkApi.getDocumentsById(docsVal)
@@ -1867,8 +1867,8 @@ function luaVkApi.completeLead(vkSid, secretVal, commentVal)
 end
 
 function luaVkApi.startLead(leadId, secretVal, aId, uId, testMode, isForce)
-  return luaVkApi.invokeApi("leads.start", {lead_id=leadId, secret=secretVal, uid=uId,
-  	aid=aId, uid=uId, test_mode=testMode, force=isForce})
+  return luaVkApi.invokeApi("leads.start", {lead_id=leadId, secret=secretVal, aid=aId,
+  	uid=uId, test_mode=testMode, force=isForce})
 end
 
 function luaVkApi.getLeadStats(leadId, secretVal, dateStart, dateEnd)

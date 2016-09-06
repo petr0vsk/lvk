@@ -12,11 +12,9 @@ local apiRequest = "https://api.vk.com/method/{METHOD_NAME}" .. "?{PARAMETERS}"
 
  
 function LuaVkApi:new(token, apiVersion)
-    --[[
     if self ~= LuaVkApi then
         return nil, "First argument must be self"
     end
-    ]]
     local o = setmetatable({}, LuaVkApi_mt)
     o._token = token
 	o._apiVersion = apiVersion

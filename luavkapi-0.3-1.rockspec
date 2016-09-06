@@ -1,5 +1,5 @@
-package = "luaVkApi"
-version = "0.3"
+package = "LuaVkApi"
+version = "0.3-1"
 source = {
   url = "https://github.com/last-khajiit/luaVkApi",
   tag = "luaVkApi-0.3"
@@ -20,6 +20,6 @@ dependencies = {
 build = {
   type = "builtin",
   modules = {
-    luaVkApi = "luaVkApi.lua"
+    LuaVkApi = "LuaVkApi.lua"
   }
 }

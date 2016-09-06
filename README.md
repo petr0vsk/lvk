@@ -7,26 +7,27 @@ Lua wrapper library for [REST API](https://vk.com/dev/methods) of [vk.com](https
 
 ### Usage
 
-Set up your *accessToken* in *luaVkApi.properties*, for instance:
-```
-accessToken=ee272c9214611c082d397def7da4368d2baa5d1805aa3dcbb989a2e52bf0cec8c69da547b5d54b524da56
-```
-and add luaVkApi to your code:
+Add LuaVkApi to your code:
 ```lua
-local luaVkApi = require "luaVkApi";
+local LuaVkApi = require "LuaVkApi";
+```
+
+Create instance using constructor and passing there your secret token and version as parameters:
+```lua
+local api = LuaVkApi:new("ee272c9214611c082d397def7da4368d2baa5d1805aa3dcbb989a2e52bf0cec8c69da547b5d54b524da56", "5.53")
 ```
 
 Now you can invoke all VK REST API methods, for example:
 ```lua
-print(luaVkApi.getStatus()) --print current user status
+print(api:getStatus()) --print current user status
 
 local userId = "201838325"
-print(luaVkApi.getStatus(userId)) --print user status for mentioned user
+print(api:getStatus(userId)) --print user status for mentioned user
 ```
-The response is usual string, but you can use _stringToJSON_ method for converting it to table:
+The response is usual string, but you can use _stringToJson_ method for converting it to table:
 ```lua
-statusStr = luaVkApi.getStatus()
-status = luaVkApi.stringToJSON(statusStr)
+local statusStr = api:getStatus()
+local status = api:stringToJson(statusStr)
 print(status.response.text)
 ```
 

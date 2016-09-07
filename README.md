@@ -6,10 +6,14 @@ luaVkApi v0.3
 Lua wrapper library for [REST API](https://vk.com/dev/methods) of [vk.com](https://vk.com). Implementation for 5.53 version of API.
 
 ### Usage
+Install LuaVkApi using Luarocks:
+```
+luarocks install luavkapi
+```
 
 Add LuaVkApi to your code:
 ```lua
-local LuaVkApi = require "LuaVkApi";
+local LuaVkApi = require "LuaVkApi"
 ```
 
 Create instance using constructor and passing there your secret token and version as parameters:

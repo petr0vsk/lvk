@@ -4,6 +4,7 @@ local LuaVkApi_mt = {
   __index = LuaVkApi
 }
 
+local currentVersion = "0.3"
 local https = require("ssl.https")
 local json = require ("dkjson")
 
@@ -2029,22 +2030,22 @@ function LuaVkApi:addToMarketAlbum(ownerId, itemId, albumIds)
 end
 
 -----------------------
+--     Metadata      --
+-----------------------
+function LuaVkApi:getVersion()
+  return currentVersion
+end
+
+function LuaVkApi:getVkApiVersion()
+  return self._apiVersion
+end
+
+-----------------------
 --      Other        --
 -----------------------
 function LuaVkApi:executeCode(codeStr)
   return self:invokeApi("execute", {code=codeStr})
 end
-
-
-
-
-
-
---[[
-function LuaVkApi:getStatus(userId, groupId)
-  return self:invokeApi("status.get", {user_id=userId, group_id=groupId})
-end
-]]
 
 
 return LuaVkApi

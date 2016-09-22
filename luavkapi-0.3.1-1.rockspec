@@ -1,8 +1,8 @@
 package = "LuaVkApi"
-version = "0.3-1"
+version = "0.3.1-1"
 source = {
   url = "https://github.com/last-khajiit/luaVkApi",
-  tag = "luaVkApi-0.3"
+  tag = "luaVkApi-0.3.1"
 }
 description = {
   summary = "Lua library for vk.com REST API",

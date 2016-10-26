@@ -6,7 +6,7 @@ luaVkApi v0.3.1
 Lua wrapper library for [REST API](https://vk.com/dev/methods) of [vk.com](https://vk.com). Implementation for 5.53 version of API.
 
 ### Usage
-Install LuaVkApi using Luarocks:
+Install LuaVkApi using [Luarocks](https://luarocks.org/):
 ```
 luarocks install luavkapi
 ```

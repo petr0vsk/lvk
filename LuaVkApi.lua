@@ -879,11 +879,13 @@ function LuaVkApi:approveUserRequestToCommunity(groupId, userId)
   return self:invokeApi("groups.approveRequest", {group_id=groupId, user_id=userId})
 end
 
-function LuaVkApi:setGroupCallbackSettings(groupId, messageNew, photoNew, audioNew,
+function LuaVkApi:setGroupCallbackSettings(groupId, messageNew, messageAllow, messageDeny, photoNew, 
+  audioNew,
 	videoNew, wallReplyNew, wallReplyEdit, wallPostNew, boardPostNew, boardPostEdit,
 	boardPostRestore, boardPostDelete, photoCommentNew, videoCommentNew, marketCommentNew,
 	groupJoin, groupLeave)
-  return self:invokeApi("groups.setCallbackSettings", {group_id=groupId, message_new=messageNew,
+  return self:invokeApi("groups.setCallbackSettings", {group_id=groupId, message_new=messageNew, 
+    message_allow=messageAllow, message_deny=messageDeny,
   	photo_new=photoNew, audio_new=audioNew, video_new=videoNew, wall_reply_new=wallReplyNew,
   	wall_reply_edit=wallReplyEdit, wall_post_new=wallPostNew, board_post_new=boardPostNew,
   	board_post_edit=boardPostEdit, board_post_restore=boardPostRestore,

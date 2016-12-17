@@ -334,7 +334,7 @@ function LuaVkApi:savePhoto(albumId, groupId, serverVal, photosList, hashVal,
 end
 
 function LuaVkApi:copyPhoto(ownerId, photoId, accessKey)
-  return self:invokeApi("photos.copy", {owner_id=ownerId, photo_id=photoId, 
+  return self:invokeApi("photos.copy", {owner_id=ownerId, photo_id=photoId,
       access_key=accessKey})
 end
 
@@ -469,9 +469,9 @@ end
 -----------------------
 --     Friends       --
 -----------------------
-function LuaVkApi:getFriendIds(userId, orderVal, listId, countVal, offsetVal, 
+function LuaVkApi:getFriendIds(userId, orderVal, listId, countVal, offsetVal,
     fieldsVal, nameCase)
-  return self:invokeApi("friends.get", {user_id=userId, order=orderVal, list_id=listId, 
+  return self:invokeApi("friends.get", {user_id=userId, order=orderVal, list_id=listId,
       count=countVal, offset=offsetVal, fields=fieldsVal, name_case=nameCase})
 end
 
@@ -496,7 +496,7 @@ end
 
 function LuaVkApi:getFriendsRequests(countVal, offsetVal, extendedVal, needMutual, outVal, sortVal,
     suggestedVal)
-  return self:invokeApi("friends.getRequests", {count=countVal, offset=offsetVal, 
+  return self:invokeApi("friends.getRequests", {count=countVal, offset=offsetVal,
       extended=extendedVal, need_mutual=needMutual, out=outVal, sort=sortVal, suggested=suggestedVal})
 end
 
@@ -771,7 +771,7 @@ function LuaVkApi:leaveCommunity(groupId)
   return self:invokeApi("groups.leave", {group_id=groupId})
 end
 
-function LuaVkApi:searchCommunities(query, typeVal, countryId, cityId, 
+function LuaVkApi:searchCommunities(query, typeVal, countryId, cityId,
     isFuture, sortVal, offsetVal, countVal)
   return self:invokeApi("groups.search", {q=query, type=typeVal, country_id=countryId,
       city_id=cityId, future=isFuture, sort=sortVal, offset=offsetVal, count=countVal})
@@ -789,8 +789,8 @@ end
 
 function LuaVkApi:banUserForCommunity(groupId, userId, endDate, reasonVal, commentVal,
     commentVisible)
-  return self:invokeApi("groups.banUser", {group_id=groupId, user_id=userId, 
-    end_date=endDate, reason=reasonVal, comment=commentVal, 
+  return self:invokeApi("groups.banUser", {group_id=groupId, user_id=userId,
+    end_date=endDate, reason=reasonVal, comment=commentVal,
     comment_visible=commentVisible})
 end
 

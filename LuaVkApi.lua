@@ -18,7 +18,7 @@ function LuaVkApi:new(token, apiVersion)
     end
     local o = setmetatable({}, LuaVkApi_mt)
     o._token = token
-	o._apiVersion = apiVersion
+  o._apiVersion = apiVersion
     return o
 end
 
@@ -463,7 +463,7 @@ end
 
 function LuaVkApi:getMarketUploadServer(groupId, mainPhoto, cropX, cropY, cropWidth)
   return self:invokeApi("photos.getMarketUploadServer", {group_id=groupId, main_photo=mainPhoto,
-  	crop_x=cropX, crop_y=cropY, crop_width=cropWidth})
+    crop_x=cropX, crop_y=cropY, crop_width=cropWidth})
 end
 
 -----------------------
@@ -691,7 +691,7 @@ end
 
 function LuaVkApi:getPopularAudios(onlyEng, genreId, offsetVal, countVal)
   return self:invokeApi("audio.getPopular", {only_eng=onlyEng, genre_id=genreId,
-  	offset=offsetVal, count=countVal})
+    offset=offsetVal, count=countVal})
 end
 
 function LuaVkApi:getAudiosCount(ownerId)
@@ -881,15 +881,15 @@ end
 
 function LuaVkApi:setGroupCallbackSettings(groupId, messageNew, messageAllow, messageDeny, photoNew, 
         audioNew, videoNew, wallReplyNew, wallReplyEdit, wallPostNew, boardPostNew, boardPostEdit,
-	boardPostRestore, boardPostDelete, photoCommentNew, videoCommentNew, marketCommentNew,
-	groupJoin, groupLeave)
+  boardPostRestore, boardPostDelete, photoCommentNew, videoCommentNew, marketCommentNew,
+  groupJoin, groupLeave)
   return self:invokeApi("groups.setCallbackSettings", {group_id=groupId, message_new=messageNew, 
-	message_allow=messageAllow, message_deny=messageDeny, photo_new=photoNew, audio_new=audioNew,
-	video_new=videoNew, wall_reply_new=wallReplyNew, wall_reply_edit=wallReplyEdit, wall_post_new=wallPostNew,
-	board_post_new=boardPostNew, board_post_edit=boardPostEdit, board_post_restore=boardPostRestore,
-  	board_post_delete=boardPostDelete, photo_comment_new=photoCommentNew,
-  	video_comment_new=videoCommentNew, market_comment_new=marketCommentNew, group_join=groupJoin,
-  	group_leave=groupLeave})
+  message_allow=messageAllow, message_deny=messageDeny, photo_new=photoNew, audio_new=audioNew,
+  video_new=videoNew, wall_reply_new=wallReplyNew, wall_reply_edit=wallReplyEdit, wall_post_new=wallPostNew,
+  board_post_new=boardPostNew, board_post_edit=boardPostEdit, board_post_restore=boardPostRestore,
+    board_post_delete=boardPostDelete, photo_comment_new=photoCommentNew,
+    video_comment_new=videoCommentNew, market_comment_new=marketCommentNew, group_join=groupJoin,
+    group_leave=groupLeave})
 end
 
 function LuaVkApi:setCallbackServerSettings(groupId, secretKey)
@@ -918,12 +918,12 @@ end
 
 function LuaVkApi:getGroupCatalogInfo(isExtended, subcategoriesVal)
   return self:invokeApi("groups.getCatalogInfo", {extended=isExtended,
-  	subcategories=subcategoriesVal})
+    subcategories=subcategoriesVal})
 end
 
 function LuaVkApi:getGroupCatalog(categoryId, subcategoryId)
   return self:invokeApi("groups.getCatalogInfo", {category_id=categoryId,
-  	subcategory_id=subcategoryId})
+    subcategory_id=subcategoryId})
 end
 
 -----------------------
@@ -1148,21 +1148,21 @@ end
 
 function LuaVkApi:getVideoCatalogSection(sectionId, fromVal, countVal, isExtended)
   return self:invokeApi("video.getCatalogSection", {section_id=sectionId, from=fromVal,
-  	count=countVal, extended=isExtended})
+    count=countVal, extended=isExtended})
 end
 
 function LuaVkApi:getVideoCatalog(countVal, itemsCount, fromVal, isExtended, filtersVal,
-	isGrouped)
+  isGrouped)
   return self:invokeApi("video.getCatalog", {count=countVal, items_count=itemsCount,
-  	form=fromVal, extended=isExtended, filters=filtersVal, grouped=isGrouped})
+    form=fromVal, extended=isExtended, filters=filtersVal, grouped=isGrouped})
 end
 
 function LuaVkApi:reorderVideos(ownerId, videoId, targetId, albumId, beforeOwnerId,
-	beforeVideoId, afterOwnerId, afterVideoId)
+  beforeVideoId, afterOwnerId, afterVideoId)
   return self:invokeApi("video.reorderVideos", {owner_id=ownerId, video_id=videoId,
-  	target_id=targetId, album_id=albumId, before_owner_id=beforeOwnerId,
-  	before_video_id=beforeVideoId, after_owner_id=afterOwnerId,
-  	after_video_id=afterVideoId})
+    target_id=targetId, album_id=albumId, before_owner_id=beforeOwnerId,
+    before_video_id=beforeVideoId, after_owner_id=afterOwnerId,
+    after_video_id=afterVideoId})
 end
 
 -----------------------
@@ -1278,14 +1278,14 @@ end
 function LuaVkApi:lookupAccountContacts(contactsVal, serviceVal, mycontactVal, returnAll,
     fieldsVal)
   return self:invokeApi("account.lookupContacts", {contacts=contactsVal, service=serviceVal,
-	  mycontact=mycontactVal, return_all=returnAll, fields=fieldsVal})
+    mycontact=mycontactVal, return_all=returnAll, fields=fieldsVal})
 end
 
 function LuaVkApi:registerDevice(tokenVal, deviceModel, deviceYear, deviceId, systemVersion,
     settingsVal, sandboxVal)
   return self:invokeApi("account.registerDevice", {token=tokenVal, device_model=deviceModel,
       device_year=deviceYear, device_id=deviceId, system_version=systemVersion, settings=settingsVal,
-	  sandbox=sandboxVal})
+    sandbox=sandboxVal})
 end
 
 function LuaVkApi:unregisterDevice(deviceId, isSandbox)
@@ -1294,7 +1294,7 @@ end
 
 function LuaVkApi:setSilenceMode(deviceId, timeVal, peerId, soundVal)
   return self:invokeApi("account.setSilenceMode", {device_id=deviceId, time=timeVal,
-	  peer_id=peerId, sound=soundVal})
+    peer_id=peerId, sound=soundVal})
 end
 
 function LuaVkApi:getPushSettings(deviceId)
@@ -1303,7 +1303,7 @@ end
 
 function LuaVkApi:setPushSettings(deviceId, settingsVal, keyStr, valueStr)
   return self:invokeApi("account.setPushSettings", {device_id=deviceId, settings=settingsVal,
-	  key=keyStr, value=valueStr})
+    key=keyStr, value=valueStr})
 end
 
 function LuaVkApi:getAppPermissions(userId)
@@ -1336,7 +1336,7 @@ end
 
 function LuaVkApi:changePassword(restoreSid, changePasswordHash, oldPassword, newPassword)
   return self:invokeApi("account.changePassword", {restore_sid=restoreSid,
-	  change_password_hash=changePasswordHash, old_password=oldPassword, new_password=newPassword})
+    change_password_hash=changePasswordHash, old_password=oldPassword, new_password=newPassword})
 end
 
 function LuaVkApi:getProfileInfo()
@@ -1344,13 +1344,13 @@ function LuaVkApi:getProfileInfo()
 end
 
 function LuaVkApi:saveProfileInfo(firstName, lastName, maidenName, screenName, cancelRequestId,
-	sexVal, relationVal, relationPartnerId, bdateVal, bdateVisibility, homeTown, countryId,
-	cityId, statusVal)
+  sexVal, relationVal, relationPartnerId, bdateVal, bdateVisibility, homeTown, countryId,
+  cityId, statusVal)
   return self:invokeApi("account.saveProfileInfo", {first_name=firstName, last_name=lastName,
-	  maiden_name=maidenName, screen_name=screenName, cancel_request_id=cancelRequestId,
-	  sex=sexVal, relation=relationVal, relation_partner_id=relationPartnerId, bdate=bdateVal,
-	  bdate_visibility=bdateVisibility, home_town=homeTown, counry_id=countryId,
-	  city_id=cityId, status=statusVal})
+    maiden_name=maidenName, screen_name=screenName, cancel_request_id=cancelRequestId,
+    sex=sexVal, relation=relationVal, relation_partner_id=relationPartnerId, bdate=bdateVal,
+    bdate_visibility=bdateVisibility, home_town=homeTown, counry_id=countryId,
+    city_id=cityId, status=statusVal})
 end
 
 -----------------------
@@ -1472,10 +1472,10 @@ function LuaVkApi:deleteChatPhoto(chatId)
 end
 
 function LuaVkApi:getMessageHistoryAttachments(peerId, mediaType, startFrom,
-	countVal, photoSizes, fieldsVal)
+  countVal, photoSizes, fieldsVal)
   return self:invokeApi("messages.getHistoryAttachments", {peer_id=peerId,
-  	media_type=mediaType, start_from=startFrom, count=countVal, photo_sizes=photoSizes,
-  	fields=fieldsVal})
+    media_type=mediaType, start_from=startFrom, count=countVal, photo_sizes=photoSizes,
+    fields=fieldsVal})
 end
 
 -----------------------
@@ -1662,7 +1662,7 @@ end
 
 function LuaVkApi:editDoc(ownerId, docId, titleVal, tagsVal)
   return self:invokeApi("docs.edit", {owner_id=ownerId, doc_id=docId, title=titleVal,
-  	tags=tagsVal})
+    tags=tagsVal})
 end
 
 -----------------------
@@ -1774,7 +1774,7 @@ end
 
 function LuaVkApi:sendAppRequest(userId, textVal, typeVal, nameVal, keyVal, separateVal)
   return self:invokeApi("apps.sendRequest", {user_id=userId, text=textVal, type=typeVal,
-  	name=nameVal, key=keyVal, separate=separateVal})
+    name=nameVal, key=keyVal, separate=separateVal})
 end
 
 function LuaVkApi:deleteAppRequests()
@@ -1880,22 +1880,22 @@ end
 
 function LuaVkApi:startLead(leadId, secretVal, aId, uId, testMode, isForce)
   return self:invokeApi("leads.start", {lead_id=leadId, secret=secretVal, aid=aId,
-  	uid=uId, test_mode=testMode, force=isForce})
+    uid=uId, test_mode=testMode, force=isForce})
 end
 
 function LuaVkApi:getLeadStats(leadId, secretVal, dateStart, dateEnd)
   return self:invokeApi("leads.getStats", {lead_id=leadId, secret=secretVal, date_start=dateStart,
-  	date_end=dateEnd})
+    date_end=dateEnd})
 end
 
 function LuaVkApi:getLeadUsers(offerId, secretVal, offsetVal, countVal, statusVal, isReverse)
   return self:invokeApi("leads.getUsers", {offer_id=offerId, secret=secretVal, offset=offsetVal,
-  	count=countVal, status=statusVal, reverse=isReverse})
+    count=countVal, status=statusVal, reverse=isReverse})
 end
 
 function LuaVkApi:checkLeadUser(leadId, testResult, testMode, autoStart, ageVal, countryVal)
   return self:invokeApi("leads.getUsers", {lead_id=leadId, test_result=testResult, test_mode=testMode,
-  	auto_start=autoStart, age=ageVal, country=countryVal})
+    auto_start=autoStart, age=ageVal, country=countryVal})
 end
 
 function LuaVkApi:metricHit(dataVala)
@@ -1918,7 +1918,7 @@ function LuaVkApi:searchMarketItems(ownerId, albumId, query, priceFrom, priceTo,
     sortVal, revVal, offsetVal, countVal, isExtended)
   return self:invokeApi("market.search", {owner_id=ownerId, album_id=albumId, 
       q=query, price_from=priceFrom, price_to=priceTo, tags=tagsVal, sort=sortVal,
-	  rev=revVal, offset=offsetVal, count=countVal, extended=isExtended})
+    rev=revVal, offset=offsetVal, count=countVal, extended=isExtended})
 end
 
 function LuaVkApi:getMarketAlbums(ownerId, offsetVal, countVal)
@@ -1934,14 +1934,14 @@ function LuaVkApi:createMarketComment(ownerId, itemId, messageVal, attachmentsVa
     fromGroup, replyToComment, stickerId, guId)
   return self:invokeApi("market.createComment", {owner_id=ownerId, item_id=itemId,
       message=messageVal, attachments=attachmentsVal, from_group=fromGroup,
-	  reply_to_comment=replyToComment, sticker_id=stickerId, guid=guId})
+    reply_to_comment=replyToComment, sticker_id=stickerId, guid=guId})
 end
 
 function LuaVkApi:getMarketComments(ownerId, itemId, needLikes, startCommentId,
     offsetVal, countVal, sortVal, isExtended, fieldsVal)
   return self:invokeApi("market.getComments", {owner_id=ownerId, item_id=itemId,
       need_likes=needLikes, start_comment_id=startCommentId, offset=offsetVal,
-	  count=countVal, sort=sortVal, extended=isExtended, fields=fieldsVal})
+    count=countVal, sort=sortVal, extended=isExtended, fields=fieldsVal})
 end
 
 function LuaVkApi:deleteMarketComment(ownerId, commentId)
@@ -1977,14 +1977,14 @@ function LuaVkApi:addMarketItem(ownerId, nameVal, descriptionVal, categoryId,
     priceVal, isDeleted, mainPhotoId, photoIds)
   return self:invokeApi("market.add", {owner_id=ownerId, name=nameVal,
       description=descriptionVal, category_id=categoryId, price=priceVal,
-	  deleted=isDeleted, main_photo_id=mainPhotoId, photo_ids=photoIds})
+    deleted=isDeleted, main_photo_id=mainPhotoId, photo_ids=photoIds})
 end
 
 function LuaVkApi:editMarketItem(ownerId, itemId, nameVal, descriptionVal, categoryId,
     priceVal, isDeleted, mainPhotoId, photoIds)
   return self:invokeApi("market.edit", {owner_id=ownerId, item_id=itemId, 
-	  name=nameVal, description=descriptionVal, category_id=categoryId, price=priceVal,
-	  deleted=isDeleted, main_photo_id=mainPhotoId, photo_ids=photoIds})
+    name=nameVal, description=descriptionVal, category_id=categoryId, price=priceVal,
+    deleted=isDeleted, main_photo_id=mainPhotoId, photo_ids=photoIds})
 end
 
 function LuaVkApi:deleteMarketItem(ownerId, itemId)

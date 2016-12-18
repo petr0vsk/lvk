@@ -43,7 +43,7 @@ function LuaVkApi:invokeApi(method, params)
   reqUrl = string.gsub(reqUrl, "{API_VERSION}", self._apiVersion)
   reqUrl = string.gsub(reqUrl, "{PARAMETERS}&", parameters)
   local response = json.decode(https.request(reqUrl))
-  return response.response or response.error
+  return response.response[1] or response.error[1]
 end
 
 function LuaVkApi:jsonToString(jsonObject_)

@@ -46,11 +46,6 @@ function LuaVkApi:invokeApi(method, params)
   return response.response or response.error
 end
 
-function LuaVkApi:stringToJson(jsonString_)
-  local jsonString = jsonString_
-  return json.decode(jsonString)
-end
-
 function LuaVkApi:jsonToString(jsonObject_)
   local jsonObject = jsonObject_
   return json.encode(jsonObject)

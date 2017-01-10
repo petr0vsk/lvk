@@ -46,6 +46,10 @@ function LuaVkApi:invokeApi(method, params)
   return response.response[1] or response.error[1]
 end
 
+function LuaVkApi:toString(jsonObject)
+  return json.encode(jsonObject)
+end
+
 -----------------------
 --      Users        --
 -----------------------

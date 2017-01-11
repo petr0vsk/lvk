@@ -6,7 +6,7 @@ local LuaVkApi_mt = {
 
 local currentVersion = "0.3.1"
 local https = require("ssl.https")
-local json = require ("dkjson")
+local json = require("json")
 
 local apiRequest = "https://api.vk.com/method/{METHOD_NAME}" .. "?{PARAMETERS}"
   .. "&access_token={ACCESS_TOKEN}" .. "&v={API_VERSION}"
@@ -42,16 +42,11 @@ function LuaVkApi:invokeApi(method, params)
   reqUrl = string.gsub(reqUrl, "{ACCESS_TOKEN}", self._token)
   reqUrl = string.gsub(reqUrl, "{API_VERSION}", self._apiVersion)
   reqUrl = string.gsub(reqUrl, "{PARAMETERS}&", parameters)
-  return https.request(reqUrl)
+  local response = json.decode(https.request(reqUrl))
+  return response.response[1] or response.error[1]
 end
 
-function LuaVkApi:stringToJson(jsonString_)
-  local jsonString = jsonString_
-  return json.decode(jsonString, 1, nil)
-end
-
-function LuaVkApi:jsonToString(jsonObject_)
-  local jsonObject = jsonObject_
+function LuaVkApi:toString(jsonObject)
   return json.encode(jsonObject)
 end
 

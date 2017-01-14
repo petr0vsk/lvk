@@ -1,7 +1,7 @@
-luaVkApi v0.3.1
+luaVkApi v0.3.2
 =========
 
-[![release](https://img.shields.io/badge/release-v0.3.1-brightgreen.png?style=default)](https://github.com/last-khajiit/lua-vk-api/releases/latest) [![Build Status](https://travis-ci.org/last-khajiit/luaVkApi.svg?branch=master)](https://travis-ci.org/last-khajiit/luaVkApi) [![Available through Luarocks https://luarocks.org/modules/lastkhajiit/luavkapi](https://img.shields.io/badge/luarocks-0.3.1--1-brightgreen.svg)](https://luarocks.org/modules/lastkhajiit/luavkapi) [![Join the chat at https://gitter.im/lua-vk-api/Lobby](https://badges.gitter.im/lua-vk-api/Lobby.svg)](https://gitter.im/lua-vk-api/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+[![release](https://img.shields.io/badge/release-v0.3.2-brightgreen.png?style=default)](https://github.com/last-khajiit/lua-vk-api/releases/latest) [![Build Status](https://travis-ci.org/last-khajiit/luaVkApi.svg?branch=master)](https://travis-ci.org/last-khajiit/luaVkApi) [![Available through Luarocks https://luarocks.org/modules/lastkhajiit/luavkapi](https://img.shields.io/badge/luarocks-0.3.2--1-brightgreen.svg)](https://luarocks.org/modules/lastkhajiit/luavkapi) [![Join the chat at https://gitter.im/lua-vk-api/Lobby](https://badges.gitter.im/lua-vk-api/Lobby.svg)](https://gitter.im/lua-vk-api/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 Lua wrapper library for [REST API](https://vk.com/dev/methods) of [vk.com](https://vk.com). Implementation for 5.62 version of API.
 

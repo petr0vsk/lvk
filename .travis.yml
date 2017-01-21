@@ -17,4 +17,4 @@ install:
 
 script:
   - luacheck -u *.lua
-  - luarocks pack luavkapi-0.3.2-1.rockspec
+  - luarocks pack lvk-0.3.2-1.rockspec

@@ -15,7 +15,7 @@ Implementation for 5.53 version of API.
   license = "WTFPL2"
 }
 dependencies = {
-  "lua >= 5.1", "dkjson", "luasec"
+  "lua >= 5.2", "dkjson", "luasec"
 }
 build = {
   type = "builtin",

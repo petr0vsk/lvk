@@ -1,24 +1,24 @@
-luaVkApi v0.3.2
+lvk v0.3.2
 =========
 
-[![release](https://img.shields.io/badge/release-v0.3.2-brightgreen.png?style=default)](https://github.com/last-khajiit/lua-vk-api/releases/latest) [![Build Status](https://travis-ci.org/last-khajiit/luaVkApi.svg?branch=master)](https://travis-ci.org/last-khajiit/luaVkApi) [![Available through Luarocks https://luarocks.org/modules/lastkhajiit/luavkapi](https://img.shields.io/badge/luarocks-0.3.2--1-brightgreen.svg)](https://luarocks.org/modules/lastkhajiit/luavkapi) [![Join the chat at https://gitter.im/lua-vk-api/Lobby](https://badges.gitter.im/lua-vk-api/Lobby.svg)](https://gitter.im/lua-vk-api/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+[![release](https://img.shields.io/badge/release-v0.3.2-brightgreen.png?style=default)](https://github.com/last-khajiit/lvk/releases/latest) [![Build Status](https://travis-ci.org/last-khajiit/lvk.svg?branch=master)](https://travis-ci.org/last-khajiit/lvk) [![Available through Luarocks https://luarocks.org/modules/lastkhajiit/lvk](https://img.shields.io/badge/luarocks-0.3.2--1-brightgreen.svg)](https://luarocks.org/modules/lastkhajiit/lvk) [![Join the chat at https://gitter.im/lua-vk-api/Lobby](https://badges.gitter.im/lua-vk-api/Lobby.svg)](https://gitter.im/lua-vk-api/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 Lua wrapper library for [REST API](https://vk.com/dev/methods) of [vk.com](https://vk.com). Implementation for 5.62 version of API.
 
 ### Usage
-Install LuaVkApi using [Luarocks](https://luarocks.org/):
+Install lvk using [Luarocks](https://luarocks.org/):
 ```
-luarocks install luavkapi
+luarocks install lvk
 ```
 
-Add LuaVkApi to your code:
+Add lvk to your code:
 ```lua
-local LuaVkApi = require "LuaVkApi"
+local Lvk = require "lvk"
 ```
 
 Create instance using constructor and passing there your secret token and version as parameters:
 ```lua
-local api = LuaVkApi:new("ee272c9214611c082d397def7da4368d2baa5d1805aa3dcbb989a2e52bf0cec8c69da547b5d54b524da56", "5.62")
+local api = Lvk:new("ee272c9214611c082d397def7da4368d2baa5d1805aa3dcbb989a2e52bf0cec8c69da547b5d54b524da56", "5.62")
 ```
 
 Now you can invoke all VK REST API methods, for example:

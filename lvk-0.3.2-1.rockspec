@@ -1,8 +1,8 @@
-package = "LuaVkApi"
+package = "lvk"
 version = "0.3.2-1"
 source = {
-  url = "https://github.com/last-khajiit/luaVkApi",
-  tag = "luaVkApi-0.3.2"
+  url = "https://github.com/last-khajiit/lvk",
+  tag = "lvk-0.3.2"
 }
 description = {
   summary = "Lua library for vk.com REST API",
@@ -11,7 +11,7 @@ luaVkApi is Lua wrapper library for REST API of vk.com.
 
 Implementation for 5.62 version of API.
 ]],
-  homepage = "https://github.com/last-khajiit/luaVkApi",
+  homepage = "https://github.com/last-khajiit/lvk",
   license = "WTFPL2"
 }
 dependencies = {
@@ -20,6 +20,6 @@ dependencies = {
 build = {
   type = "builtin",
   modules = {
-    LuaVkApi = "LuaVkApi.lua"
+    lvk = "lvk.lua"
   }
 }

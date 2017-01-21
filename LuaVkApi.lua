@@ -4,7 +4,7 @@ local LuaVkApi_mt = {
   __index = LuaVkApi
 }
 
-local currentVersion = "0.3.1"
+local currentVersion = "0.3.2"
 local https = require("ssl.https")
 local json = require("json")
 

@@ -5,6 +5,8 @@ lvk v1.0
 
 Lua wrapper library for [RESTful API](https://vk.com/dev/methods) of [vk.com](https://vk.com). Implementation for 5.62 version of API.
 
+Compatible with Lua 5.2 and 5.3.
+
 ### Usage
 Install lvk using [Luarocks](https://luarocks.org/):
 ```
@@ -16,23 +18,29 @@ Add lvk to your code:
 local Lvk = require "lvk"
 ```
 
-Create instance using constructor and passing there your secret token and version as parameters:
+Create instance of the wrapper using a constructor and passing there your secret token and version as parameters:
 ```lua
 local api = Lvk:new("ee272c9214611c082d397def7da4368d2baa5d1805aa3dcbb989a2e52bf0cec8c69da547b5d54b524da56", "5.62")
 ```
 
 Now you can invoke all VK REST API methods, for example:
 ```lua
-print(api:getStatus().text) --print current user status
+print(api:getStatus()) --print current user status
 
 local userId = "201838325"
-print(api:getStatus(userId).text) --print user status for mentioned user
+print(api:getStatus(userId)) --print user status for mentioned user
 ```
-The response is usual table, but you can use _toString_ method for converting it to string:
+The response is usual string, but you can use _stringToTable_ method for converting it to table:
 ```lua
-local status = api:getStatus(1)
-local statusStr = api:toString(status)
-print(statusStr) --print {"text":"道德經"}
+local responce = api:getStatus()
+local responceTable = api:stringToTable(responce) --cast raw responce to Lua table
+print(responceTable.response.text)
+```
+
+If you want to see version of lvk library and version of vk.com API you can use _getVersion_ and _getVkApiVersion_ methods:
+```lua
+print(api:getVersion()) --return 1.0 version
+print(api:getVkApiVersion()) --return version which you use in lvk constructor
 ```
 
 ### Required Luarocks packages

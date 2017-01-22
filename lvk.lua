@@ -4,9 +4,9 @@ local Lvk_mt = {
   __index = Lvk
 }
 
-local currentVersion = "0.3.2"
+local currentVersion = "1.0"
 local https = require("ssl.https")
-local json = require("json")
+local json = require("dkjson")
 
 local apiRequest = "https://api.vk.com/method/{METHOD_NAME}" .. "?{PARAMETERS}"
   .. "&access_token={ACCESS_TOKEN}" .. "&v={API_VERSION}"
@@ -37,16 +37,20 @@ function Lvk:invokeApi(method, params)
       parameters = parameters .. key .. "=" .. value .. "&"
     end
   end
-
   local reqUrl = string.gsub(apiRequest, "{METHOD_NAME}", method)
   reqUrl = string.gsub(reqUrl, "{ACCESS_TOKEN}", self._token)
   reqUrl = string.gsub(reqUrl, "{API_VERSION}", self._apiVersion)
   reqUrl = string.gsub(reqUrl, "{PARAMETERS}&", parameters)
-  local response = json.decode(https.request(reqUrl))
-  return response.response or response.error
+  return https.request(reqUrl)
 end
 
-function Lvk:toString(jsonObject)
+function Lvk:stringToTable(jsonString_)
+  local jsonString = jsonString_
+  return json.decode(jsonString, 1, nil)
+end
+
+function Lvk:tableToString(jsonObject_)
+  local jsonObject = jsonObject_
   return json.encode(jsonObject)
 end
 

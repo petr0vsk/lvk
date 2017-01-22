@@ -1,4 +1,4 @@
-lvk v1.0
+lvk v1.0 (ex. luaVkApi)
 =========
 
 [![release](https://img.shields.io/badge/release-v1.0-brightgreen.png?style=default)](https://github.com/last-khajiit/lvk/releases/latest) [![Build Status](https://travis-ci.org/last-khajiit/lvk.svg?branch=master)](https://travis-ci.org/last-khajiit/lvk) [![Available through Luarocks https://luarocks.org/modules/lastkhajiit/lvk](https://img.shields.io/badge/luarocks-1.0--1-brightgreen.svg)](https://luarocks.org/modules/lastkhajiit/lvk) [![Join the chat at https://gitter.im/lua-vk-api/Lobby](https://badges.gitter.im/lua-vk-api/Lobby.svg)](https://gitter.im/lua-vk-api/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
@@ -20,7 +20,8 @@ local Lvk = require "lvk"
 
 Create instance of the wrapper using a constructor and passing there your secret token and version as parameters:
 ```lua
-local api = Lvk:new("ee272c9214611c082d397def7da4368d2baa5d1805aa3dcbb989a2e52bf0cec8c69da547b5d54b524da56", "5.62")
+local secretKey = "ee272c9214611c082d397def7da4368d2baa5d1805aa3dcbb989a2e52bf0cec8c69da547b5d54b524da56"
+local api = Lvk:new(secretKey, "5.62")
 ```
 
 Now you can invoke all VK REST API methods, for example:

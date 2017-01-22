@@ -32,10 +32,10 @@ local userId = "201838325"
 print(api:getStatus(userId)) --print user status for mentioned user
 ```
 
-The response is usual string, but you can use _stringToTable_ method to convert it to Lua table:
+The response is usual string, but you can use _toTable_ method to convert it to Lua table:
 ```lua
 local responce = api:getStatus()
-local responceTable = api:stringToTable(responce) --cast raw responce to Lua table
+local responceTable = api:toTable(responce) --cast raw responce to Lua table
 print(responceTable.response.text)
 ```
 

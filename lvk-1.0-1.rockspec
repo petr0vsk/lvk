@@ -1,13 +1,13 @@
 package = "lvk"
-version = "0.3.2-1"
+version = "1.0-1"
 source = {
   url = "https://github.com/last-khajiit/lvk",
-  tag = "lvk-0.3.2"
+  tag = "lvk-1.0"
 }
 description = {
   summary = "Lua library for vk.com REST API",
   detailed = [[
-luaVkApi is Lua wrapper library for REST API of vk.com. 
+lvk is Lua wrapper library for REST API of vk.com (ex. luaVkApi). 
 
 Implementation for 5.62 version of API.
 ]],

@@ -18,20 +18,21 @@ Add lvk to your code:
 local Lvk = require "lvk"
 ```
 
-Create instance of the wrapper using a constructor and passing there your secret token and version as parameters:
+Create instance of the lvk using a constructor and passing there your secret token and version as parameters:
 ```lua
 local secretKey = "ee272c9214611c082d397def7da4368d2baa5d1805aa3dcbb989a2e52bf0cec8c69da547b5d54b524da56"
 local api = Lvk:new(secretKey, "5.62")
 ```
 
-Now you can invoke all VK REST API methods, for example:
+Now you can invoke all REST methods of vk.com, for example:
 ```lua
 print(api:getStatus()) --print current user status
 
 local userId = "201838325"
 print(api:getStatus(userId)) --print user status for mentioned user
 ```
-The response is usual string, but you can use _stringToTable_ method for converting it to table:
+
+The response is usual string, but you can use _stringToTable_ method to convert it to Lua table:
 ```lua
 local responce = api:getStatus()
 local responceTable = api:stringToTable(responce) --cast raw responce to Lua table

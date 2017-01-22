@@ -44,14 +44,9 @@ function Lvk:invokeApi(method, params)
   return https.request(reqUrl)
 end
 
-function Lvk:stringToTable(jsonString_)
+function Lvk:toTable(jsonString_)
   local jsonString = jsonString_
   return json.decode(jsonString, 1, nil)
-end
-
-function Lvk:tableToString(jsonObject_)
-  local jsonObject = jsonObject_
-  return json.encode(jsonObject)
 end
 
 -----------------------

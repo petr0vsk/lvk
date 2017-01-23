@@ -45,7 +45,7 @@ print(api:getVersion()) --return 1.0 version
 print(api:getVkApiVersion()) --return version which you use in lvk constructor
 ```
 
-### Required Luarocks packages
+### Luarocks dependencies
 
 - [luasec](https://luarocks.org/modules/brunoos/luasec)
 - [dkjson](https://luarocks.org/modules/dhkolf/dkjson)

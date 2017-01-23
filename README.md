@@ -50,10 +50,6 @@ print(api:getVkApiVersion()) --return version which you use in lvk constructor
 - [luasec](https://luarocks.org/modules/brunoos/luasec)
 - [dkjson](https://luarocks.org/modules/dhkolf/dkjson)
 
-
-*Feel free to make pull requests!*
-
-
 ---
 
 **Copyright © 2017 Last Khajiit <last.khajiit@gmail.com>**

@@ -18,3 +18,8 @@ install:
 script:
   - luacheck -u *.lua
   - luarocks pack lvk-1.0-1.rockspec
+
+notifications:
+  email:
+    on_success: never
+    on_failure: always

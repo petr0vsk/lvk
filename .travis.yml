@@ -18,6 +18,8 @@ install:
 script:
   - luacheck -u *.lua
   - luarocks pack lvk-1.0-1.rockspec
+  - luarocks install lvk-1.0-1.src.rock
+  - lua test-lvk.lua
 
 notifications:
   email:

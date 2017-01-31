@@ -1,4 +1,4 @@
-lvk v1.0 (ex. luaVkApi)
+lvk v1.0
 =========
 
 [![release](https://img.shields.io/badge/release-v1.0-brightgreen.png?style=default)](https://github.com/last-khajiit/lvk/releases/latest) [![Build Status](https://travis-ci.org/last-khajiit/lvk.svg?branch=master)](https://travis-ci.org/last-khajiit/lvk) [![Available through Luarocks https://luarocks.org/modules/lastkhajiit/lvk](https://img.shields.io/badge/luarocks-1.0--1-brightgreen.svg)](https://luarocks.org/modules/lastkhajiit/lvk) [![Join the chat at https://gitter.im/lvk-chat/Lobby](https://badges.gitter.im/lvk-chat/Lobby.svg)](https://gitter.im/lvk-chat/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)

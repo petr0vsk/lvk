@@ -1,5 +1,5 @@
 package = "lvk"
-version = "1.0-1"
+version = "1.0-2"
 source = {
   url = "git://github.com/last-khajiit/lvk.git",
   tag = "lvk-1.0"

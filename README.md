@@ -5,7 +5,7 @@ lvk v1.0
 
 Lua library for integration with [REST API](https://vk.com/dev/methods) of [vk.com](https://vk.com). Implementation for 5.62 API version.
 
-Compatible with Lua 5.2 and 5.3.
+Compatible with Lua 5.2 and higher.
 
 ### Usage
 Install lvk using [Luarocks](https://luarocks.org/):

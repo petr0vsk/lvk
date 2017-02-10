@@ -20,6 +20,7 @@ script:
   - luarocks pack lvk-1.0-2.rockspec
   - luarocks install lvk-1.0-2.src.rock
   - lua test-lvk.lua
+  - bash publish_luarocks_module.sh
 
 notifications:
   email:

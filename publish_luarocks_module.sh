@@ -1,3 +1,4 @@
 #!/bin/bash
 
-echo "Dummy publishing script"
+latesttag=$(git describe --tags)
+echo checking out ${latesttag}

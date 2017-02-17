@@ -1,13 +1,10 @@
 #!/bin/bash
 
 luaversion=${LUA}
+latesttag=$(git describe --tags)
+
+#need to compare latest released version with latest published in Luarocks version too
 if [ "$luaversion" == "lua=5.2" ]; then
-	latesttag=$(git describe --tags)
-	echo "-------"
-	echo "Need to check for new releases (via tags)"
-	echo checking out ${latesttag}
-	echo "-------"
-	echo "$luaversion: we can publish module in this case!"
-else
-	echo "$luaversion: not valid case!"
+	echo "Latest tag = ${latesttag}"
+	echo "Lua version = $luaversion"
 fi

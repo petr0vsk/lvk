@@ -1,6 +1,6 @@
 #!/bin/bash
 
-current_artifact_version = $1
+current_artifact_version=$1
 lua_version=${LUA}
 latest_tag=$(git describe --tags)
 

@@ -12,5 +12,7 @@ echo "~~~~~~~~~~~~~~~~~"
 
 #need to compare latest released version with latest published in Luarocks version too
 if [ "$lua_version" == "lua=5.2" ] && [ "$current_artifact_version" != "${latest_tag}" ]; then
-    echo "Need to publish new module"
+    echo "We can publish new module"
+else
+    echo "Current version is already published"
 fi
